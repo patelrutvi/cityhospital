@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Doctor from './Doctor';
+
 
 const doctordata = [
     {
@@ -47,26 +47,18 @@ function Doctors(props) {
                         <p>Duis sagittis rutrum neque, quis tincidunt arcu pretium ac. Suspendisse sem risus, molestie vitae arcu et,
                             tincidunt viverra erat. Quisque in lectus id nulla viverra sodales in a risus. Aliquam ut sem ex. Duis viverra
                             ipsum lacus, ut pharetra arcu sagittis nec. Phasellus a eleifend elit.</p>
-
-                        <Link to={'/doctor/1'}>doctor 1</Link>
-                        <Link to={'/doctor/2'}>doctor 2</Link>
-
                     </div>
-
                     <div className="row">
-
-
                         {
                             doctordata.map((v, i) => {
                                 return (
-
                                     <>
-
                                         <div className="col-lg-6" >
                                             <div className="member d-flex align-items-start">
                                                 {/* <p>{v.id}</p> */}
                                                 <div className="pic" ><img src={v.url} className="img-doctor" alt /></div>
-                                                <Link to={'/doctor/1'}>
+                                                <Link to={'/doctor/' + v.id + ''} style={{color:'gray'}}>
+                                                    {console.log('/doctor/' + v.id + '')}
                                                     <div className="member-info">
                                                         <h4>{v.name}</h4>
                                                         <span>{v.speciality}</span>
