@@ -11,8 +11,16 @@ function Auth(props) {
                 <section id="appointment" className="appointment">
                     <div className="container">
                         <div className="section-title">
+                            {/* .........Heading......... */}
                             {
-                                authdata === 'login' ? <h2>Login</h2> : (authdata === 'sign up' ? <h2>Sign Up</h2> : <h2>Forgot password</h2>)
+                                authdata === 'login'
+                                    ? <h2>Login</h2>
+                                    :
+                                    (authdata === 'sign up'
+                                        ? <h2>Sign Up</h2>
+                                        :
+                                        <h2>Forgot password</h2>
+                                    )
                             }
                             <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                                 blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
@@ -20,8 +28,12 @@ function Auth(props) {
                         </div>
                         <form className="php-email-form">
                             <div className="row" style={{ justifyContent: 'center' }}>
+                                {/* ........name....... */}
                                 {
-                                    authdata === 'login' ? null :
+                                    authdata === 'login'
+                                        ?
+                                        null
+                                        :
                                         (authdata === 'sign up'
                                             ?
                                             <div className="col-md-7 form-group">
@@ -33,12 +45,13 @@ function Auth(props) {
                                         )
 
                                 }
-
+                                {/* ..........email.......... */}
                                 <div className="col-md-7 form-group mt-3 mt-md-0">
                                     <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
                                     <div className="validate" />
                                 </div>
 
+                                {/* ...........password......... */}
                                 {
                                     authdata === 'login'
                                         ?
@@ -60,27 +73,34 @@ function Auth(props) {
                             </div>
                             {/* ......buttonnnn...... */}
                             {
-                                authdata === 'login' ? <div className="text-center"><button type="submit">Login</button></div>
+                                authdata === 'login'
+                                    ?
+                                    <div className="text-center"><button type="submit">Login</button></div>
                                     :
                                     (authdata === 'sign up'
                                         ?
                                         <div className="text-center"><button type="submit">Sign Up</button></div>
-                                        : <div className="text-center"><button type="submit">Sign Up</button></div>
+                                        : <div className="text-center"><button type="submit">submit</button></div>
                                     )
 
                             }
-                            {/* ......link...... */}
+                            {/* ......link...sign up ////....login... */}
                             {
-                                authdata === 'login' ?<div> Don't have account?<a href='#' onClick={() => setauth('sign up')}> Sign Up Here</a></div>
+                                authdata === 'login'
+                                    ?
+                                    <div>Create a new account<a href='#' onClick={() => setauth('sign up')}> Sign Up</a></div>
                                     :
-                                   <div> Already have an account?<a href='#' onClick={() => setauth('login')}> log In Here</a></div>
+                                    <div>Already have an account <a href='#' onClick={() => setauth('login')}> log In</a></div>
                             }
-
+                            {/* ........link.......forgot password.... */}
                             <div>
                                 {
-                                    <a href='#' onClick={() => setauth('forgot')} >Forgot Password?</a>
+                                    authdata === 'login' ?
+                                        <a href='#' onClick={() => setauth('forgot')} >Forgot Password?</a>
+                                        : (authdata === 'sign up' ? null : null)
                                 }
                             </div>
+
 
                         </form>
                     </div>
