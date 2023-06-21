@@ -12,7 +12,7 @@ function Auth(props) {
                     <div className="container">
                         <div className="section-title">
                             {
-                                authdata === 'login' ? <h2>Login</h2> : <h2>Signup</h2>
+                                authdata === 'login' ? <h2>Login</h2> : (authdata === 'sign up' ? <h2>Sign Up</h2> : <h2>Forgot password</h2>)
                             }
                             <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                                 blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
@@ -21,27 +21,67 @@ function Auth(props) {
                         <form className="php-email-form">
                             <div className="row" style={{ justifyContent: 'center' }}>
                                 {
-                                    authdata === 'login' ? null : <div className="col-md-7 form-group">
-                                        <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                        <div className="validate" />
-                                    </div>
+                                    authdata === 'login' ? null :
+                                        (authdata === 'sign up'
+                                            ?
+                                            <div className="col-md-7 form-group">
+                                                <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                                <div className="validate" />
+                                            </div>
+                                            :
+                                            null
+                                        )
+
                                 }
 
                                 <div className="col-md-7 form-group mt-3 mt-md-0">
                                     <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
                                     <div className="validate" />
                                 </div>
-                                <div className="col-md-7 form-group mt-3 mt-md-0">
-                                    <input type="password" className="form-control" name="pass" id="pass" placeholder="Your Password" data-rule="minlen:4" data-msg="Please enter at least 2 chars" />
-                                    <div className="validate" />
-                                </div>
-                            </div>
+
                                 {
-                                      authdata === 'login' ?  <div className="text-center"><button type="submit">Login</button></div>
-                                      :
-                                      <div className="text-center"><button type="submit">Signup</button></div>
+                                    authdata === 'login'
+                                        ?
+                                        <div className="col-md-7 form-group mt-3 mt-md-0">
+                                            <input type="password" className="form-control" name="pass" id="pass" placeholder="Your Password" data-rule="minlen:4" data-msg="Please enter at least 2 chars" />
+                                            <div className="validate" />
+                                        </div>
+                                        :
+                                        (authdata === 'sign up'
+                                            ?
+                                            <div className="col-md-7 form-group mt-3 mt-md-0">
+                                                <input type="password" className="form-control" name="pass" id="pass" placeholder="Your Password" data-rule="minlen:4" data-msg="Please enter at least 2 chars" />
+                                                <div className="validate" />
+                                            </div>
+                                            :
+                                            null
+                                        )
                                 }
-                           
+                            </div>
+                            {/* ......buttonnnn...... */}
+                            {
+                                authdata === 'login' ? <div className="text-center"><button type="submit">Login</button></div>
+                                    :
+                                    (authdata === 'sign up'
+                                        ?
+                                        <div className="text-center"><button type="submit">Sign Up</button></div>
+                                        : <div className="text-center"><button type="submit">Sign Up</button></div>
+                                    )
+
+                            }
+                            {/* ......link...... */}
+                            {
+                                authdata === 'login' ?<div> Don't have account?<a href='#' onClick={() => setauth('sign up')}> Sign Up Here</a></div>
+                                    :
+                                   <div> Already have an account?<a href='#' onClick={() => setauth('login')}> log In Here</a></div>
+                            }
+
+                            <div>
+                                {
+                                    <a href='#' onClick={() => setauth('forgot')} >Forgot Password?</a>
+                                }
+                            </div>
+
                         </form>
                     </div>
                 </section>
