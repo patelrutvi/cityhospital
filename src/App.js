@@ -14,6 +14,7 @@ import Visitingdoctors from './containers/Visitingdoctors';
 import NotFound from './containers/NotFound';
 import Auth from './containers/Auth';
 import Test2 from './containers/Test2';
+import MuiDrower from './containers/MuiDrower';
 
 function App() {
   return (
@@ -43,6 +44,8 @@ function App() {
 
     <>
       <Test2 />
+
+      {/* <MuiDrower /> */}
     </>
   );
 }
