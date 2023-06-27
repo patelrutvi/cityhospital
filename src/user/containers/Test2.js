@@ -3,20 +3,6 @@ import React from 'react';
 import * as Yup from 'yup'
 
 function Test2(props) {
-
-    const hobbi = [
-        {
-            defaultValue: "sports",
-        },
-        {
-            defaultValue: "movies",
-        },
-        {
-            defaultValue: "music",
-        },
-    ];
-
-
     let testvaliSchema = Yup.object({
         name: Yup.string()
             .required('plase enter full name')
@@ -26,13 +12,11 @@ function Test2(props) {
                 function (val) {
                     let arr = val.split(" ")
                     //   console.log(arr);
-                    if (arr.length < 3) {
-                        return false
-                    }
-                    if (arr.length > 3) {
-                        return false
-                    } else {
+                  
+                    if (arr.length === 3) {
                         return true
+                    } else {
+                        return false
                     }
                 }),
 
@@ -45,8 +29,18 @@ function Test2(props) {
                 'password must be eight characters including one uppercase letter, one special character and alphanumeric characters?'
             ),
         conpass: Yup.string()
-            .required("Please enter confirm password")
-            .oneOf([Yup.ref("pass"), ''], "Password Must Match"),
+            .required()
+            .test('conpass','please enter same password',
+            function(val){
+                // console.log(this.parent.pass);
+                if(this.parent.pass === val){
+                    return true
+                }else {
+                    return false
+                }
+            }),
+
+            // .oneOf([Yup.ref("pass"), ''], "Password Must Match"),
 
         mobile: Yup.string()
             .required('please enter mobile number')
@@ -57,21 +51,10 @@ function Test2(props) {
         age: Yup.number()
             .min(0)
             .max(150)
-            .required("please enter age"),
-        dob: Yup.string()
+            .required(),
+        dob: Yup.date()
             .required("plase enter date of birth")
-            .test('dob', 'plase enter valid date of birth',
-                function (val) {
-                    // console.log(val);
-                    let today = new Date();
-                    let bod = new Date(val);
-                    console.log(today > bod);
-                    if (today > bod) {
-                        return true
-                    } else {
-                        return false
-                    }
-                }),
+            .max( new Date(),'Must be in present and past'),
         add: Yup.string()
             .required("plase enter Address")
             .test("add", "Maximum 5 word allow", function (val) {
@@ -93,31 +76,11 @@ function Test2(props) {
                     return true
                 }
             }),
-        gender: Yup.boolean()
-            .required()
-            .oneOf([0, 1])
-            .test("gender", "Gender must be selected.", function (val) {
-            }),
-        hobbies: Yup.boolean()
-            .required("Must be selected.")
-            .test('hobbies', 'please select 2 hobbeis',
-                function (val) {
-                    if (val == 'true') {
-                        return false
-                    } else {
+        gender: Yup.string().required(),
+          
+        hobbies: Yup.array().min(2,'please select 2 hobbies').required(),
 
-                        return true
-                    }
-                }),
-
-        // .test("hobbies", "Must 2 be selected.", function (val) {
-        //   console.log(hobbies.length, val);
-        //   if (val.checked > 2) {
-        //     return false;
-        //   } else {
-        //     return true;
-        //   }
-        // }),
+       
         tc: Yup.boolean()
             .required("Must be selected.").oneOf([true], "You must accept the terms and conditions"),
     })
@@ -136,7 +99,7 @@ function Test2(props) {
             country: '',
             gender: '',
             hobbies: '',
-            tc: ''
+            tc: false
 
         },
         validationSchema: testvaliSchema,
@@ -285,7 +248,7 @@ function Test2(props) {
                                         defaultValue="male"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.gender}
+                                        value="male"
                                     />{" "}
                                     Male
                                 </p>
@@ -296,7 +259,7 @@ function Test2(props) {
                                         defaultValue="female"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.gender}
+                                        value="female"
                                     />{" "}
                                     Female
                                 </p>
@@ -314,21 +277,21 @@ function Test2(props) {
                                     defaultValue="sports"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.hobbies}
+                                    value="sports"
                                 /> Sports</p>
                                 <p><input type="checkbox"
                                     name="hobbies"
                                     defaultValue="movies"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.hobbies}
+                                    value="movies"
                                 /> Movies</p>
                                 <p><input type="checkbox"
                                     name="hobbies"
                                     defaultValue="music"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.hobbies}
+                                    value="music"
                                 /> Music</p>
                             </div>
                         </div>

@@ -1,20 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './containers/Home';
+import Header from './user/components/Header';
+import Footer from './user/components/Footer';
+import Home from './user/containers/Home';
 import { Route, Routes } from 'react-router-dom';
-import Department from './containers/Department';
-import Doctors from './containers/Doctors';
-import About from './containers/About';
-import Contact from './containers/Contact';
-import Appoiment from './containers/Appoiment';
-import Doctor from './containers/Doctor';
-import Visitingdoctors from './containers/Visitingdoctors';
-import NotFound from './containers/NotFound';
-import Auth from './containers/Auth';
-import Test2 from './containers/Test2';
-import MuiDrower from './containers/MuiDrower';
+import Department from './user/containers/Department';
+import Doctors from './user/containers/Doctors';
+import About from './user/containers/About';
+import Contact from './user/containers/Contact';
+import Appoiment from './user/containers/Appoiment';
+import Doctor from './user/containers/Doctor';
+import Visitingdoctors from './user/containers/Visitingdoctors';
+import NotFound from './user/containers/NotFound';
+import Auth from './user/containers/Auth';
+import Test2 from './user/containers/Test2';
+import MuiDrower from './user/containers/MuiDrower';
 
 function App() {
   return (
