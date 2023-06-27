@@ -15,38 +15,43 @@ import NotFound from './user/containers/NotFound';
 import Auth from './user/containers/Auth';
 import Test2 from './user/containers/Test2';
 import MuiDrower from './user/containers/MuiDrower';
+import Panel from './admin/components/Panel'
+import ADoctor from './admin/components/ADoctor'
+import ADrpartment from './admin/components/ADrpartment'
 
 function App() {
   return (
-    // <>
-    //   <Header />
-    //   <Routes>
-    //     <Route path='/' element={<Home />} />
-    //     <Route path='/department' element={<Department />} />
-    //     <Route path='/doctors' element={<Doctors />} />
-    //     {/* <Route path='/doctor/:id' element={<Doctor />}/>
-    //   <Route path='/doctor/visiting_doctors' element={<Visitingdoctors />}/> */}
-
-    //     <Route path='/about' element={<About />} />
-    //     <Route path='/contact' element={<Contact />} />
-    //     <Route path='/appiment' element={<Appoiment />} />
-    //   {/* neseted routs */}
-    //     <Route  path='/doctor'>
-    //       <Route path=':id' element={<Doctor />} />
-    //       <Route path='visiting_doctors' element={<Visitingdoctors />} />
-    //     </Route>
-
-    //   <Route path='*' element={<NotFound />}/>
-    //   <Route path='/auth' element={<Auth />}/>
-    //   </Routes>
-    //   <Footer />
-    // </>
-
     <>
-      <Test2 />
+      {/* <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/department' element={<Department />} />
+        <Route path='/doctors' element={<Doctors />} />
+        {/* <Route path='/doctor/:id' element={<Doctor />}/>
+      <Route path='/doctor/visiting_doctors' element={<Visitingdoctors />}/> */}
 
+      {/* <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/appiment' element={<Appoiment />} />
+      {/* neseted routs */}
+      {/* <Route  path='/doctor'>
+          <Route path=':id' element={<Doctor />} />
+          <Route path='visiting_doctors' element={<Visitingdoctors />} />
+        </Route>
+
+      <Route path='*' element={<NotFound />}/>
+      <Route path='/auth' element={<Auth />}/>
+      </Routes>
+      <Footer /> */}
+      {/* <Test2 /> */}
       {/* <MuiDrower /> */}
+      <Panel />
+
+      {/* <ADoctor />
+      <ADrpartment /> */}
+    
     </>
+
   );
 }
 
