@@ -22,25 +22,25 @@ import ADrpartment from './admin/components/ADrpartment'
 function App() {
   return (
     <>
-      {/* <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
+      {/* <Header /> */}
+      {/* <Routes> */}
+        {/* <Route path='/' element={<Home />} />
         <Route path='/department' element={<Department />} />
-        <Route path='/doctors' element={<Doctors />} />
-        {/* <Route path='/doctor/:id' element={<Doctor />}/>
-      <Route path='/doctor/visiting_doctors' element={<Visitingdoctors />}/> */}
+        <Route path='/doctors' element={<Doctors />} /> */}
+        {/* { <Route path='/doctor/:id' element={<Doctor />}/>
+      <Route path='/doctor/visiting_doctors' element={<Visitingdoctors />}/> } */}
 
-      {/* <Route path='/about' element={<About />} />
+       {/* <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/appiment' element={<Appoiment />} />
+        <Route path='/appiment' element={<Appoiment />} /> */}
       {/* neseted routs */}
       {/* <Route  path='/doctor'>
           <Route path=':id' element={<Doctor />} />
           <Route path='visiting_doctors' element={<Visitingdoctors />} />
         </Route>
 
-      <Route path='*' element={<NotFound />}/>
-      <Route path='/auth' element={<Auth />}/>
+       <Route path='*' element={<NotFound />}/>
+       <Route path='/auth' element={<Auth />}/>
       </Routes>
       <Footer /> */}
       {/* <Test2 /> */}
