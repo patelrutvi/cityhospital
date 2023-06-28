@@ -26,7 +26,7 @@ import AMedicine from './AMedicine';
 import AAppoiment from './AAppoiment';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import { Dialog } from '@mui/material';
-
+import { Link } from 'react-router-dom';
 
 
 const drawerWidth = 240;
@@ -99,7 +99,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 
-export default function Panel() {
+export default function Panel(Children) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [menudata, setMenudata] = useState("")
@@ -112,6 +112,15 @@ export default function Panel() {
     setOpen(false);
   };
 
+  const listItem = [
+    {
+      lable: "Doctor", icon: < HealthAndSafetyRoundedIcon />, to: './admin/adoctor',
+      lable: "Department", icon: < Diversity1Icon />, to: './admin/adepartment',
+      lable: "Appoinment", icon: <EditCalendarOutlinedIcon />, to: './admin/aapoinment',
+      lable: "Medicine", icon: <VaccinesIcon />, to: './admin/amedicine',
+    }
+  ]
+
   return (
     <>
 
@@ -122,7 +131,7 @@ export default function Panel() {
             <IconButton
               color="inherit"
               aria-label="open drawer"
-              onClick={()=>setOpen(!open)}
+              onClick={() => setOpen(!open)}
               edge="start"
             >
               <MenuIcon />
@@ -140,156 +149,46 @@ export default function Panel() {
           </DrawerHeader>
           <Divider />
           <List>
-
-            <ListItem disablePadding sx={{ display: 'block'}} onClick={() => setMenudata("Doctor")}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                 
-                  
-                }}
+            {listItem.map((v, i) => (
+              <ListItem 
+              key={i} 
+              disablePadding sx={{ display: 'block' }}
+              component={Link}
+              to={v.to}
               >
-                <ListItemIcon
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                    marginLeft:2.3,
-                    marginRight:2.3,
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
                   }}
                 >
-               < HealthAndSafetyRoundedIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Doctor'} />
-              </ListItemButton>
-            </ListItem>
-
-          </List>
-          <List>
-
-            <ListItem disablePadding sx={{ display: 'block' }} onClick={() => setMenudata("Department")}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                    marginLeft:2.3,
-                    marginRight:2.3,
-                  }}
-                >
-                  < Diversity1Icon />
-                </ListItemIcon>
-                <ListItemText primary={'Department'} />
-              </ListItemButton>
-            </ListItem>
-
-          </List>
-          <List>
-
-     
-         <ListItem disablePadding sx={{ display: 'block' }} onClick={() => setMenudata("Appoinment")}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                    marginLeft:2.3,
-                    marginRight:2.3,
-                  }}
-                >
-                  <EditCalendarOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Appoinment'} />
-              </ListItemButton>
-            </ListItem>
-
-          </List>
-          <List>
-
-            <ListItem disablePadding sx={{ display: 'block' }} onClick={() => setMenudata("Medicine")}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                    marginLeft:2.3,
-                    marginRight:2.3,
-
-                  }}
-                >
-
-                  {/* {text === 'Doctor' ? <PersonIcon /> : <HealthAndSafetyRoundedIcon />} */}
-                  <VaccinesIcon />
-                  
-                </ListItemIcon>
-                <ListItemText primary={'Medicine'} />
-              </ListItemButton>
-            </ListItem>
-
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {v.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={v.lable} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            ))}
           </List>
           <Divider />
-          {/* <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >               
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List> */}
+
+       
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          {menudata == 'Doctor' && <ADoctor />}
+          {/* {menudata == 'Doctor' && <ADoctor />}
           {menudata == 'Department' && <ADrpartment />}
           {menudata == 'Appoinment' && <AAppoiment />}
-          {menudata == 'Medicine' && <AMedicine />}
+          {menudata == 'Medicine' && <AMedicine />} */}
 
 
-          {/* <DrawerHeader />
-        <Typography paragraph>
-
-        </Typography>
-        <Typography paragraph>
-
-        </Typography> */}
+        {Children}
         </Box>
       </Box>
     </>

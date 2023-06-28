@@ -23,75 +23,76 @@ export default function AAppoiment() {
     return (
         <div>
             <Box height={50} />
-            <DialogTitle>Appoiment</DialogTitle>
-            <DialogContent>
-                <DialogContentText>
-
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="pname"
-                    label="Patient Name"
-                    type="text"
-                    fullWidth
-                    variant="standard"
-                    sx={{ margin: '10px',padding:'25px 0 0 0' }}
-                />
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="contact"
-                    label="Contact Number"
-                    type="text"
-                    fullWidth
-                    variant="standard"
-                    sx={{ margin: '10px',padding:'25px 0 0 0' }}
-                />
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="date"
-                    label="Date"
-                    type="date"
-                    fullWidth
-                    variant="standard"
-                    sx={{ margin: '10px',padding:'25px 0 0 0' }}
-                />
-
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="time"
-                    label="Time"
-                    type="time"
-                    fullWidth
-                    variant="standard"
-                    sx={{ margin: '10px',padding:'25px 0 0 0' }}
-                />
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="trtment"
-                    label="TreateMent"
-                    type="text"
-                    fullWidth
-                    variant="standard" 
-                    sx={{ margin: '10px',padding:'25px 0 0 0' }}
-                />
-            </DialogContent>
-
-
-            {/* <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen}>
                 Open form dialog
             </Button>
             <Dialog open={open} onClose={handleClose}>
+
+                <DialogTitle>Appoiment</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="pname"
+                        label="Patient Name"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        sx={{ margin: '10px', padding: '25px 0 0 0' }}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="contact"
+                        label="Contact Number"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        sx={{ margin: '10px', padding: '25px 0 0 0' }}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="date"
+                        label="Date"
+                        type="date"
+                        fullWidth
+                        variant="standard"
+                        sx={{ margin: '10px', padding: '25px 0 0 0' }}
+                    />
+
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="time"
+                        label="Time"
+                        type="time"
+                        fullWidth
+                        variant="standard"
+                        sx={{ margin: '10px', padding: '25px 0 0 0' }}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="trtment"
+                        label="TreateMent"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        sx={{ margin: '10px', padding: '25px 0 0 0' }}
+                    />
+                </DialogContent>
+
+
 
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleClose}>Subscribe</Button>
                 </DialogActions>
-            </Dialog> */}
+            </Dialog>
         </div>
     );
 }

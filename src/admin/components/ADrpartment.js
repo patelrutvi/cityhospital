@@ -22,47 +22,48 @@ export default function ADrpartment() {
 
     return (
         <div>
+
             <Box height={50} />
-            <DialogTitle>Department</DialogTitle>
-            <DialogContent>
-                <DialogContentText>
-
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="dname"
-                    label="Department Name"
-                    type="text"
-                    fullWidth
-                    variant="standard"
-                    sx={{ margin: '10px',padding:'25px 0 0 0' }}
-                />
-
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="faci"
-                    label="Facilities "
-                    type="text"
-                    fullWidth
-                    variant="standard"
-                    sx={{ margin: '10px',padding:'25px 0 0 0' }}
-                />
-
-            </DialogContent>
-
-
-            {/* <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen}>
                 Open form dialog
             </Button>
+
             <Dialog open={open} onClose={handleClose}>
+
+                <DialogTitle>Department</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="dname"
+                        label="Department Name"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        sx={{ margin: '10px', padding: '25px 0 0 0' }}
+                    />
+
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="faci"
+                        label="Facilities "
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        sx={{ margin: '10px', padding: '25px 0 0 0' }}
+                    />
+
+                </DialogContent>
 
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleClose}>Subscribe</Button>
                 </DialogActions>
-            </Dialog> */}
+            </Dialog>
         </div>
     );
 }
