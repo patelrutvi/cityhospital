@@ -16,14 +16,34 @@ export default function AMedicine() {
 
     let medicineSchema = Yup.object({
         mname: Yup.string()
-            .required(   )
+            .required()
             .matches(
-                /^[a-zA-Z ]{2,30}$/, 'plase anter valid name'
-            )
+                /^[a-zA-Z ]{2,30}$/, 'please enter valid name'
+            ),
+        expdate: Yup.date()
+            .required("please enter EXp date")
+            .min(new Date(), 'Must be in present and past'),
+        mprice: Yup.string()
+        .required()
+        .matches(/^\d+(?:[.,]\d+)*$/,'please enter  price'),
+       
+        mdisc: Yup.string()
+            .required()
+            .test("mdisc", "Maximum 100 word allow", function (val) {
+                let arr = val.split(" ");
+                if (arr.length > 5) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }),
     })
     const formik = useFormik({
         initialValues: {
             name: '',
+            expdate: '',
+            mprice: '',
+            mdisc: '',
 
         },
         validationSchema: medicineSchema,
@@ -95,7 +115,7 @@ export default function AMedicine() {
                             name="mprice"
                             id="mprice"
                             label="Price"
-                            type="number"
+                            type="text"
                             fullWidth
                             variant="standard"
                             sx={{ margin: '10px', padding: '25px 0 0 0' }}

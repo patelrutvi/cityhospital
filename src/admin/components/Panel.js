@@ -16,18 +16,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
-import Diversity1Icon from '@mui/icons-material/Diversity1';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 import HealthAndSafetyRoundedIcon from '@mui/icons-material/HealthAndSafetyRounded';
-import { useState } from 'react';
-import ADoctor from './ADoctor';
-import ADrpartment from './ADrpartment'
-import AMedicine from './AMedicine';
-import AAppoiment from './AAppoiment';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
-import { Dialog } from '@mui/material';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
+import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 
 const drawerWidth = 240;
 
@@ -68,7 +64,6 @@ const AppBar = styled(MuiAppBar, {
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
-
   }),
   ...(open && {
     marginLeft: drawerWidth,
@@ -86,7 +81,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
-
     ...(open && {
       ...openedMixin(theme),
       '& .MuiDrawer-paper': openedMixin(theme),
@@ -98,11 +92,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-
-export default function Panel(Children) {
+export default function Panel({children}) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [menudata, setMenudata] = useState("")
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -111,86 +103,77 @@ export default function Panel(Children) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const listItem = [
-    {
-      lable: "Doctor", icon: < HealthAndSafetyRoundedIcon />, to: './admin/adoctor',
-      lable: "Department", icon: < Diversity1Icon />, to: './admin/adepartment',
-      lable: "Appoinment", icon: <EditCalendarOutlinedIcon />, to: './admin/aapoinment',
-      lable: "Medicine", icon: <VaccinesIcon />, to: './admin/amedicine',
-    }
+  const listData =[
+    {label:'Doctor',icon:<HealthAndSafetyRoundedIcon />,to:'./ADoctor'},
+    {label:'Medicine',icon:<VaccinesIcon />,to:'./AMedicine'},
+    {label:'Department',icon:<Diversity1Icon />,to:'./ADrpartment'},
+    {label:'Appointment',icon:<EditCalendarOutlinedIcon />,to:'./AAppoiment'}
   ]
 
   return (
-    <>
-
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <AppBar position="fixed" elevation={3} sx={{ backgroundColor: 'red' }}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={() => setOpen(!open)}
-              edge="start"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div" >
-              Admin panle
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open} >
-          <DrawerHeader >
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
-          </DrawerHeader>
-          <Divider />
-          <List>
-            {listItem.map((v, i) => (
-              <ListItem 
-              key={i} 
-              disablePadding sx={{ display: 'block' }}
-              component={Link}
-              to={v.to}
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar position="fixed" open={open} sx={{backgroundColor:'red'}}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: 'none' }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Mini variant drawer
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer variant="permanent" open={open}>
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          {listData.map((v, i) => (
+            <ListItem
+             key={i} 
+             disablePadding 
+             sx={{ display: 'block' }}
+             component={Link}
+             to={v.to}
+             >
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
+                }}
               >
-                <ListItemButton
+                <ListItemIcon
                   sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
                   }}
                 >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {v.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={v.lable} sx={{ opacity: open ? 1 : 0 }} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-
-       
-        </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          {/* {menudata == 'Doctor' && <ADoctor />}
-          {menudata == 'Department' && <ADrpartment />}
-          {menudata == 'Appoinment' && <AAppoiment />}
-          {menudata == 'Medicine' && <AMedicine />} */}
-
-
-        {Children}
-        </Box>
+                  {v.icon}
+                </ListItemIcon>
+                <ListItemText primary={v.label} sx={{ opacity: open ? 1 : 0 ,color:'black'}} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        {children}
       </Box>
-    </>
+    </Box>
   );
 }

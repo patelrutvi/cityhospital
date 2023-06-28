@@ -1,22 +1,21 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-rouAMedicineter-dom';
 import AMedicine from '../admin/components/AMedicine';
 import Panel from '../admin/components/Panel';
 import ADoctor from '../admin/components/ADoctor';
 import ADrpartment from '../admin/components/ADrpartment';
 import AAppoiment from '../admin/components/AAppoiment';
+import { Route, Routes } from 'react-router-dom';
 
 function AdminRoutes(props) {
     return (
         <Panel >
-            <Route>
-            <Route path='/adoctor' element={<ADoctor />} />
-            <Route path='/adepartment' element={<ADrpartment />} />
-            <Route path='/aapoinment' element={<AAppoiment />} />
-
-                <Route path='/amedicine' element={<AMedicine />} />
-
-            </Route>
+            <Routes>
+                <Route path='/ADoctor' element={<ADoctor />} />
+                <Route path='/ADrpartment' element={<ADrpartment />} />
+                <Route path='/AAppoiment' element={<AAppoiment />} />
+                <Route path='/AMedicine' element={<AMedicine />} />
+            </Routes>
         </Panel>
 
 
