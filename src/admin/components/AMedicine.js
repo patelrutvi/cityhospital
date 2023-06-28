@@ -12,8 +12,52 @@ import { useState } from 'react';
 import * as Yup from 'yup'
 import { json } from 'react-router-dom';
 
+// .....table...
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
+//........
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
+
+
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
+
+//   .....dialog...
+
 export default function AMedicine() {
     const [open, setOpen] = useState(false);
+
+    
+
+    let getlocaldata = JSON.parse(localStorage.getItem("medicine"))
+    console.log(getlocaldata);
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -30,16 +74,34 @@ export default function AMedicine() {
         console.log(getlocaldata);
         let rno = Math.floor(Math.random() * 1000)
 
-        let newdata = {id:rno,...data}
+        let newdata = { id: rno, ...data }
 
         if (getlocaldata === null) {
-            localStorage.setItem("medicine",JSON.stringify([newdata]))
-        }else{
+            localStorage.setItem("medicine", JSON.stringify([newdata]))
+        } else {
             getlocaldata.push(newdata)
             console.log(getlocaldata);
-            localStorage.setItem("medicine",JSON.stringify(getlocaldata))
+            localStorage.setItem("medicine", JSON.stringify(getlocaldata))
         }
 
+    }
+
+    const handleDelete = (i) => {
+        console.log("delete", i);
+
+        let getlocaldata = JSON.parse(localStorage.getItem("medicine"))
+        console.log(getlocaldata);
+
+        let rdata = getlocaldata.filter((c) => c.id == i)
+        console.log(rdata, "rdata");
+        // rdata.remove()
+
+        getlocaldata.map((v, index) => {
+            if (v.id === i) {
+                getlocaldata.splice(index, 1)
+            }
+        })
+        console.log(getlocaldata);
     }
 
 
@@ -61,7 +123,7 @@ export default function AMedicine() {
             .required()
             .test("mdisc", "Maximum 100 word allow", function (val) {
                 let arr = val.split(" ");
-                if (arr.length > 5) {
+                if (arr.length > 100) {
                     return false;
                 } else {
                     return true;
@@ -96,11 +158,12 @@ export default function AMedicine() {
 
     return (
         <div>
-            <Box height={50} />
+            <Box height={40} />
 
             <Button variant="outlined" onClick={handleClickOpen}>
                 Open Medicine
             </Button>
+
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Medicine</DialogTitle>
                 <DialogContent>
@@ -172,6 +235,39 @@ export default function AMedicine() {
                     </form>
                 </DialogContent>
             </Dialog>
+
+            {/* .......table... */}
+
+            <TableContainer component={Paper} sx={{ marginTop: '20px' }} >
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Medicine Name</StyledTableCell>
+                            <StyledTableCell align="center">Exp Date</StyledTableCell>
+                            <StyledTableCell align="center">Price</StyledTableCell>
+                            <StyledTableCell align="center">Description</StyledTableCell>
+                            <StyledTableCell align="center">Delete</StyledTableCell>
+                            <StyledTableCell align="center">Edit</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {getlocaldata.map((row) => (
+                            <StyledTableRow id='medirem' key={row.id}>
+                                <StyledTableCell component="th" scope="row">
+                                    {row.mname}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">{row.expdate}</StyledTableCell>
+                                <StyledTableCell align="center">{row.mprice}</StyledTableCell>
+                                <StyledTableCell align="center">{row.mdisc}</StyledTableCell>
+                                <StyledTableCell align="center"><DeleteIcon onClick={() => handleDelete(row.id)} /></StyledTableCell>
+                                <StyledTableCell align="center"><EditIcon /></StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
+
         </div>
     );
 }
