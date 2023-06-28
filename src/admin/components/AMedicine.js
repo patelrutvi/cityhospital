@@ -23,6 +23,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { useEffect } from 'react';
 
 //........
 
@@ -52,12 +53,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function AMedicine() {
     const [open, setOpen] = useState(false);
+    const [medicine, setmedicine] = useState([]);
 
-    
-
-    let getlocaldata = JSON.parse(localStorage.getItem("medicine"))
-    console.log(getlocaldata);
-
+    useEffect(() => {
+        const medicine = JSON.parse(localStorage.getItem('medicine'));
+        if (medicine) {
+         setmedicine(medicine);
+        }
+      }, []);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -89,19 +92,23 @@ export default function AMedicine() {
     const handleDelete = (i) => {
         console.log("delete", i);
 
-        let getlocaldata = JSON.parse(localStorage.getItem("medicine"))
-        console.log(getlocaldata);
+        setmedicine((i) =>
+        i.filter((_, index) => index !== i)
+      );
 
-        let rdata = getlocaldata.filter((c) => c.id == i)
-        console.log(rdata, "rdata");
-        // rdata.remove()
+        // let getlocaldata = JSON.parse(localStorage.getItem("medicine"))
+        // console.log(getlocaldata);
 
-        getlocaldata.map((v, index) => {
-            if (v.id === i) {
-                getlocaldata.splice(index, 1)
-            }
-        })
-        console.log(getlocaldata);
+        // let rdata = getlocaldata.filter((c) => c.id == i)
+        // console.log(rdata, "rdata");
+        // // rdata.remove()
+
+        // getlocaldata.map((v, index) => {
+        //     if (v.id === i) {
+        //         getlocaldata.splice(index, 1)
+        //     }
+        // })
+        // console.log(getlocaldata);
     }
 
 
@@ -251,7 +258,7 @@ export default function AMedicine() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {getlocaldata.map((row) => (
+                        {medicine.map((row) => (
                             <StyledTableRow id='medirem' key={row.id}>
                                 <StyledTableCell component="th" scope="row">
                                     {row.mname}
