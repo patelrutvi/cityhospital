@@ -14,6 +14,13 @@ import * as Yup from 'yup'
 export default function ADoctor() {
     const [open, setOpen] = useState(false);
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     let doctorSchema = Yup.object({
         name: Yup.string()
@@ -26,7 +33,7 @@ export default function ADoctor() {
             .matches(
                 /^[a-zA-Z ]{2,30}$/, 'please enter valid designation'
             ),
-            dis: Yup.string()
+        dis: Yup.string()
             .required()
             .test("dis", "Maximum 100 word allow", function (val) {
                 let arr = val.split(" ");
@@ -36,13 +43,16 @@ export default function ADoctor() {
                     return true;
                 }
             }),
+        img: Yup.string()
+            .required('please add photo')
     })
 
     const formik = useFormik({
         initialValues: {
             name: '',
-            dn:'',
-            dis:'',
+            dn: '',
+            dis: '',
+            img: ''
         },
         validationSchema: doctorSchema,
         enableReinitialize: true,
@@ -54,18 +64,12 @@ export default function ADoctor() {
 
     const { values, errors, touched, handleSubmit, handleChange, handleBlur } = formik
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+ 
 
     return (
         <div>
             <Box height={50} />
-            <Button variant="outlined" onClick={() => setOpen(!open)}>
+            <Button variant="outlined" onClick={handleClickOpen}>
                 Open doctor
             </Button>
             <Dialog open={open} onClose={handleClose}>
@@ -77,7 +81,7 @@ export default function ADoctor() {
                     </DialogContentText>
                     <form method="post" onSubmit={handleSubmit} >
                         <TextField
-                            autoFocus
+
                             margin="dense"
                             name="name"
                             id="name"
@@ -92,7 +96,7 @@ export default function ADoctor() {
                         />
                         <span style={{ color: "red" }} className='error'>{errors.name && touched.name ? errors.name : ''}</span>
                         <TextField
-                            autoFocus
+
                             margin="dense"
                             name="dn"
                             id="dn"
@@ -107,7 +111,7 @@ export default function ADoctor() {
                         />
                         <span style={{ color: "red" }} className='error'>{errors.dn && touched.dn ? errors.dn : ''}</span>
                         <TextField
-                            autoFocus
+
                             margin="dense"
                             name="dis"
                             id="dis"
@@ -122,19 +126,29 @@ export default function ADoctor() {
                         />
                         <span style={{ color: "red" }} className='error'>{errors.dis && touched.dis ? errors.dis : ''}</span>
                         <div className="social">
-                            <a href><i className="ri-twitter-fill" /></a>
-                            <a href><i className="ri-facebook-fill" /></a>
-                            <a href><i className="ri-instagram-fill" /></a>
-                            <a href> <i className="ri-linkedin-box-fill" /></a>
+                            <input
+                                type='file'
+                                name="img"
+                                id="img"
+                                label="icon"
+                                sx={{ margin: '10px', padding: '25px 0 0 0' }}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.dis}
+                            >
+
+                            </input>
+                            <span style={{ color: "red" }} className='error'>{errors.img && touched.img ? errors.img : ''}</span>
                         </div>
+                        <DialogActions>
+                            <Button onClick={handleClose}>Cancel</Button>
+                            <Button type='submit'>Submit</Button>
+                        </DialogActions>
                     </form>
                 </DialogContent>
 
 
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Subscribe</Button>
-                </DialogActions>
+
             </Dialog>
         </div>
     );

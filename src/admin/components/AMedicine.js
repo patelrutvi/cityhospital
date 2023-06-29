@@ -10,23 +10,53 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import * as Yup from 'yup'
+import { json } from 'react-router-dom';
 
 export default function AMedicine() {
     const [open, setOpen] = useState(false);
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleAdd = (data) => {
+        console.log(data);
+        handleClose()
+
+        let getlocaldata = JSON.parse(localStorage.getItem("medicine"))
+        console.log(getlocaldata);
+        let rno = Math.floor(Math.random() * 1000)
+
+        let newdata = {id:rno,...data}
+
+        if (getlocaldata === null) {
+            localStorage.setItem("medicine",JSON.stringify([newdata]))
+        }else{
+            getlocaldata.push(newdata)
+            console.log(getlocaldata);
+            localStorage.setItem("medicine",JSON.stringify(getlocaldata))
+        }
+
+    }
+
+
+    // var d = new Date();
+    // let nd = new Date(d.setDate(d.getDate()-1))
+    // ..present date mathi -1
+
     let medicineSchema = Yup.object({
         mname: Yup.string()
-            .required()
-            .matches(
-                /^[a-zA-Z ]{2,30}$/, 'please enter valid name'
-            ),
+            .required(),
         expdate: Yup.date()
             .required("please enter EXp date")
             .min(new Date(), 'Must be in present and past'),
-        mprice: Yup.string()
-        .required()
-        .matches(/^\d+(?:[.,]\d+)*$/,'please enter  price'),
-       
+        mprice: Yup.number()
+            .required()
+            .typeError('please enter valid price'),
+
         mdisc: Yup.string()
             .required()
             .test("mdisc", "Maximum 100 word allow", function (val) {
@@ -38,9 +68,10 @@ export default function AMedicine() {
                 }
             }),
     })
+
     const formik = useFormik({
         initialValues: {
-            name: '',
+            mname: '',
             expdate: '',
             mprice: '',
             mdisc: '',
@@ -48,39 +79,33 @@ export default function AMedicine() {
         },
         validationSchema: medicineSchema,
         enableReinitialize: true,
-        onsubmit: (values, action) => {
+        onSubmit: (values, action) => {
             action.resetForm()
-            console.log(values);
+            // console.log(values);
+            handleAdd(values)
+
+
         }
     })
 
     const { values, errors, touched, handleSubmit, handleChange, handleBlur } = formik
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    // console.log(errors);
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+
 
     return (
         <div>
             <Box height={50} />
 
             <Button variant="outlined" onClick={handleClickOpen}>
-                Open form dialog
+                Open Medicine
             </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Medicine</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-
-                    </DialogContentText>
                     <form method="post" onSubmit={handleSubmit} >
-
                         <TextField
-                            autoFocus
                             margin="dense"
                             name="mname"
                             id="mname"
@@ -95,7 +120,7 @@ export default function AMedicine() {
                         />
                         <span style={{ color: "red" }} className='error'>{errors.mname && touched.mname ? errors.mname : ''}</span>
                         <TextField
-                            autoFocus
+
                             margin="dense"
                             name="expdate"
                             id="expdate"
@@ -110,12 +135,12 @@ export default function AMedicine() {
                         />
                         <span style={{ color: "red" }} className='error'>{errors.expdate && touched.expdate ? errors.expdate : ''}</span>
                         <TextField
-                            autoFocus
+
                             margin="dense"
                             name="mprice"
                             id="mprice"
                             label="Price"
-                            type="text"
+                            type="number"
                             fullWidth
                             variant="standard"
                             sx={{ margin: '10px', padding: '25px 0 0 0' }}
@@ -126,7 +151,7 @@ export default function AMedicine() {
                         <span style={{ color: "red" }} className='error'>{errors.mprice && touched.mprice ? errors.mprice : ''}</span>
 
                         <TextField
-                            autoFocus
+
                             margin="dense"
                             name="mdisc"
                             id="mdisc"
@@ -140,13 +165,12 @@ export default function AMedicine() {
                             value={values.mdisc}
                         />
                         <span style={{ color: "red" }} className='error'>{errors.mdisc && touched.mdisc ? errors.mdisc : ''}</span>
-
+                        <DialogActions>
+                            <Button onClick={handleClose}>Cancel</Button>
+                            <Button type="submit">Submit</Button>
+                        </DialogActions>
                     </form>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Subscribe</Button>
-                </DialogActions>
             </Dialog>
         </div>
     );

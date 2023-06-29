@@ -27,14 +27,11 @@ export default function ADrpartment() {
             <Button variant="outlined" onClick={handleClickOpen}>
                 Open form dialog
             </Button>
-
+       
             <Dialog open={open} onClose={handleClose}>
 
                 <DialogTitle>Department</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-
-                    </DialogContentText>
                     <TextField
                         autoFocus
                         margin="dense"
