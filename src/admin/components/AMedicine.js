@@ -25,6 +25,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect } from 'react';
 
+
 //........
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -54,13 +55,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function AMedicine() {
     const [open, setOpen] = useState(false);
     const [medicine, setmedicine] = useState([]);
-
     useEffect(() => {
         const medicine = JSON.parse(localStorage.getItem('medicine'));
         if (medicine) {
-         setmedicine(medicine);
+        
+            setmedicine(medicine);
         }
-      }, []);
+    }, [medicine]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -93,8 +94,8 @@ export default function AMedicine() {
         console.log("delete", i);
 
         setmedicine((i) =>
-        i.filter((_, index) => index !== i)
-      );
+            i.filter((_, index) => index !== i)
+        );
 
         // let getlocaldata = JSON.parse(localStorage.getItem("medicine"))
         // console.log(getlocaldata);
