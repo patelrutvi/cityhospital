@@ -1752,3 +1752,54 @@ section {
 .main-header {
   height: 138px;
 }
+/* /////////////////////................. PR  Doctor style.................///////////////////////////// */
+
+.drpr-data .col-lg-6  {
+  width:100%;
+  margin: 20px;
+
+ 
+}
+.drpr-data .pic{
+ width: 40%;
+}
+.drpr-data .pic img{
+  width: 80%;
+  height: 400px;
+  margin-left: 60px;
+ }
+
+ .drpr-data .member-info{
+  margin: 30px;
+ }
+ 
+.drpr-data h4{
+  font-size: 40px;
+}
+.drpr-data span,
+.drpr-data p{
+  font-size: 20px;
+  margin: 5px 0px;
+
+}
+.drpr-data p{
+  font-size: 20px;
+  margin: 5px 0px;
+  margin-bottom: 20px;
+}
+
+.drpr-data a i{
+  width: 100px;
+  height: 80px;
+  border-radius: 50%;
+  background: #a0bcd5;
+  margin: 15px 10px;
+  color: #fff;
+  font-size: 20px;padding: 5px;
+
+}
+
+.drpr-data a i:hover {
+  background: #FF6337;
+}
+
