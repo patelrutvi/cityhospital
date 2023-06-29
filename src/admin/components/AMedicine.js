@@ -57,10 +57,10 @@ export default function AMedicine() {
     const [medicine, setmedicine] = useState([]);
     useEffect(() => {
         const medicine = JSON.parse(localStorage.getItem('medicine'));
-        if (medicine) {
+        // console.log(medicine,"getmedicine");
         
-            setmedicine(medicine);
-        }
+         setmedicine(medicine);
+        
     }, [medicine]);
 
     const handleClickOpen = () => {
@@ -93,23 +93,25 @@ export default function AMedicine() {
     const handleDelete = (i) => {
         console.log("delete", i);
 
-        setmedicine((i) =>
-            i.filter((_, index) => index !== i)
-        );
 
-        // let getlocaldata = JSON.parse(localStorage.getItem("medicine"))
-        // console.log(getlocaldata);
+        // setmedicine((i) =>
+        //     i.filter((_, index) => index !== i)
+        // );
 
-        // let rdata = getlocaldata.filter((c) => c.id == i)
-        // console.log(rdata, "rdata");
+        let mgetlocaldata = JSON.parse(localStorage.getItem("medicine"))
+        console.log(mgetlocaldata);
+
+        // let rdata = medicine.filter((c) => c.id == i)
+        // console.log(rdata, "rdata" , i ,"id");
         // // rdata.remove()
 
-        // getlocaldata.map((v, index) => {
-        //     if (v.id === i) {
-        //         getlocaldata.splice(index, 1)
-        //     }
-        // })
-        // console.log(getlocaldata);
+        mgetlocaldata.map((v, index) => {
+            if (v.id === i) {
+                console.log(v.id === i);
+                mgetlocaldata.splice(index,1)
+            }
+        })
+        console.log(mgetlocaldata);
     }
 
 
