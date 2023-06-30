@@ -104,7 +104,7 @@ export default function AMedicine() {
     }
 
     const handleEdit = (ei) => {
-        console.log("edit", ei);
+        // console.log("edit", ei);
 
         let mgetlocaldata = JSON.parse(localStorage.getItem("medicine"))
         console.log(mgetlocaldata);
