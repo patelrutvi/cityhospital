@@ -110,7 +110,7 @@ export default function AMedicine() {
         console.log(mgetlocaldata);
 
         let fdata = mgetlocaldata.filter((v, index) => v.id === ei)
-        console.log(fdata);
+        // console.log(fdata);
 
         handleClickOpen()
 
