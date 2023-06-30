@@ -95,7 +95,7 @@ export default function AMedicine() {
         console.log("delete", i);
 
         let mgetlocaldata = JSON.parse(localStorage.getItem("medicine"))
-        console.log(mgetlocaldata);
+        // console.log(mgetlocaldata);
 
         let fdata = mgetlocaldata.filter((v, index) => v.id !== i)
         setmedicine(fdata)
@@ -104,13 +104,13 @@ export default function AMedicine() {
     }
 
     const handleEdit = (ei) => {
-        console.log("edit", ei);
+        // console.log("edit", ei);
 
         let mgetlocaldata = JSON.parse(localStorage.getItem("medicine"))
-        console.log(mgetlocaldata);
+        // console.log(mgetlocaldata);
 
         let fdata = mgetlocaldata.filter((v, index) => v.id === ei)
-        // console.log(fdata);
+        console.log(fdata);
 
         handleClickOpen()
 
