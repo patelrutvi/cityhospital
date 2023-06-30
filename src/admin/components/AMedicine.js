@@ -6,13 +6,13 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import * as Yup from 'yup'
 import { json } from 'react-router-dom';
 
 // .....table...
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -56,12 +56,12 @@ export default function AMedicine() {
     const [open, setOpen] = useState(false);
     const [medicine, setmedicine] = useState([]);
     useEffect(() => {
-        const medicine = JSON.parse(localStorage.getItem('medicine'));
-        // console.log(medicine,"getmedicine");
-        
-         setmedicine(medicine);
-        
-    }, [medicine]);
+        let medicine = JSON.parse(localStorage.getItem('medicine'));
+        // console.log(medicine,"getmedicine");  
+        if (medicine !== null) {
+            setmedicine(medicine);
+        }
+    }, []);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -82,38 +82,26 @@ export default function AMedicine() {
 
         if (getlocaldata === null) {
             localStorage.setItem("medicine", JSON.stringify([newdata]))
+            setmedicine([newdata])
         } else {
             getlocaldata.push(newdata)
             console.log(getlocaldata);
             localStorage.setItem("medicine", JSON.stringify(getlocaldata))
+            setmedicine(getlocaldata)
         }
 
     }
-
-    const handleDelete = (i) => {
+    const handledelete = (i) => {
         console.log("delete", i);
-
-
-        // setmedicine((i) =>
-        //     i.filter((_, index) => index !== i)
-        // );
 
         let mgetlocaldata = JSON.parse(localStorage.getItem("medicine"))
         console.log(mgetlocaldata);
 
-        // let rdata = medicine.filter((c) => c.id == i)
-        // console.log(rdata, "rdata" , i ,"id");
-        // // rdata.remove()
+        let fdata = mgetlocaldata.filter((v, index) => v.id !== i)
+        setmedicine(fdata)
+        localStorage.setItem("medicine", JSON.stringify(fdata))
 
-        mgetlocaldata.map((v, index) => {
-            if (v.id === i) {
-                console.log(v.id === i);
-                mgetlocaldata.splice(index,1)
-            }
-        })
-        console.log(mgetlocaldata);
     }
-
 
     // var d = new Date();
     // let nd = new Date(d.setDate(d.getDate()-1))
@@ -164,7 +152,39 @@ export default function AMedicine() {
 
     // console.log(errors);
 
+    // ....Grid table..../
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'mname', headerName: 'Medicine Name', width: 130 },
+        { field: 'expdate', headerName: 'Exp Date', width: 130 },
+        { field: 'mprice', headerName: 'Price', width: 130 },
+        { field: 'mdisc', headerName: 'Description', width: 130 },
+        {
+            field: 'action',
+            headerName: 'Action',
+            width: 130,
 
+            renderCell: (params) => (
+                <DeleteIcon onClick={() => handledelete(params.row.id)}>
+
+                </DeleteIcon>
+            )
+
+        },
+
+    ];
+
+    // const rows = [
+    //     { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+    //     { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+    //     { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+    //     { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+    //     { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+    //     { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+    //     { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+    //     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+    //     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+    // ];
 
     return (
         <div>
@@ -247,7 +267,7 @@ export default function AMedicine() {
             </Dialog>
 
             {/* .......table... */}
-
+            {/* 
             <TableContainer component={Paper} sx={{ marginTop: '20px' }} >
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
@@ -275,7 +295,24 @@ export default function AMedicine() {
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </TableContainer> */}
+
+
+            {/* ....gid table */}
+
+            <div style={{ height: 400, width: '100%' }}>
+                <DataGrid
+                    rows={medicine}
+                    columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 5 },
+                        },
+                    }}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                />
+            </div>
 
 
         </div>
