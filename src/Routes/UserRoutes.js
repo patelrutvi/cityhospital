@@ -12,7 +12,8 @@ import Doctor from '../user/containers/Doctor';
 import Visitingdoctors from '../user/containers/Visitingdoctors';
 import NotFound from '../user/containers/NotFound';
 import Auth from '../user/containers/Auth';
-import Usermedicine from '../user/containers/Usermedicine';
+import Usermedicine from '../user/containers/medicines/Usermedicine';
+
 
 
 function UserRoutes(props) {
@@ -38,7 +39,7 @@ function UserRoutes(props) {
 
                 <Route path='*' element={<NotFound />} />
                 <Route path='/auth' element={<Auth />} />
-               <Route path='/usermedicine' element={<Usermedicine />} />
+               <Route path='/medicines' element={<Usermedicine />} />
             
             </Routes>
             <Footer />

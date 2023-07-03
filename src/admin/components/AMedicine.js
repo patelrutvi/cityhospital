@@ -55,6 +55,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function AMedicine() {
     const [open, setOpen] = useState(false);
     const [medicine, setmedicine] = useState([]);
+    
     useEffect(() => {
         let medicine = JSON.parse(localStorage.getItem('medicine'));
         // console.log(medicine,"getmedicine");  
