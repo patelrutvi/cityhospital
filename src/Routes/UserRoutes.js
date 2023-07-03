@@ -39,8 +39,8 @@ function UserRoutes(props) {
 
                 <Route path='*' element={<NotFound />} />
                 <Route path='/auth' element={<Auth />} />
-               <Route path='/medicines' element={<Usermedicine />} />
-            
+                <Route path='/medicines' element={<Usermedicine />} />
+
             </Routes>
             <Footer />
 

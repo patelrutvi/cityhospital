@@ -1,10 +1,11 @@
 import React from 'react';
 import CustomCard from '../../components/UI/CustomCard';
-import { Col } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 
 function MedicineList({ mdata }) {
     return (
         <div>
+            <Row >
             {
                 mdata.map((v, i) => {
                     return (
@@ -14,6 +15,7 @@ function MedicineList({ mdata }) {
                     )
                 })
             }
+            </Row>
         </div>
     );
 }

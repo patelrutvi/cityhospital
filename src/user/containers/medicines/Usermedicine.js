@@ -7,6 +7,7 @@ import { Row } from 'reactstrap';
 function Usermedicine(props) {
 
     const [data, setdata] = useState([])
+    const [filterdata,setfilterdata] = useState([])
 
     useEffect(() => {
         let medicine = JSON.parse(localStorage.getItem('medicine'));
@@ -23,11 +24,15 @@ function Usermedicine(props) {
 
         let medicine = JSON.parse(localStorage.getItem('medicine'));
 
-       let fdata = medicine.filter((v) => 
+        let fdata = medicine.filter((v) =>
             v.mname.toLowerCase().includes(val.toLowerCase())
+            || v.mprice.toString().includes(val)
+            ||v.expdate.toString().includes(val)
+            || v.mdisc.toLowerCase().includes(val.toLowerCase())
         )
 
         console.log(fdata);
+        setfilterdata(fdata)
 
     }
 
@@ -50,7 +55,7 @@ function Usermedicine(props) {
                     <input id="search-input"
                         type="search"
                         class="form-control"
-                      onChange={(e)=>handlechange(e.target.value)} />
+                        onChange={(e) => handlechange(e.target.value)} />
 
                 </div>
                 <button id="search-button" type="button" class="btn btn-primary" style={{ margin: '30px 0px' }}>
@@ -60,8 +65,7 @@ function Usermedicine(props) {
 
             <div className='container'>
                 <div className='row gap-3' >
-                    <MedicineList mdata={data} />
-
+                    <MedicineList mdata={ filterdata.length > 0 ? filterdata :  data} />
                 </div>
 
             </div>
