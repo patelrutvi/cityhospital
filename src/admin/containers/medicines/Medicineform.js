@@ -69,7 +69,6 @@ function Medicineform(props) {
     return (
 
         <>
-            <Box height={50} />
             <Button variant="outlined" onClick={handleClickOpen}>
                 Open form dialog
             </Button>
