@@ -55,7 +55,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function AMedicine() {
     const [open, setOpen] = useState(false);
     const [medicine, setmedicine] = useState([]);
-    
+    const [updatedata, setupdatedata] = useState(null)
+
     useEffect(() => {
         let medicine = JSON.parse(localStorage.getItem('medicine'));
         // console.log(medicine,"getmedicine");  
@@ -71,7 +72,7 @@ export default function AMedicine() {
     const handleClose = () => {
         setOpen(false);
     };
-    const handleAdd = (data) => {
+    const handleSubmitdata = (data) => {
         console.log(data);
         handleClose()
 
@@ -85,11 +86,26 @@ export default function AMedicine() {
             localStorage.setItem("medicine", JSON.stringify([newdata]))
             setmedicine([newdata])
         } else {
-            getlocaldata.push(newdata)
-            console.log(getlocaldata);
-            localStorage.setItem("medicine", JSON.stringify(getlocaldata))
-            setmedicine(getlocaldata)
+            if (updatedata) {
+                let udata = getlocaldata.map((v) => {
+                    if (v.id === data.id) {
+                        return data
+                    } else {
+                        return v
+                    }
+                })
+                console.log(udata);
+                localStorage.setItem("medicine", JSON.stringify(udata))
+                setmedicine(udata)
+            } else {
+                getlocaldata.push(newdata)
+                console.log(getlocaldata);
+                localStorage.setItem("medicine", JSON.stringify(getlocaldata))
+                setmedicine(getlocaldata)
+            }
+
         }
+        setupdatedata(null)
 
     }
     const handledelete = (i) => {
@@ -104,19 +120,12 @@ export default function AMedicine() {
 
     }
 
-    const handleEdit = (ei) => {
-        // console.log("edit", ei);
-
-        let mgetlocaldata = JSON.parse(localStorage.getItem("medicine"))
-        // console.log(mgetlocaldata);
-
-        let fdata = mgetlocaldata.filter((v, index) => v.id === ei)
-        console.log(fdata);
-
+    const handleEdit = (evalue) => {
+        //    console.log(evalue);
+        formik.setValues(evalue)
         handleClickOpen()
-
-        let mn = fdata[0].mname
-        console.log(mn);    
+        formik.setValues(evalue)
+        setupdatedata(evalue)
     }
 
     // var d = new Date();
@@ -158,7 +167,7 @@ export default function AMedicine() {
         onSubmit: (values, action) => {
             action.resetForm()
             // console.log(values);
-            handleAdd(values)
+            handleSubmitdata(values)
 
 
         }
@@ -193,7 +202,7 @@ export default function AMedicine() {
             headerName: 'Edit',
             width: 130,
             renderCell: (params) => (
-                <EditIcon onClick={() => handleEdit(params.row.id)}>
+                <EditIcon onClick={() => handleEdit(params.row)}>
 
                 </EditIcon>
             )
