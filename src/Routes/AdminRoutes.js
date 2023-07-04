@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Route } from 'react-rouAMedicineter-dom';
-import AMedicine from '../admin/components/AMedicine';
+import AMedicine from '../admin/containers/medicines/AMedicine';
 import Panel from '../admin/components/Panel';
 import ADoctor from '../admin/components/ADoctor';
 import ADrpartment from '../admin/components/ADrpartment';
