@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -59,7 +59,7 @@ function Medicineform(props) {
             action.resetForm()
             handleClose()
             // console.log(values);
-            handleSubmitdata(values)
+            // handleSubmitdata(values)
 
 
         }
@@ -67,12 +67,12 @@ function Medicineform(props) {
 
     const { values, errors, touched, handleSubmit, handleChange, handleBlur } = formik
     return (
-        <>
-          <Box height={40} />
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open Medicine
-            </Button>
 
+        <>
+            <Box height={50} />
+            <Button variant="outlined" onClick={handleClickOpen}>
+                Open form dialog
+            </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Medicine</DialogTitle>
                 <DialogContent>

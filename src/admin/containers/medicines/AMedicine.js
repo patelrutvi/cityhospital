@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect } from 'react';
+import Medicineform from './Medicineform';
 
 
 //........
@@ -139,6 +140,7 @@ export default function AMedicine() {
     return (
         <div>
             <Box height={40} />
+            <Medicineform />
             {/* ....gid table */}
 
             <div style={{ height: 400, width: '100%' }}>
