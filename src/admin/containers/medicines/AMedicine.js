@@ -100,13 +100,11 @@ export default function AMedicine() {
 
     }
 
-    // const handleEdit = (evalue) => {
-    //     //    console.log(evalue);
-    //     formik.setValues(evalue)
-    //     handleClickOpen()
-    //     formik.setValues(evalue)
-    //     setupdatedata(evalue)
-    // }
+    const handleEdit = (evalue) => {
+        //    console.log(evalue);
+    
+        setupdatedata(evalue)
+    }
 
     // ....Grid table..../
     const columns = [
@@ -125,9 +123,9 @@ export default function AMedicine() {
                     <DeleteIcon onClick={() => handledelete(params.row.id)}>
 
                     </DeleteIcon>
-                    {/* <EditIcon onClick={() => handleEdit(params.row)}>
+                    <EditIcon onClick={() => handleEdit(params.row)}>
 
-                    </EditIcon> */}
+                    </EditIcon>
                 </>
 
             ),
@@ -140,7 +138,7 @@ export default function AMedicine() {
     return (
         <div>
             <Box height={40} />
-            <Medicineform />
+            <Medicineform onhandlesubmit={handleSubmitdata} onupdate={updatedata}/>
             {/* ....gid table */}
 
             <div style={{ height: 400, width: '100%' }}>

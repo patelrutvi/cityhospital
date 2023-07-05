@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -9,8 +9,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 import * as Yup from 'yup'
 
 
-function Medicineform(props) {
+function Medicineform({ onhandlesubmit, onupdate }) {
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        if (onupdate) {
+            handleClickOpen()
+            formik.setValues(onupdate)
+        }
+    }, [onupdate])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -59,7 +66,7 @@ function Medicineform(props) {
             action.resetForm()
             handleClose()
             // console.log(values);
-            // handleSubmitdata(values)
+            onhandlesubmit(values)
 
 
         }
