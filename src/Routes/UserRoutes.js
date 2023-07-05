@@ -13,6 +13,7 @@ import Visitingdoctors from '../user/containers/Visitingdoctors';
 import NotFound from '../user/containers/NotFound';
 import Auth from '../user/containers/Auth';
 import Usermedicine from '../user/containers/medicines/Usermedicine';
+import Protected from './Protected';
 
 
 
@@ -22,7 +23,7 @@ function UserRoutes(props) {
 
             <Header />
             <Routes>
-                <Route path='/' element={<Home />} />
+                <Route path='/' element={<Protected Component={Home} />} />
                 <Route path='/department' element={<Department />} />
                 <Route path='/doctors' element={<Doctors />} />
                 {/* { <Route path='/doctor/:id' element={<Doctor />}/>
