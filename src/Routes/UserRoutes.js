@@ -23,24 +23,37 @@ function UserRoutes(props) {
 
             <Header />
             <Routes>
-                <Route path='/' element={<Protected Component={Home} />} />
-                <Route path='/department' element={<Department />} />
+                {/* <Route path='/' element={<Home />} /> */}
+                {/* <Route path='/department' element={<Department />} /> */}
                 <Route path='/doctors' element={<Doctors />} />
-                {/* { <Route path='/doctor/:id' element={<Doctor />}/>
-      <Route path='/doctor/visiting_doctors' element={<Visitingdoctors />}/> } */}
 
-                <Route path='/about' element={<About />} />
-                <Route path='/contact' element={<Contact />} />
-                <Route path='/appiment' element={<Appoiment />} />
+                {/* ..... */}
+                <Route path='/doctor/:id' element={<Protected Component={Doctor} />} />
+                <Route path='/doctor/visiting_doctors' element={<Protected Component={Visitingdoctors} />} />
+
+
+                {/* <Route path='/about' element={<About />} /> */}
+                {/* <Route path='/contact' element={<Contact />} /> */}
+                {/* <Route path='/appiment' element={<Appoiment />} /> */}
                 {/* neseted routs */}
-                <Route path='/doctor'>
+
+                {/* <Route path='/doctor'>
                     <Route path=':id' element={<Doctor />} />
                     <Route path='visiting_doctors' element={<Visitingdoctors />} />
-                </Route>
+                </Route> */}
 
                 <Route path='*' element={<NotFound />} />
                 <Route path='/auth' element={<Auth />} />
-                <Route path='/medicines' element={<Usermedicine />} />
+                {/* <Route path='/medicines' element={<Usermedicine />} /> */}
+
+                <Route path='/' element={<Protected Component={Home} />} />
+                <Route path='/department' element={<Protected Component={Department} />} />
+                <Route path='/about' element={<Protected Component={About} />} />
+                <Route path='/medicines' element={<Protected Component={Usermedicine} />} />
+                <Route path='/contact' element={<Protected Component={Contact} />} />
+                <Route path='/appiment' element={<Protected Component={Appoiment} />} />
+
+
 
             </Routes>
             <Footer />

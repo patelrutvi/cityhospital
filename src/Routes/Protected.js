@@ -7,7 +7,7 @@ function Protected({ Component }) {
         let login = JSON.parse(localStorage.getItem("login"))
         console.log(login);
         if (login) {
-            navigate('./auth')
+            navigate('/auth')
         }
 
     }, [])
@@ -19,3 +19,4 @@ function Protected({ Component }) {
 }
 
 export default Protected;
+
