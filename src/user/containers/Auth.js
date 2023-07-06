@@ -1,17 +1,13 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup'
 
 function Auth(props) {
 
     const [authdata, setauth] = useState('login')
     const [logindata,setlogindata] = useState([])
-
-    // const handleLogin = (data) => {
-    //     console.log(data);
-    //     let getlocaldata = JSON.parse(localStorage.getItem("login"))
-    //     console.log(getlocaldata);
-    // }
+    const navigate = useNavigate();
 
     const handleLogin = (val) => {
         console.log("loginnn",val);
@@ -28,6 +24,7 @@ function Auth(props) {
             localStorage.setItem("login", JSON.stringify(getlocaldata))
             setlogindata(getlocaldata)
         }
+        navigate('/medicines')
 
     }
 

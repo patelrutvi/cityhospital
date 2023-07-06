@@ -6,7 +6,7 @@ function Protected({ Component }) {
     useEffect(() => {
         let login = JSON.parse(localStorage.getItem("login"))
         console.log(login);
-        if (login) {
+        if (!login) {
             navigate('/auth')
         }
 
