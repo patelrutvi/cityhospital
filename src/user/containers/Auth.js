@@ -1,36 +1,19 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup'
 
 function Auth(props) {
 
     const [authdata, setauth] = useState('login')
-    const [logindata,setlogindata] = useState([])
+    const navigate = useNavigate();
 
-    // const handleLogin = (data) => {
-    //     console.log(data);
-    //     let getlocaldata = JSON.parse(localStorage.getItem("login"))
-    //     console.log(getlocaldata);
-    // }
 
-    const handleLogin = (val) => {
-        console.log("loginnn",val);
-
-        let getlocaldata = JSON.parse(localStorage.getItem("login"))
-        console.log(getlocaldata);
-
-        if (getlocaldata === null) {
-            localStorage.setItem("login", JSON.stringify([val]))
-            setlogindata([val])
-        }else {
-            getlocaldata.push(val)
-            console.log(getlocaldata);
-            localStorage.setItem("login", JSON.stringify(getlocaldata))
-            setlogindata(getlocaldata)
-        }
-
+    const handleLogin = () => {
+        console.log("loginnn");
+        localStorage.setItem("login", "true")
+        navigate("/")
     }
-
 
     let authobj = {}, intivalue = {}
     if (authdata === 'login') {
@@ -78,7 +61,10 @@ function Auth(props) {
         onSubmit: (values, action) => {
             action.resetForm()
             console.log(values);
-            handleLogin(values)
+            if(authdata === 'login'){
+                handleLogin()
+            }
+           
         }
     })
 

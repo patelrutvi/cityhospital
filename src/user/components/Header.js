@@ -2,6 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Header(props) {
+
+    let login = localStorage.getItem("login")
+
+    const handleLogout = () => {
+        localStorage.removeItem("login")
+    }
     return (
 
         <div className="main-header">
@@ -30,7 +36,7 @@ function Header(props) {
                     <nav id="navbar" className="navbar order-last order-lg-0">
                         <ul>
                             <li><Link className="nav-link scrollto active" to={"/"}>Home</Link></li>
-                            <li><Link className="nav-link scrollto"to={'/department'}>Departments</Link></li>
+                            <li><Link className="nav-link scrollto" to={'/department'}>Departments</Link></li>
                             <li><Link className="nav-link scrollto" to={'/doctors'}>Doctors</Link></li>
                             <li><Link className="nav-link scrollto" to={'/medicines'}>Medicines</Link></li>
                             <li><Link className="nav-link scrollto " to={'/about'}>About</Link></li>
@@ -40,9 +46,15 @@ function Header(props) {
                     </nav>
                     <Link to={'/appiment'} className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</Link>
-                    <Link to={'/auth'} className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">Login/ Signup</span>
-                    </Link>
+
+                    {
+                        login ? <Link to={'/'} className="appointment-btn scrollto" onClick={handleLogout}>
+                            <span className="d-none d-md-inline">LogOut</span>
+                        </Link> : <Link to={'/auth'} className="appointment-btn scrollto">
+                            <span className="d-none d-md-inline">Login/ Signup</span>
+                        </Link>
+                    }
+
                 </div>
             </header>
         </div>

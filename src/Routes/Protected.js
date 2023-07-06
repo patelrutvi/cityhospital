@@ -1,20 +1,12 @@
 import React, { useEffect } from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet, redirect, useNavigate } from 'react-router-dom';
 
-function Protected({ Component }) {
+function Protected(props) {
     const navigate = useNavigate();
-    useEffect(() => {
-        let login = JSON.parse(localStorage.getItem("login"))
-        console.log(login);
-        if (login) {
-            navigate('/auth')
-        }
-
-    }, [])
+    let login = localStorage.getItem("login")
     return (
-        <div>
-            <Component />
-        </div>
+        login ? <Outlet /> : <Navigate to={'/auth'} replace />
+           
     );
 }
 

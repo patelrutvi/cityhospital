@@ -6,19 +6,19 @@ import ADoctor from '../admin/components/ADoctor';
 import ADrpartment from '../admin/components/ADrpartment';
 import AAppoiment from '../admin/components/AAppoiment';
 import { Route, Routes } from 'react-router-dom';
+import DashBoard from '../admin/containers/DashBoard';
 
 function AdminRoutes(props) {
     return (
-        <Panel >
-            <Routes>
-                <Route path='/ADoctor' element={<ADoctor />} />
-                <Route path='/ADrpartment' element={<ADrpartment />} />
-                <Route path='/AAppoiment' element={<AAppoiment />} />
-                <Route path='/AMedicine' element={<AMedicine />} />
-            </Routes>
-        </Panel>
-
-
+            <Panel >
+                <Routes>
+                    <Route  path='/' element={<DashBoard />}/>
+                    <Route path='/ADoctor' element={<ADoctor />} />
+                    <Route path='/ADrpartment' element={<ADrpartment />} />
+                    <Route path='/AAppoiment' element={<AAppoiment />} />
+                    <Route path='/AMedicine' element={<AMedicine />} />
+                </Routes>
+            </Panel>
     );
 }
 
