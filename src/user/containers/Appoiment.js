@@ -1,6 +1,28 @@
 import React from 'react';
+import { styled } from 'styled-components';
 
 function Appoiment(props) {
+    const Button = styled.button`
+    color: #BF4F74;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid #BF4F74;
+  border-radius: 3px;
+
+  &:hover{
+    background-color: #105b72c2;
+  }
+  `;
+
+    // A new component based on Button, but with some override styles
+    const TomatoButton = styled(Button)`
+    background-color: tomato;
+    color:white;
+    border-radius: 40px;
+    padding: 9px 36px;
+  `;
+
     return (
         <div>
             <section id="appointment" className="appointment">
@@ -50,7 +72,7 @@ function Appoiment(props) {
                             <div className="error-message" />
                             <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                         </div>
-                        <div className="text-center"><button type="submit">Make an Appointment</button></div>
+                        <div className="text-center"><TomatoButton >Make an Appointment</TomatoButton></div>
                     </form>
                 </div>
             </section>

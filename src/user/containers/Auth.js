@@ -1,12 +1,35 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { styled } from 'styled-components';
 import * as Yup from 'yup'
 
 function Auth(props) {
 
     const [authdata, setauth] = useState('login')
     const navigate = useNavigate();
+
+
+    const Button = styled.button`
+    color: #BF4F74;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid #BF4F74;
+  border-radius: 3px;
+
+  &:hover{
+    background-color: #105b72c2;
+  }
+  `;
+
+    // A new component based on Button, but with some override styles
+    const TomatoButton = styled(Button)`
+    background-color: tomato;
+    color:white;
+    border-radius: 40px;
+    padding: 9px 36px;
+  `;
 
 
     const handleLogin = () => {
@@ -61,10 +84,10 @@ function Auth(props) {
         onSubmit: (values, action) => {
             action.resetForm()
             console.log(values);
-            if(authdata === 'login'){
+            if (authdata === 'login') {
                 handleLogin()
             }
-           
+
         }
     })
 
@@ -186,12 +209,12 @@ function Auth(props) {
                             {
                                 authdata === 'login'
                                     ?
-                                    <div className="text-center"><button type="submit">Login</button></div>
+                                    <div className="text-center"><TomatoButton>Loginn</TomatoButton></div>
                                     :
                                     (authdata === 'sign up'
                                         ?
-                                        <div className="text-center"><button type="submit">Sign Up</button></div>
-                                        : <div className="text-center"><button type="submit">submit</button></div>
+                                        <div className="text-center"><TomatoButton>Sign Up</TomatoButton></div>
+                                        : <div className="text-center"><TomatoButton>submit</TomatoButton></div>
                                     )
 
                             }
@@ -211,8 +234,6 @@ function Auth(props) {
                                         : (authdata === 'sign up' ? null : null)
                                 }
                             </div>
-
-
                         </form>
                     </div>
                 </section>

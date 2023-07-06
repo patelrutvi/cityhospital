@@ -1,40 +1,60 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { styled } from 'styled-components';
 import * as Yup from 'yup'
 
 function Contect1(props) {
+    const Button = styled.button`
+    color: #BF4F74;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid #BF4F74;
+  border-radius: 3px;
 
+  &:hover{
+    background-color: #105b72c2;
+  }
+  `;
+
+    // A new component based on Button, but with some override styles
+    const TomatoButton = styled(Button)`
+    background-color: tomato;
+    color:white;
+    border-radius: 40px;
+    padding: 9px 36px;
+  `;
     let contact1Schema = Yup.object({
-        name: Yup.string().required('Please enter name').matches(/^[a-z]+$/ , 'Please enter valid name'),
+        name: Yup.string().required('Please enter name').matches(/^[a-z]+$/, 'Please enter valid name'),
         email: Yup.string().email('please enter valid email').required('Please enter email'),
         subject: Yup.string().required('Please enter subject'),
         message: Yup.string().required('Please enter message')
-        .test('message' , 'Maximum 5 word allow',
-        function(val){
-            let arr = val.split(" ")
-            if(arr.length > 5){
-                return false ;
-            } else {
-                return true
-            }
-        }
-        ),
-      });
+            .test('message', 'Maximum 5 word allow',
+                function (val) {
+                    let arr = val.split(" ")
+                    if (arr.length > 5) {
+                        return false;
+                    } else {
+                        return true
+                    }
+                }
+            ),
+    });
 
-      const formik = useFormik({
-        initialValues : {
+    const formik = useFormik({
+        initialValues: {
             name: '',
             email: '',
             subject: '',
-            message :''
+            message: ''
         },
-           validationSchema : contact1Schema ,
-           onSubmit: values => {
-         
-          },
-      })
+        validationSchema: contact1Schema,
+        onSubmit: values => {
 
-      const {values , errors , touched , handleBlur , handleChange , handleSubmit } = formik
+        },
+    })
+
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik
 
     return (
         <div>
@@ -93,8 +113,8 @@ function Contect1(props) {
                                                 onBlur={handleBlur}
                                                 value={values.name}
                                             />
-                                           
-                                        <span style={{color : 'red'}} className='error'>{errors.name && touched.name ? errors.name : null}</span>   
+
+                                            <span style={{ color: 'red' }} className='error'>{errors.name && touched.name ? errors.name : null}</span>
 
                                         </div>
                                         <div className="col-md-6 form-group mt-3 mt-md-0">
@@ -108,7 +128,7 @@ function Contect1(props) {
                                                 onBlur={handleBlur}
                                                 value={values.email}
                                             />
-                                           <span style={{color : 'red'}}  className='error'>{errors.email && touched.email ? errors.email : null}</span>
+                                            <span style={{ color: 'red' }} className='error'>{errors.email && touched.email ? errors.email : null}</span>
                                         </div>
                                     </div>
                                     <div className="form-group mt-3">
@@ -121,9 +141,9 @@ function Contect1(props) {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.subject}
-                                      
+
                                         />
-                                        <span style={{color : 'red'}}  className='error'>{errors.subject && touched.subject ? errors.subject : null}</span>
+                                        <span style={{ color: 'red' }} className='error'>{errors.subject && touched.subject ? errors.subject : null}</span>
                                     </div>
                                     <div className="form-group mt-3">
                                         <textarea
@@ -134,10 +154,10 @@ function Contect1(props) {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.message}
-                                         
-                                          
+
+
                                         />
-                                        <span style={{color : 'red'}}  className='error'>{errors.message && touched.message ? errors.message : null}</span>
+                                        <span style={{ color: 'red' }} className='error'>{errors.message && touched.message ? errors.message : null}</span>
                                     </div>
                                     <div className="my-3">
                                         <div className="loading">Loading</div>
@@ -147,7 +167,8 @@ function Contect1(props) {
                                         </div>
                                     </div>
                                     <div className="text-center">
-                                        <button type="submit">Send Message</button>
+                                        <TomatoButton >Send Message</TomatoButton>
+                                        {/* type="submit" */}
                                     </div>
                                 </form>
                             </div>
