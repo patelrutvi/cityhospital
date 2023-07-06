@@ -10,6 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import * as Yup from 'yup'
+import { styled } from 'styled-components';
 
 export default function ADoctor() {
     const [open, setOpen] = useState(false);
@@ -21,7 +22,26 @@ export default function ADoctor() {
     const handleClose = () => {
         setOpen(false);
     };
+    const Button = styled.button`
+    color: #BF4F74;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid #BF4F74;
+  border-radius: 3px;
 
+  &:hover{
+    background-color: #105b72c2;
+  }
+  `;
+
+    // A new component based on Button, but with some override styles
+    const TomatoButton = styled(Button)`
+    background-color: tomato;
+    color:white;
+    border-radius: 40px;
+    padding: 9px 36px;
+  `;
     let doctorSchema = Yup.object({
         name: Yup.string()
             .required()
@@ -69,9 +89,7 @@ export default function ADoctor() {
     return (
         <div>
             <Box height={50} />
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open doctor
-            </Button>
+            <TomatoButton variant="outlined" onClick={handleClickOpen}>Add Doctor</TomatoButton>
             <Dialog open={open} onClose={handleClose}>
 
                 <DialogTitle>Doctors</DialogTitle>

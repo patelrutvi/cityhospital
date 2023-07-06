@@ -22,7 +22,7 @@ function Appoiment(props) {
     border-radius: 40px;
     padding: 9px 36px;
   `;
-
+  
     return (
         <div>
             <section id="appointment" className="appointment">

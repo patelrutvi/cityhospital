@@ -7,6 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as Yup from 'yup'
+import { styled } from 'styled-components';
 
 
 function Medicineform({ onhandlesubmit, onupdate }) {
@@ -26,6 +27,27 @@ function Medicineform({ onhandlesubmit, onupdate }) {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const Button = styled.button`
+    color: #BF4F74;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid #BF4F74;
+  border-radius: 3px;
+
+  &:hover{
+    background-color: #105b72c2;
+  }
+  `;
+
+    // A new component based on Button, but with some override styles
+    const TomatoButton = styled(Button)`
+    background-color: tomato;
+    color:white;
+    border-radius: 40px;
+    padding: 9px 36px;
+  `;
 
     // var d = new Date();
     // let nd = new Date(d.setDate(d.getDate()-1))
@@ -76,9 +98,10 @@ function Medicineform({ onhandlesubmit, onupdate }) {
     return (
 
         <>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            {/* <Button variant="outlined" onClick={handleClickOpen}>
                 Open form dialog
-            </Button>
+            </Button> */}
+            <TomatoButton variant="outlined" onClick={handleClickOpen}>Add Medicine</TomatoButton>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Medicine</DialogTitle>
                 <DialogContent>
