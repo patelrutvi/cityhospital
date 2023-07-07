@@ -1,36 +1,17 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components';
+
+
+
 import * as Yup from 'yup'
+import Button from '../components/UI/Button/Button';
+import Input from '../components/UI/Input/Input';
 
 function Auth(props) {
 
     const [authdata, setauth] = useState('login')
     const navigate = useNavigate();
-
-
-    const Button = styled.button`
-    color: #BF4F74;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid #BF4F74;
-  border-radius: 3px;
-
-  &:hover{
-    background-color: #105b72c2;
-  }
-  `;
-
-    // A new component based on Button, but with some override styles
-    const TomatoButton = styled(Button)`
-    background-color: tomato;
-    color:white;
-    border-radius: 40px;
-    padding: 9px 36px;
-  `;
-
 
     const handleLogin = () => {
         console.log("loginnn");
@@ -148,7 +129,9 @@ function Auth(props) {
                                 }
                                 {/* ..........email.......... */}
                                 <div className="col-md-7 form-group mt-3 mt-md-0">
-                                    <input type="email"
+
+                                    <Input
+                                        type="email"
                                         className="form-control"
                                         name="email" id="email"
                                         placeholder="Your Email"
@@ -157,10 +140,13 @@ function Auth(props) {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.email}
-                                    />
+                                    >
+                                    </Input>
                                     <div className="validate" />
                                     <span className='error'>{errors.email && touched.email ? errors.email : ''}</span>
+
                                 </div>
+
 
                                 {/* ...........password......... */}
                                 {
@@ -209,12 +195,14 @@ function Auth(props) {
                             {
                                 authdata === 'login'
                                     ?
-                                    <div className="text-center"><TomatoButton>Loginn</TomatoButton></div>
+                                    <div className="text-center"> <Button type="primary" btnDisable={true}>Login1</Button></div>
+
+
                                     :
                                     (authdata === 'sign up'
                                         ?
-                                        <div className="text-center"><TomatoButton>Sign Up</TomatoButton></div>
-                                        : <div className="text-center"><TomatoButton>submit</TomatoButton></div>
+                                        <div className="text-center"><Button type="secondary">Sign Up</Button></div>
+                                        : <div className="text-center"><Button type="outlined">submit</Button></div>
                                     )
 
                             }
@@ -236,6 +224,7 @@ function Auth(props) {
                             </div>
                         </form>
                     </div>
+
                 </section>
 
 
