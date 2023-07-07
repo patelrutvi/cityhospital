@@ -9,6 +9,8 @@ function Input({ children, type, placeholder }) {
                 <StyledInput type={type} placeholder={placeholder}>
                     {children}
                 </StyledInput>
+
+                
     );
 }
 

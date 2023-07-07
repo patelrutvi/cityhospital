@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import Button from '../components/UI/Button/Button';
 import Input from '../components/UI/Input/Input';
 import { Spantag } from '../components/UI/Input/input.style';
+import Span from '../components/UI/span/Span';
 
 
 
@@ -122,7 +123,7 @@ function Auth(props) {
                                                     value={values.name}
                                                 />
                                                 <div className="validate" />
-                                                <span className='error'>{errors.name && touched.name ? errors.name : ''}</span>
+                                                <Span className='error'>{errors.name && touched.name ? errors.name : ''}</Span>
                                             </div>
                                             :
                                             null
@@ -141,8 +142,8 @@ function Auth(props) {
                                         onBlur={handleBlur}
                                         value={values.email}
                                     />
-                                     <div className="validate" />
-                                     <span className='error'>{errors.email && touched.email ? errors.email : ''}</span>
+                                    <div className="validate" />
+                                    <Span className='error'>{errors.email && touched.email ? errors.email : ''}</Span>
                                 </div>
 
                                 {/* ...........password......... */}
@@ -162,7 +163,7 @@ function Auth(props) {
 
                                             />
                                             <div className="validate" />
-                                            <span className='error'>{errors.pass && touched.pass ? errors.pass : ''}</span>
+                                            <Span className='error'>{errors.pass && touched.pass ? errors.pass : ''}</Span>
                                         </div>
                                         :
                                         (authdata === 'sign up'
@@ -181,7 +182,7 @@ function Auth(props) {
 
                                                 />
                                                 <div className="validate" />
-                                                <span className='error'>{errors.pass && touched.pass ? errors.pass : ''}</span>
+                                                <Span className='error'>{errors.pass && touched.pass ? errors.pass : ''}</Span>
                                             </div>
                                             :
                                             null
@@ -222,9 +223,6 @@ function Auth(props) {
                             </div>
                         </form>
                     </div >
-
-
-
 
                 </section>
 
