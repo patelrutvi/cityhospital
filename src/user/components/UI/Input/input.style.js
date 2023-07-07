@@ -1,15 +1,31 @@
 import { styled } from "styled-components";
 
-const Input = styled.input`
-height: 44px;
-border-radius: 0;
-box-shadow: none;
-font-size: 14px;
-padding: 10px !important;
-display: block;
-width: 100%;
+export const StyledInput = styled.input`
+    height: 44px;
+    font-size: 14px;
+    padding: 10px !important;
+    width: 100%;
+    font-weight: 400;
+    line-height: 1.5;
+    justify-content: center;
+    outline: none;
+    border:1px solid lightgray;
+    margin:5px;
+ 
+    &:focus{
+        display:inline-block;
+        border:1px solid #FF6337;
+    }
+    &:blur{
+        display:inline-block;
+        border:1px solid green;
+    }
 
-&:focus{
-    border-color: green;
-}
 `;
+
+
+
+
+
+
+

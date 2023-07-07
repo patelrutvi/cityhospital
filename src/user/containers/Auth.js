@@ -2,11 +2,13 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
-
 import * as Yup from 'yup'
 import Button from '../components/UI/Button/Button';
 import Input from '../components/UI/Input/Input';
+import { Spantag } from '../components/UI/Input/input.style';
+
+
+
 
 function Auth(props) {
 
@@ -108,7 +110,7 @@ function Auth(props) {
                                         (authdata === 'sign up'
                                             ?
                                             <div className="col-md-7 form-group">
-                                                <input type="text"
+                                                <Input type="text"
                                                     name="name"
                                                     className="form-control"
                                                     id="name"
@@ -129,31 +131,26 @@ function Auth(props) {
                                 }
                                 {/* ..........email.......... */}
                                 <div className="col-md-7 form-group mt-3 mt-md-0">
-
                                     <Input
-                                        type="email"
                                         className="form-control"
-                                        name="email" id="email"
-                                        placeholder="Your Email"
-                                        data-rule="email"
-                                        data-msg="Please enter a valid email"
+                                        type="text"
+                                        name="email"
+                                        id="email"
+                                        placeholder="email"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.email}
-                                    >
-                                    </Input>
-                                    <div className="validate" />
-                                    <span className='error'>{errors.email && touched.email ? errors.email : ''}</span>
-
+                                    />
+                                     <div className="validate" />
+                                     <span className='error'>{errors.email && touched.email ? errors.email : ''}</span>
                                 </div>
-
 
                                 {/* ...........password......... */}
                                 {
                                     authdata === 'login'
                                         ?
                                         <div className="col-md-7 form-group mt-3 mt-md-0">
-                                            <input type="password"
+                                            <Input type="password"
                                                 className="form-control"
                                                 name="pass" id="pass"
                                                 placeholder="Your Password"
@@ -171,7 +168,7 @@ function Auth(props) {
                                         (authdata === 'sign up'
                                             ?
                                             <div className="col-md-7 form-group mt-3 mt-md-0">
-                                                <input type="password"
+                                                <Input type="password"
                                                     className="form-control"
                                                     name="pass"
                                                     id="pass"
@@ -190,6 +187,7 @@ function Auth(props) {
                                             null
                                         )
                                 }
+
                             </div>
                             {/* ......buttonnnn...... */}
                             {
@@ -223,7 +221,10 @@ function Auth(props) {
                                 }
                             </div>
                         </form>
-                    </div>
+                    </div >
+
+
+
 
                 </section>
 

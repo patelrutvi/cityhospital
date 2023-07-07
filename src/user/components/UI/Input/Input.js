@@ -1,10 +1,14 @@
 import React from 'react';
+import { StyledInput } from './input.style';
 
-function Input({ children }) {
+
+
+function Input({ children, type, placeholder }) {
     return (
-        <Input>
-            {children}
-        </Input>
+
+                <StyledInput type={type} placeholder={placeholder}>
+                    {children}
+                </StyledInput>
     );
 }
 
