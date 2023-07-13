@@ -198,13 +198,13 @@ function Auth(props) {
                             {
                                 authdata === 'login'
                                     ?
-                                    <div className="text-center"> <Button type="primary" btnDisable={true}>Login1</Button></div>
+                                    <div className="text-center"> <Button type="primary" >Login</Button></div>
 
 
                                     :
                                     (authdata === 'sign up'
                                         ?
-                                        <div className="text-center"><Button type="secondary">Sign Up</Button></div>
+                                        <div className="text-center"><Button type="secondary" btnDisable={true}>Sign Up</Button></div>
                                         : <div className="text-center"><Button type="outlined">submit</Button></div>
                                     )
 

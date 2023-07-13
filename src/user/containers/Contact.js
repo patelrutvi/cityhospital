@@ -1,29 +1,11 @@
 import { useFormik } from 'formik';
 import React from 'react';
-import { styled } from 'styled-components';
 import * as Yup from 'yup'
+import Button from '../components/UI/Button/Button';
+
+
 
 function Contect1(props) {
-    const Button = styled.button`
-    color: #BF4F74;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid #BF4F74;
-  border-radius: 3px;
-
-  &:hover{
-    background-color: #105b72c2;
-  }
-  `;
-
-    // A new component based on Button, but with some override styles
-    const TomatoButton = styled(Button)`
-    background-color: tomato;
-    color:white;
-    border-radius: 40px;
-    padding: 9px 36px;
-  `;
     let contact1Schema = Yup.object({
         name: Yup.string().required('Please enter name').matches(/^[a-z]+$/, 'Please enter valid name'),
         email: Yup.string().email('please enter valid email').required('Please enter email'),
@@ -167,7 +149,8 @@ function Contect1(props) {
                                         </div>
                                     </div>
                                     <div className="text-center">
-                                        <TomatoButton >Send Message</TomatoButton>
+                                        <Button type="primary" >Send Message</Button>
+                                    
                                         {/* type="submit" */}
                                     </div>
                                 </form>
@@ -177,6 +160,7 @@ function Contect1(props) {
                 </section>
             </main>
         </div>
+        
     );
 
 

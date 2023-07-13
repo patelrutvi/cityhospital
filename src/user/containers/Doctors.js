@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+// import Link from '../components/UI/Link/Link';
 import { Link } from 'react-router-dom';
+import Span from '../components/UI/span/Span';
 
 
 const doctordata = [
@@ -62,7 +64,7 @@ function Doctors(props) {
                                                     {console.log('/doctor/' + v.id + '')}
                                                     <div className="member-info">
                                                         <h4>{v.name}</h4>
-                                                        <span>{v.speciality}</span>
+                                                        <Span>{v.speciality}</Span>
                                                         <p>{v.discription}</p>
                                                         <div className="social">
                                                             <a href><i className="ri-twitter-fill" /></a>

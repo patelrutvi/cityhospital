@@ -1,32 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { styled } from 'styled-components';
-
+import Button from './UI/Button/Button';
 
 
 function Header(props) {
 
-
-    const Button = styled.button`
-    color: #BF4F74;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid #BF4F74;
-  border-radius: 3px;
-
-  &:hover{
-    background-color: #105b72c2;
-  }
-  `;
-
-    // A new component based on Button, but with some override styles
-    const TomatoButton = styled(Button)`
-    background-color: tomato;
-    color:white;
-    border-radius: 30px;
-    padding: 9px 26px;
-  `;
     let login = localStorage.getItem("login")
     const handleLogout = () => {
         localStorage.removeItem("login")
@@ -70,24 +48,23 @@ function Header(props) {
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
                     <Link to={'/appiment'} >
-                        <TomatoButton >Make anAppointment</TomatoButton>
+                        <Button >Make anAppointment</Button>
                     </Link>
 
                     {
                         login ? <Link to={'/'} onClick={handleLogout}>
-                            <TomatoButton >LogOut</TomatoButton>
+                            <Button>LogOut</Button>
                         </Link> : <Link to={'/auth'} >
-                            <TomatoButton >Login/SignUp</TomatoButton>
+                            <Button >Login/SignUp</Button>
                         </Link>
                     }
 
                 </div>
+            
             </header>
-
-          
+         
         </div>
-
-
+      
     );
 }
 

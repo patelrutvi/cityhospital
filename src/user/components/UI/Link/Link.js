@@ -2,9 +2,10 @@ import React from 'react';
 import { Linkstcompo } from './Link.style';
 
 
-function Link(props) {
+function Link({className }) {
     return (
-        <Linkstcompo  className="nav-link scrollto" />
+        <Linkstcompo  />
+      
         
        
     );

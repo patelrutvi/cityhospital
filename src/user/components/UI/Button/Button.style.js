@@ -1,9 +1,10 @@
 import { styled } from "styled-components";
 const Basebutton = styled.button`
-    padding: 10px 35px;
+    padding: 10px 30px;
     border-radius: 50px;
     transition:0.4s;
     border:0;
+    margin: 8px 0 8px 20px;
     
 `;
 

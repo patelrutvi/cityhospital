@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from '../components/UI/Link/Link';
+
 
 function Department(props) {
     return (
