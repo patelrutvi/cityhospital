@@ -2,15 +2,9 @@ import React from 'react';
 import { StyledInput } from './input.style';
 
 
-
-function Input({ children, type, placeholder }) {
+function Input({errorText,...rest }) {
     return (
-
-                <StyledInput type={type} placeholder={placeholder}>
-                    {children}
-                </StyledInput>
-
-                
+                <StyledInput errorText={errorText} {...rest} />
     );
 }
 

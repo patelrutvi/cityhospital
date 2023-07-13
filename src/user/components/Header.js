@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
+
+
 function Header(props) {
 
 
@@ -62,7 +64,9 @@ function Header(props) {
                             <li><Link className="nav-link scrollto" to={'/medicines'}>Medicines</Link></li>
                             <li><Link className="nav-link scrollto " to={'/about'}>About</Link></li>
                             <li><Link className="nav-link scrollto" to={'/contact'}>Contact</Link></li>
+                           
                         </ul>
+                        
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
                     <Link to={'/appiment'} >
@@ -79,6 +83,8 @@ function Header(props) {
 
                 </div>
             </header>
+
+          
         </div>
 
 

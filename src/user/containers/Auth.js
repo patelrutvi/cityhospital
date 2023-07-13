@@ -121,6 +121,7 @@ function Auth(props) {
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
                                                     value={values.name}
+                                                    errorText={errors.name && touched.name ? errors.name : ''}
                                                 />
                                                 <div className="validate" />
                                                 <Span className='error'>{errors.name && touched.name ? errors.name : ''}</Span>
@@ -141,6 +142,7 @@ function Auth(props) {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.email}
+                                        errorText={errors.email && touched.email ? errors.email : ''}
                                     />
                                     <div className="validate" />
                                     <Span className='error'>{errors.email && touched.email ? errors.email : ''}</Span>
@@ -160,6 +162,7 @@ function Auth(props) {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 value={values.pass}
+                                                errorText={errors.pass && touched.pass ? errors.pass : ''}
 
                                             />
                                             <div className="validate" />
@@ -179,6 +182,7 @@ function Auth(props) {
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
                                                     value={values.pass}
+                                                    errorText={errors.pass && touched.pass ? errors.pass : ''}
 
                                                 />
                                                 <div className="validate" />
