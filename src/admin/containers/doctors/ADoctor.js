@@ -12,12 +12,14 @@ import * as Yup from 'yup'
 import { styled } from 'styled-components';
 import Button from '../../../user/components/UI/Button/Button';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getdoctordata } from '../../../redux/action/doctordata.action';
 
 export default function ADoctor() {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
+    const drdataval = useSelector(state => state.doctor)
+    console.log(drdataval,"drdataval");
 
 // ......redux.....
     useEffect(()=>{

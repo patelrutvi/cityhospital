@@ -1,8 +1,9 @@
-import * as ActionTypes from '../ActionType'
+import * as ActionType from '../ActionType'
 
 export const getdoctordata = () => (dispatch) => {
-    fetch(" http://localhost:3004/doctors")
-    .then(response => response.json())
-    .then((data) => dispatch({type:ActionTypes.GET_DOCTORDATA , payload:data}))
-    .catch(error=>console.log(error))
+    fetch("http://localhost:3004/doctors")
+    .then((response) => response.json())
+    .then((data) => dispatch({type : ActionType.GET_DOCTORDATA , paylord : data}))
+    .catch((error)=>console.log(error))
 }
+// 
