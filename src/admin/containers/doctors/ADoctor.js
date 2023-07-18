@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useFormik } from 'formik';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -11,9 +10,20 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import * as Yup from 'yup'
 import { styled } from 'styled-components';
+import Button from '../../../user/components/UI/Button/Button';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getdoctordata } from '../../../redux/action/doctordata.action';
 
 export default function ADoctor() {
     const [open, setOpen] = useState(false);
+    const dispatch = useDispatch()
+
+// ......redux.....
+    useEffect(()=>{
+        dispatch(getdoctordata())
+    },[])
+// ....................
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -22,26 +32,7 @@ export default function ADoctor() {
     const handleClose = () => {
         setOpen(false);
     };
-    const Button = styled.button`
-    color: #BF4F74;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid #BF4F74;
-  border-radius: 3px;
 
-  &:hover{
-    background-color: #105b72c2;
-  }
-  `;
-
-    // A new component based on Button, but with some override styles
-    const TomatoButton = styled(Button)`
-    background-color: tomato;
-    color:white;
-    border-radius: 40px;
-    padding: 9px 36px;
-  `;
     let doctorSchema = Yup.object({
         name: Yup.string()
             .required()
@@ -56,6 +47,7 @@ export default function ADoctor() {
         dis: Yup.string()
             .required()
             .test("dis", "Maximum 100 word allow", function (val) {
+                console.log(val);
                 let arr = val.split(" ");
                 if (arr.length > 5) {
                     return false;
@@ -89,7 +81,7 @@ export default function ADoctor() {
     return (
         <div>
             <Box height={50} />
-            <TomatoButton variant="outlined" onClick={handleClickOpen}>Add Doctor</TomatoButton>
+            <button variant="outlined" onClick={handleClickOpen}>Add Doctor</button>
             <Dialog open={open} onClose={handleClose}>
 
                 <DialogTitle>Doctors</DialogTitle>
@@ -143,7 +135,7 @@ export default function ADoctor() {
                             value={values.dis}
                         />
                         <span style={{ color: "red" }} className='error'>{errors.dis && touched.dis ? errors.dis : ''}</span>
-                        <div className="social">
+                        {/* <div className="social">
                             <input
                                 type='file'
                                 name="img"
@@ -157,7 +149,7 @@ export default function ADoctor() {
 
                             </input>
                             <span style={{ color: "red" }} className='error'>{errors.img && touched.img ? errors.img : ''}</span>
-                        </div>
+                        </div> */}
                         <DialogActions>
                             <Button onClick={handleClose}>Cancel</Button>
                             <Button type='submit'>Submit</Button>

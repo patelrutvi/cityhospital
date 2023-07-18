@@ -5,7 +5,7 @@ const initState = {
 }
 
 export const counterReduce = (state=initState,action) => {
-    console.log(action);
+    // console.log(action);
 
     switch(action.type){
         case ActionType.INCREMENT_COUNTER :
