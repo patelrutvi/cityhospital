@@ -1,19 +1,19 @@
 
 import * as ActionType from '../ActionType'
 
-const iniState = {
-    loading : true ,
-    drdata : {},
-    error : ''
-}
+const initalState = {
+    drData: [{}],
+  
+  };
 
-export const doctordataReduce = (state = iniState,action) => {
+export const doctordataReduce = (state = initalState,action) => {
     console.log(action.paylord,"njkh");
 
     switch(action.type){
         case ActionType.GET_DOCTORDATA :
             return{
-                drdata : state.action.paylord
+                ...state,
+                drData:action.paylord
             }
             default :
             return state
@@ -23,4 +23,4 @@ export const doctordataReduce = (state = iniState,action) => {
     
     
 }
-console.log(iniState.drdata,'dsdata');
+console.log(initalState.drdata,'dsdata');

@@ -15,17 +15,20 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getdoctordata } from '../../../redux/action/doctordata.action';
 
+import { DataGrid } from '@mui/x-data-grid';
+
+
 export default function ADoctor() {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
     const drdataval = useSelector(state => state.doctor)
-    console.log(drdataval,"drdataval");
+    console.log(drdataval, "drdataval");
 
-// ......redux.....
-    useEffect(()=>{
+    // ......redux.....
+    useEffect(() => {
         dispatch(getdoctordata())
-    },[])
-// ....................
+    }, [])
+    // ....................
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -78,7 +81,19 @@ export default function ADoctor() {
 
     const { values, errors, touched, handleSubmit, handleChange, handleBlur } = formik
 
+    //  ......grid data............
+
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'name', headerName: 'Doctor Name', width: 130 },
+        { field: 'Specialization', headerName: 'Specialization', width: 130 },
+        { field: 'Degree', headerName: 'Degree', width: 130 },
+       
+    ];
+
  
+
+    // ....................
 
     return (
         <div>
@@ -162,6 +177,41 @@ export default function ADoctor() {
 
 
             </Dialog>
+
+            {/* '''''''grid data..... */}
+
+            <div style={{ height: 400, width: '100%' }}>
+                <DataGrid
+                    rows={drdataval.drData}
+                    columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 5 },
+                        },
+                    }}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                   
+                />
+            </div> 
+
+            {/* ...................... */}
+
+            {/* {
+                drdataval.drData.map((v, i) => {
+                    return (
+                        <h1>ID:{v.id}</h1>
+                    )
+                })
+            } */}
         </div>
     );
 }
+
+
+
+
+
+
+
+
