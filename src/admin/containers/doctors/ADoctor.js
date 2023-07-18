@@ -85,9 +85,9 @@ export default function ADoctor() {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'name', headerName: 'Doctor Name', width: 130 },
-        { field: 'Specialization', headerName: 'Specialization', width: 130 },
-        { field: 'Degree', headerName: 'Degree', width: 130 },
+        { field: 'name', headerName: 'Doctor Name', width: 150 },
+        { field: 'Specialization', headerName: 'Specialization', width: 150 },
+        { field: 'Degree', headerName: 'Degree', width: 150 },
        
     ];
 
