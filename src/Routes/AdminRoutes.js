@@ -2,11 +2,12 @@ import React from 'react';
 // import { Route } from 'react-rouAMedicineter-dom';
 import AMedicine from '../admin/containers/medicines/AMedicine';
 import Panel from '../admin/components/Panel';
-import ADoctor from '../admin/components/ADoctor';
+
 import ADrpartment from '../admin/components/ADrpartment';
 import AAppoiment from '../admin/components/AAppoiment';
 import { Route, Routes } from 'react-router-dom';
 import DashBoard from '../admin/containers/DashBoard';
+import ADoctor from '../admin/containers/doctors/ADoctor';
 
 function AdminRoutes(props) {
     return (
