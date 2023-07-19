@@ -2,7 +2,9 @@
 import * as ActionType from '../ActionType'
 
 const initalState = {
-    drData: [{}],
+    drData: [],
+    loding:false,
+    error:null
   
   };
 
