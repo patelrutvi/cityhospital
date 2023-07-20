@@ -2,13 +2,15 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getdoctordata } from '../../../redux/action/doctordata.action';
+import { addDoctor, deleteDoctor, getdoctordata, updateDoctor } from '../../../redux/action/doctordata.action';
 import { DataGrid } from '@mui/x-data-grid';
 import DoctorsForm from './DoctorsForm';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 export default function ADoctor() {
-   
+    const [updatedata, setupdatedata] = React.useState(null)
     const dispatch = useDispatch()
     const drdataval = useSelector(state => state.doctor)
     console.log(drdataval, "drdataval");
@@ -20,9 +22,23 @@ export default function ADoctor() {
     // ....................
 
     const handleSubmitdata = (data) => {
-        console.log(data,"sjkdnsjk");
-        dispatch()
-      
+        console.log(data, "sjkdnsjk");
+
+        if (updatedata) {
+            dispatch(updateDoctor(data))
+        } else {
+            dispatch(addDoctor(data))
+        }
+        setupdatedata(null)
+    }
+
+    const handledelete = (id) => {
+        console.log(id);
+        dispatch(deleteDoctor(id))
+    }
+
+    const handleEdit = (data) => {
+        setupdatedata(data)
     }
 
     //  ......grid data............
@@ -32,7 +48,25 @@ export default function ADoctor() {
         { field: 'name', headerName: 'Doctor Name', width: 150 },
         { field: 'Designation', headerName: 'Designation', width: 150 },
         { field: 'Degree', headerName: 'Degree', width: 150 },
-        { field: 'img', headerName: 'image', width: 150 }
+        { field: 'img', headerName: 'image', width: 150 },
+        {
+            field: 'action',
+            headerName: 'Action',
+            width: 130,
+
+            renderCell: (params) => (
+                <>
+                    <DeleteIcon onClick={() => handledelete(params.row.id)}>
+
+                    </DeleteIcon>
+                    <EditIcon onClick={() => handleEdit(params.row)}>
+
+                    </EditIcon>
+                </>
+
+            ),
+
+        },
 
     ];
 
@@ -41,7 +75,7 @@ export default function ADoctor() {
     return (
         <div>
             <Box height={50} />
-           <DoctorsForm onhandlesubmit={handleSubmitdata} />
+            <DoctorsForm onhandlesubmit={handleSubmitdata} onupdate={updatedata} />
 
             {/* '''''''grid data..... */}
 
@@ -62,7 +96,7 @@ export default function ADoctor() {
 
             {/* ...................... */}
 
-           
+
         </div>
     );
 }

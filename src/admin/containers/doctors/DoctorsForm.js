@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -12,8 +12,15 @@ import Button from '../../../user/components/UI/Button/Button';
 import { useState } from 'react';
 
 
-function DoctorsForm({ onhandlesubmit }) {
+function DoctorsForm({ onhandlesubmit,onupdate }) {
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        if (onupdate) {
+            handleClickOpen()
+            formik.setValues(onupdate)
+        }
+    }, [onupdate])
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -43,8 +50,8 @@ function DoctorsForm({ onhandlesubmit }) {
                     return true;
                 }
             }),
-        img: Yup.string()
-            .required('please add photo')
+        // img: Yup.string()
+        //     .required('please add photo')
     })
 
     const formik = useFormik({
@@ -52,7 +59,7 @@ function DoctorsForm({ onhandlesubmit }) {
             name: '',
             Designation: '',
             Degree: '',
-            img: ''
+            // img: ''
         },
         validationSchema: doctorSchema,
         enableReinitialize: true,

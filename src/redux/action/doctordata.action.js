@@ -14,6 +14,7 @@ export const getdoctordata = () => (dispatch) => {
 
 
 export const addDoctor = (data) => (dispatch) => {
+    console.log(data);
     try {
         fetch("http://localhost:3004/doctors", {
             method: "POST",
@@ -22,11 +23,42 @@ export const addDoctor = (data) => (dispatch) => {
             },
             body: JSON.stringify(data),
         })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.log(error))
+            .then((response) => response.json())
+            .then((data) => dispatch({ type: ActionType.ADD_DOCTORDATA, paylord: data }))
+            .catch((error) => console.log(error))
 
     } catch (error) {
+        console.log(error);
+    }
+}
+
+export const deleteDoctor = (id) => (dispatch) => {
+    console.log(id);
+    try {
+        fetch("http://localhost:3004/doctors/" + id, {
+            method: "DELETE",
+        })
+            .then(dispatch({ type: ActionType.DELETE_DOCTORDATA, paylord: id }))
+            .catch((error) => console.log(error))
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateDoctor = (data) => (dispatch) => {
+    console.log(data);
+    try{
+        fetch("http://localhost:3004/doctors" + data.id , {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then(dispatch({type: ActionType.EDIT_DOCTORDATA , paylord : data}))
+        .catch((error) => console.log(error))
+    }catch (error) {
         console.log(error);
     }
 }

@@ -1,4 +1,3 @@
-
 {
   "posts": [
     {
@@ -23,29 +22,39 @@
       "name": "Dr. Chandnani Sonia",
       "Designation": "Gynecologist",
       "Degree": "MBBS, MD",
-      "img":" "
-    },
-    {
-      "id": 102,
-      "name": "Dr. Desai Prashant",
-      "Designation": "ENT Surgeon",
-      "Degree": "MBBS",
-      "img":" "
-     
+      "img": " "
     },
     {
       "id": 103,
       "name": "Dr. Rupareliya Ravi",
       "Designation": "Physician (MD Medicine)",
       "Degree": "MBBS, MD (Medicine)",
-      "img":" "
+      "img": " "
     },
     {
       "id": 104,
       "name": "Dr. Rashiniha Virendra",
       "Designation": "Gynecologist",
       "Degree": "BEMS",
-      "img":" "
+      "img": " "
+    },
+    {
+      "name": "dxsdsd",
+      "Designation": "frdfdgd",
+      "Degree": "dfdfgdfgd",
+      "id": 106
+    },
+    {
+      "name": "avcd",
+      "Designation": "ghngjg",
+      "Degree": "sdsdsfsd",
+      "id": 107
+    },
+    {
+      "name": "avcd",
+      "Designation": "fgfgfg",
+      "Degree": "gffgfg",
+      "id": 108
     }
   ]
 }
