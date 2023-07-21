@@ -7,6 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import DoctorsForm from './DoctorsForm';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 export default function ADoctor() {
@@ -75,26 +76,35 @@ export default function ADoctor() {
     return (
         <div>
             <Box height={50} />
-            <DoctorsForm onhandlesubmit={handleSubmitdata} onupdate={updatedata} />
+            {
+                drdataval.loding ? <CircularProgress color="secondary" sx={{marginLeft:60}} /> :
 
-            {/* '''''''grid data..... */}
+                drdataval.error ? 'Somthing went wrong' : 
+                    <>
+                        <DoctorsForm onhandlesubmit={handleSubmitdata} onupdate={updatedata} />
 
-            <div style={{ height: 400, width: '100%' }}>
-                <DataGrid
-                    rows={drdataval.drData}
-                    columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: { page: 0, pageSize: 5 },
-                        },
-                    }}
-                    pageSizeOptions={[5, 10]}
-                    checkboxSelection
+                        {/* '''''''grid data..... */}
 
-                />
-            </div>
+                        <div style={{ height: 400, width: '100%' }}>
+                            <DataGrid
+                                rows={drdataval.drData}
+                                columns={columns}
+                                initialState={{
+                                    pagination: {
+                                        paginationModel: { page: 0, pageSize: 5 },
+                                    },
+                                }}
+                                pageSizeOptions={[5, 10]}
+                                checkboxSelection
 
-            {/* ...................... */}
+                            />
+                        </div>
+
+                        {/* ...................... */}
+                    </>
+            }
+
+
 
 
         </div>
