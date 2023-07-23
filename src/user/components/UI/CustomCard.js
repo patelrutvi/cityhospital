@@ -3,11 +3,15 @@ import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'react
 
 function CustomCard({ values }) {
     return (
-       
+
         <div>
-            <Card
+            <Card  body outline color="success"
                 style={{
-                    width: '18rem'
+                    width: '18rem',
+                    // backgroundColor: '#333',
+                    // borderColor: '#333',
+                    // color:'#fff'
+                    margin:'20px'
                 }}
             >
                 {
@@ -19,24 +23,26 @@ function CustomCard({ values }) {
 
                 <CardBody>
                     <CardTitle tag="h5">
-                        {values.mname}
+                        <p>Medicine Name: <b>{values.name}</b> </p>
                     </CardTitle>
                     <CardSubtitle
                         className="mb-2 text-muted"
                         tag="h6"
                     >
-                       {values.mprice}
+                        <p>price: <b>{values.price}</b> </p>
+
                     </CardSubtitle>
                     <CardText>
-                       {values.expdate}
+                        <p>Expiry: <b>{values.expiry}</b> </p>
+
                     </CardText>
                     <CardText>
-                       {values.mdisc}
+                        {values.desc}
                     </CardText>
                     {
-                        values.Button ? <Button>
-                            Button
-                        </Button> : null
+                        values.Button ? null : <Button style={{backgroundColor: 'green'}}>
+                            ADD TO CART
+                        </Button>
                     }
 
                 </CardBody>

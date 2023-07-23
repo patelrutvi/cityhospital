@@ -2,33 +2,39 @@ import React, { useEffect } from 'react';
 import MedicineList from './MedicineList';
 import { useState } from 'react';
 import { Row } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { getmediData } from '../../../redux/action/usermedidata.action';
 
 
 function Usermedicine(props) {
 
     const [data, setdata] = useState([])
     const [filterdata, setfilterdata] = useState([])
+    const dispatch = useDispatch()
+    const usermedival = useSelector(state => state.medicineUser)
+    console.log("user medicine js", usermedival);
 
     useEffect(() => {
-        let medicine = JSON.parse(localStorage.getItem('medicine'));
-        console.log(medicine, "getmedicine");
-        if (medicine) {
-            setdata(medicine)
+
+        dispatch(getmediData(data))
+
+        if (usermedival.usrMdata) {
+            setdata(usermedival.usrMdata)
         }
 
     }, [])
 
 
     const handlechange = (val) => {
-        console.log(val);
+        console.log(val,"val");
 
-        let medicine = JSON.parse(localStorage.getItem('medicine'));
+        // let medicine = JSON.parse(localStorage.getItem('medicine'));
 
-        let fdata = medicine.filter((v) =>
-            v.mname.toLowerCase().includes(val.toLowerCase())
-            || v.mprice.toString().includes(val)
-            || v.expdate.toString().includes(val)
-            || v.mdisc.toLowerCase().includes(val.toLowerCase())
+        let fdata = usermedival.usrMdata.filter((v) =>
+            v. name.toLowerCase().includes(val.toLowerCase())
+            || v. price.toString().includes(val)
+            || v.expiry.toString().includes(val)
+            || v.desc.toLowerCase().includes(val.toLowerCase())
         )
 
         console.log(fdata);

@@ -40,3 +40,19 @@ export const deleteMedicinedta = (id) => (dispatch) => {
         console.log(error);
     }
 }
+
+export const upadeMedicine = (data) => (dispatch) => {
+    try{
+        fetch("http://localhost:3004/medicines/" + data.id , {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+        })
+        .then(dispatch({type:ActionType.UPDATE_MEDICINEDATA , payload : data}))
+        .catch((error) => console.log(error))
+    }catch (error) {
+        console.log(error);
+    }
+}

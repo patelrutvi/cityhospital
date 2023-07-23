@@ -14,7 +14,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useEffect } from 'react';
 import Medicineform from './Medicineform';
 import { useDispatch, useSelector } from 'react-redux';
-import { addmedicineData, deleteMedicinedta, getmedicinedata } from '../../../redux/action/medicine.action';
+import { addmedicineData, deleteMedicinedta, getmedicinedata, upadeMedicine } from '../../../redux/action/medicine.action';
 
 
 
@@ -33,7 +33,12 @@ export default function AMedicine() {
 
 
     const handleSubmitdata = (data) => {
-        dispatch(addmedicineData(data))
+        if(updatedata){
+            dispatch(upadeMedicine(data))
+        }else{
+            dispatch(addmedicineData(data))
+        }
+        setupdatedata(null)
     }
     const handledelete = (id) => {
         console.log("delete");
@@ -41,9 +46,10 @@ export default function AMedicine() {
 
     }
 
-    const handleEdit = (evalue) => {
+    const handleEdit = (data) => {
         //    console.log(evalue);
-        setupdatedata(evalue)
+      
+        setupdatedata(data)
     }
 
     // ....Grid table..../

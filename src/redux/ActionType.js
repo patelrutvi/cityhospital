@@ -17,3 +17,10 @@ export const  EDIT_DOCTORDATA = "EDIT_DOCTORDATA";
 export const GET_MEDICINEDATA = "GET_MEDICINEDATA";
 export const ADD_MEDICINEDATA = "ADD_MEDICINEDATA";
 export const DELETE_MEDICINEDATA = "DELETE_MEDICINEDATA";
+export const UPDATE_MEDICINEDATA = "UPDATE_MEDICINEDATA";
+
+// ...................user side get medicine data...................
+
+export const GET_USERMEDICINEDATA = "GET_USERMEDICINEDATA"
+
+// ............................................................
