@@ -3,8 +3,9 @@ import MedicineList from './MedicineList';
 import { useState } from 'react';
 import { Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getmediData } from '../../../redux/action/usermedidata.action';
+
 import { addtoCart } from '../../../redux/action/addtocart.action';
+import { getmedicinedata } from '../../../redux/action/medicine.action';
 
 
 function Usermedicine(props) {
@@ -12,12 +13,12 @@ function Usermedicine(props) {
     const [data, setdata] = useState([])
     const [filterdata, setfilterdata] = useState([])
     const dispatch = useDispatch()
-    const usermedival = useSelector(state => state.medicineUser)
+    const usermedival = useSelector(state => state.medicine)
     console.log("user medicine js", usermedival);
 
     useEffect(() => {
 
-        dispatch(getmediData(data))
+        dispatch(getmedicinedata(data))
 
     }, [])
 
@@ -27,7 +28,7 @@ function Usermedicine(props) {
 
         // let medicine = JSON.parse(localStorage.getItem('medicine'));
 
-        let fdata = usermedival.usrMdata.filter((v) =>
+        let fdata = usermedival.mediData.filter((v) =>
             v. name.toLowerCase().includes(val.toLowerCase())
             || v. price.toString().includes(val)
             || v.expiry.toString().includes(val)
@@ -74,7 +75,7 @@ function Usermedicine(props) {
             <div className='container'>
                 <div className='row gap-3' >
                     <MedicineList 
-                     mdata={filterdata.length > 0 ? filterdata :usermedival.usrMdata}
+                     mdata={filterdata.length > 0 ? filterdata :usermedival.mediData}
                      handleCart1={handleCart}
                      
                      />

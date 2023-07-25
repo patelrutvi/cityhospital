@@ -21,8 +21,5 @@ export const UPDATE_MEDICINEDATA = "UPDATE_MEDICINEDATA";
 
 // ...................user side get medicine data...................
 
-export const GET_USERMEDICINEDATA = "GET_USERMEDICINEDATA"
-
-
 export const ADD_TO_CART = "ADD_TO_CART"
 // ............................................................
