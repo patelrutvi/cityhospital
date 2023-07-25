@@ -23,4 +23,6 @@ export const UPDATE_MEDICINEDATA = "UPDATE_MEDICINEDATA";
 
 export const GET_USERMEDICINEDATA = "GET_USERMEDICINEDATA"
 
+
+export const ADD_TO_CART = "ADD_TO_CART"
 // ............................................................

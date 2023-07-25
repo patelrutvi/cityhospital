@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getmediData } from '../../../redux/action/usermedidata.action';
+import { addtoCart } from '../../../redux/action/addtocart.action';
 
 
 function Usermedicine(props) {
@@ -17,10 +18,6 @@ function Usermedicine(props) {
     useEffect(() => {
 
         dispatch(getmediData(data))
-
-        if (usermedival.usrMdata) {
-            setdata(usermedival.usrMdata)
-        }
 
     }, [])
 
@@ -42,6 +39,11 @@ function Usermedicine(props) {
 
     }
 
+    const handleCart = (id) => {
+        dispatch(addtoCart(id))
+        console.log("handleCart",id);
+    }
+
     return (
 
         <>
@@ -56,7 +58,7 @@ function Usermedicine(props) {
                 </p>
             </div>
 
-            <div class="input-group">
+            <div class="input-group" style={{marginLeft:'90px'}}>
                 <div class="form-outline" style={{ width: '80%', margin: '30px', marginRight: '0px' }}>
                     <input id="search-input"
                         type="search"
@@ -71,7 +73,11 @@ function Usermedicine(props) {
 
             <div className='container'>
                 <div className='row gap-3' >
-                    <MedicineList mdata={filterdata.length > 0 ? filterdata : data} />
+                    <MedicineList 
+                     mdata={filterdata.length > 0 ? filterdata :usermedival.usrMdata}
+                     handleCart1={handleCart}
+                     
+                     />
                 </div>
 
             </div>

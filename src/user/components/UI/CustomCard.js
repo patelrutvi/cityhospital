@@ -1,17 +1,17 @@
 import React from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 
-function CustomCard({ values }) {
+function CustomCard({ values, btnval, onclick1 }) {
     return (
 
         <div>
-            <Card  body outline color="success"
+            <Card body outline color="success"
                 style={{
-                    width: '18rem',
+
                     // backgroundColor: '#333',
                     // borderColor: '#333',
                     // color:'#fff'
-                    margin:'20px'
+                    margin: '20px'
                 }}
             >
                 {
@@ -36,13 +36,17 @@ function CustomCard({ values }) {
                         <p>Expiry: <b>{values.expiry}</b> </p>
 
                     </CardText>
-                    <CardText>
+                    <CardText style={{ height: '60px', overflow: 'auto' }}>
                         {values.desc}
                     </CardText>
                     {
-                        values.Button ? null : <Button style={{backgroundColor: 'green'}}>
-                            ADD TO CART
-                        </Button>
+                        btnval ? <Button
+                            style={{ backgroundColor: 'green' }}
+                            onClick={() => onclick1(values.id)}
+
+                        >
+                            {btnval}
+                        </Button> : null
                     }
 
                 </CardBody>
