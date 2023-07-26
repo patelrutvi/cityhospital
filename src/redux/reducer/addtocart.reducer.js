@@ -14,7 +14,7 @@ export const addtoCartreducer = (state = initState, action) => {
         case ActionType.ADD_TO_CART:
             let item = state.items.some((v) => v.pid === action.payload.pid)
             if (item) {
-                let index  = state.items.findIndex((v) => v.pid === action.payload.pid)
+                let index = state.items.findIndex((v) => v.pid === action.payload.pid)
                 state.items[index].qyt++
                 console.log(index);
             } else {
@@ -24,11 +24,21 @@ export const addtoCartreducer = (state = initState, action) => {
 
 
             return {
-                items:state.items,
+                items: state.items,
                 loding: false,
                 error: null
             }
+        case ActionType.INC_QTY:
+            console.log(state.items, action.payload);
+            let index = state.items.findIndex((v) => v.pid === action.payload)
+            console.log(index);
+            state.items[index].qyt++
 
+            return {
+                items: state.items,
+                loding: false,
+                error: null
+            }
         default:
             return state
     }

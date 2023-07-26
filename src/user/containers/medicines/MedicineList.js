@@ -9,7 +9,7 @@ function MedicineList({ mdata , handleCart1}) {
             {
                 mdata.map((v, i) => {
                     return (
-                        <Col sm="6">
+                        <Col sm="3">
                             <CustomCard 
                             values={v}
                              btnval={"Add To Cart"}

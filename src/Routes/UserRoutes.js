@@ -15,6 +15,7 @@ import Auth from '../user/containers/Auth';
 import Usermedicine from '../user/containers/medicines/Usermedicine';
 import Protected from './Protected';
 import Counter from '../../src/user/containers/counter/Counter'
+import Cart from '../user/containers/cart/Cart';
 
 
 
@@ -32,6 +33,7 @@ function UserRoutes(props) {
                 <Route path='/contact' element={<Contact />} />
                 <Route path='/appiment' element={<Appoiment />} />
                 <Route path='/counter' element={<Counter/>} />
+                <Route path='/cart' element={<Cart/>} />
                 {/* neseted routs */}
                 <Route path='/doctor'>
                     <Route path=':id' element={<Doctor />} />
