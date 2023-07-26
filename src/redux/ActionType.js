@@ -24,4 +24,6 @@ export const UPDATE_MEDICINEDATA = "UPDATE_MEDICINEDATA";
 export const ADD_TO_CART = "ADD_TO_CART"
 export const INC_QTY = "INC_QTY"
 export const DEC_QTY = "DEC_QTY"
+
+export const CART_DELETE_DATA = "CART_DELETE_DATA"
 // ............................................................
