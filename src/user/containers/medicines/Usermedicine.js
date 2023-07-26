@@ -18,9 +18,9 @@ function Usermedicine(props) {
 
         dispatch(getmediData(data))
 
-        if (usermedival.usrMdata) {
-            setdata(usermedival.usrMdata)
-        }
+        // if (usermedival.usrMdata) {
+        //     setdata(usermedival.usrMdata)
+        // }
 
     }, [])
 
