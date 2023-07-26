@@ -19,7 +19,6 @@ function Cart(props) {
     console.log(medicinedata, cartdata);
 
 
-
     const handleIncr = (id) => {
         dispatch(incQty(id))
     }
@@ -28,13 +27,9 @@ function Cart(props) {
     }
 
     const handleDelete = (id) => {
-        // dispatch(deleteCArtdata(id))
-
-        let d = cartmediitem.filter((v) => v.pid !== id)
-        console.log(d);
-
-        
+        dispatch(deleteCArtdata(id))
     }
+    let pr = 0;
 
     return (
 
@@ -45,6 +40,12 @@ function Cart(props) {
 
                     {
                         cartmediitem.map((c, i) => {
+                            let cp = c.price * c.qyt
+
+                            pr = cartmediitem.reduce((acc, a, i) => acc + a.price * a.qyt, 0)
+                            console.log(pr, "prrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+
+
                             return (
                                 <>
                                     <div className="card mb-3">
@@ -65,7 +66,7 @@ function Cart(props) {
                                                     </div>
                                                     <div style={{ width: 80 }}>
 
-                                                        <h5 className="mb-0">{c.price * c.qyt}</h5>
+                                                        <h5 className="mb-0">{cp}</h5>
 
                                                     </div>
                                                     <div style={{ width: 130 }}>
@@ -75,21 +76,27 @@ function Cart(props) {
                                                     <a href="#!" style={{ color: '#cecece' }} onClick={() => handleDelete(c.pid)}><i className="fas fa-trash-alt" /></a>
                                                 </div>
                                             </div>
-                                         
+
                                         </div>
 
                                     </div>
+
 
                                 </>
 
                             )
                         })
-                    }
 
+                    }
+                    <div style={{ width: '100%' , marginRight:'0px' }}>
+
+                        <h5 className="mb-0">Total Price:{pr}</h5>
+
+                    </div>
 
                 </div>
 
-             
+
 
             </div>
         </section>
