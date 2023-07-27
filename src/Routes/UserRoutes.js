@@ -16,6 +16,7 @@ import Usermedicine from '../user/containers/medicines/Usermedicine';
 import Protected from './Protected';
 import Counter from '../../src/user/containers/counter/Counter'
 import Cart from '../user/containers/cart/Cart';
+import MedicineNR from '../user/containers/medicineNTredux/MedicineNR';
 
 
 
@@ -42,7 +43,7 @@ function UserRoutes(props) {
 
                 <Route path='*' element={<NotFound />} />
                 <Route path='/auth' element={<Auth />} />
-               
+                <Route path='/medicinenr' element={<MedicineNR/>} />
 
                 <Route element={<Protected />}>
                     <Route path='/medicines' element={<Usermedicine />} />
