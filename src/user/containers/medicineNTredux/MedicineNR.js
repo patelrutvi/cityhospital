@@ -6,9 +6,8 @@ function MedicineNR(props) {
 
     const [medidata, setmedidata] = useState([])
     const [filterdata, setfilterdata] = useState([])
-    // const [cartitems, setcartitems] = useState([])
-    
-    
+    const [cartitems, setcartitems] = useState([])
+    let arr = [];
 
     useEffect(() => {
         try {
@@ -39,26 +38,57 @@ function MedicineNR(props) {
         setfilterdata(fdata)
 
     }
-    let arr = []; 
-   
+
     const handlecart = (id) => {
         console.log(id);
 
-        // let items = { pid: id, qyt: 1 }
-        // arr.push(items)
-        // console.log(arr, "nr arr");
-        // // setcartitems(items)
-        // // console.log(cartitems,"cartitems") 
+        let items = { pid: id, qyt: 0 }
+
+        // setcartitems(items)
+        // console.log(cartitems,"cartitems") 
+        arr.push(items)
+        console.log(arr, "nr arr");
+
+
+        let spreding = arr.map((v) => {
+            // console.log(medidata,"medidata");
+            let medi = medidata.find((m) => m.id == v.pid)
+            // console.log(medi, "medi-cart");
+            let medicart = {...medi,...v}
+            return medicart
+            // console.log(medicart,"mearge");
+        })
+        console.log(spreding, "spreding");
+
+       
+
+//         let count = arr.map((v) => {
+//             let arrpid = spreding.some((a) => a.pid == v.pid)
+//             console.log(arrpid,"arrpid");
+//             if(arrpid){
+//                 let index = spreding.findIndex((a) => a.pid == v.pid )
+//                 arr[index].qyt++
+//                 console.log(index,"index");
+                
+//             }else{
+//                 arr.push(v)
+//             }
+
+//             return arr
+
+//         })
+// console.log(count,"count");
+
         // if(arr){
         //     let index = arr.findIndex((v) => v.pid  === id)
         //     // console.log("index",index);
-        //     console.log( arr[index].qyt,"index qyt");
+        //     console.log( arr[index].qyt++ ,"index qyt");
         //     arr[index].qyt++
         // }else{
         //     arr.push(id)
         // }
 
-       
+
 
         // let cartcount1 = 0;
         // if (arr) {
@@ -99,7 +129,7 @@ function MedicineNR(props) {
             <div className='container'>
                 <div className='row gap-3' >
                     <MedisineListNR mdata={filterdata.length > 0 ? filterdata : medidata} onhandlecart={handlecart} />
-                    
+
                 </div>
 
             </div>
