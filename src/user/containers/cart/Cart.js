@@ -41,10 +41,8 @@ function Cart(props) {
                     {
                         cartmediitem.map((c, i) => {
                             let cp = c.price * c.qyt
-
                             pr = cartmediitem.reduce((acc, a, i) => acc + a.price * a.qyt, 0)
-                            console.log(pr, "prrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-
+                            console.log(pr);
 
                             return (
                                 <>
@@ -69,10 +67,10 @@ function Cart(props) {
                                                         <h5 className="mb-0">{cp}</h5>
 
                                                     </div>
-                                                    <div style={{ width: 130 }}>
+                                                    {/* <div style={{ width: 130 }}>
 
                                                         <h5 className="mb-0">{c.expiry}</h5>
-                                                    </div>
+                                                    </div> */}
                                                     <a href="#!" style={{ color: '#cecece' }} onClick={() => handleDelete(c.pid)}><i className="fas fa-trash-alt" /></a>
                                                 </div>
                                             </div>
@@ -88,12 +86,30 @@ function Cart(props) {
                         })
 
                     }
-                    <div style={{ width: '100%' , marginRight:'0px' }}>
 
-                        <h5 className="mb-0">Total Price:{pr}</h5>
+                    <div className="card mb-3">
+                        <div className="card-body">
+                            <div className="d-flex justify-content-between">
+                                <div className="d-flex flex-row align-items-center">
+
+                                    <div className="ms-3">
+                                        <h5>Total Amount</h5>
+                                    </div>
+                                </div>
+                                <div className="d-flex flex-row align-items-center">
+                                    <div style={{ width: 50 }}>
+                                    </div>
+                                    <div style={{ width: 80 }}>
+
+                                        <h5 className="mb-0">{pr}</h5>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
 
                     </div>
-
                 </div>
 
 
