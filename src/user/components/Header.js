@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from './UI/Button/Button';
 import Badge from '@mui/material/Badge';
@@ -22,7 +22,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 function Header(props) {
 
     const cartData = useSelector((state) => state.cart)
-    console.log(cartData);
+  
+    console.log(cartData,"crd");
 
     let cartcount = 0;
 
@@ -46,9 +47,9 @@ function Header(props) {
 
                     <div className="d-none d-lg-flex social-links align-items-center">
                         <div>
-                            <Link to="/cart">
+                            <Link to="/cartnr">
                                 <IconButton aria-label="cart" >
-                                    <StyledBadge badgeContent={1} color="secondary">
+                                    <StyledBadge badgeContent={0} color="secondary">
                                         <ShoppingCartIcon />
                                     </StyledBadge>
                                 </IconButton>

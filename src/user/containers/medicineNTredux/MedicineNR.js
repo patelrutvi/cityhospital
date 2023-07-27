@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import MedisineListNR from './MedisineListNR';
+import Header from '../../components/Header';
 
 function MedicineNR(props) {
 
     const [medidata, setmedidata] = useState([])
     const [filterdata, setfilterdata] = useState([])
+    // const [cartitems, setcartitems] = useState([])
+    
+    
 
     useEffect(() => {
         try {
@@ -35,10 +39,36 @@ function MedicineNR(props) {
         setfilterdata(fdata)
 
     }
-
+    let arr = []; 
+   
     const handlecart = (id) => {
         console.log(id);
+
+        // let items = { pid: id, qyt: 1 }
+        // arr.push(items)
+        // console.log(arr, "nr arr");
+        // // setcartitems(items)
+        // // console.log(cartitems,"cartitems") 
+        // if(arr){
+        //     let index = arr.findIndex((v) => v.pid  === id)
+        //     // console.log("index",index);
+        //     console.log( arr[index].qyt,"index qyt");
+        //     arr[index].qyt++
+        // }else{
+        //     arr.push(id)
+        // }
+
+       
+
+        // let cartcount1 = 0;
+        // if (arr) {
+        //     cartcount1 = arr.reduce((acc, v, i) => acc + v.qyt, 0)
+        // }
+        // console.log(cartcount1);
+
     }
+
+
 
     return (
         <>
@@ -69,6 +99,7 @@ function MedicineNR(props) {
             <div className='container'>
                 <div className='row gap-3' >
                     <MedisineListNR mdata={filterdata.length > 0 ? filterdata : medidata} onhandlecart={handlecart} />
+                    
                 </div>
 
             </div>

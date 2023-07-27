@@ -4,7 +4,7 @@ import { Col, Row } from 'reactstrap';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 
 function MedisineListNR({ mdata ,onhandlecart}) {
-    console.log(mdata);
+    // console.log(mdata);
     return (
         <Row >
             {
