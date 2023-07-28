@@ -6,8 +6,6 @@ function MedicineNR(props) {
 
     const [medidata, setmedidata] = useState([])
     const [filterdata, setfilterdata] = useState([])
-    const [cartitems, setcartitems] = useState([])
-    let arr = [];
 
     useEffect(() => {
         try {
@@ -42,60 +40,30 @@ function MedicineNR(props) {
     const handlecart = (id) => {
         console.log(id);
 
-        let items = { pid: id, qyt: 0 }
+        let cartitems = JSON.parse(localStorage.getItem("cart"))
 
-        // setcartitems(items)
-        // console.log(cartitems,"cartitems") 
-        arr.push(items)
-        console.log(arr, "nr arr");
+        if (cartitems === null) {
+            localStorage.setItem("cart", JSON.stringify([{
+                pid: id,
+                qyt: 1
+            }]))
+        } else {
+            let idfine = cartitems.some((v) => v.pid === id)
+            console.log(idfine);
+            if (idfine) {
+                let index = cartitems.findIndex((v) => v.pid === id)
+                cartitems[index].qyt++
+                console.log(index, "index");
 
-
-        let spreding = arr.map((v) => {
-            // console.log(medidata,"medidata");
-            let medi = medidata.find((m) => m.id == v.pid)
-            // console.log(medi, "medi-cart");
-            let medicart = {...medi,...v}
-            return medicart
-            // console.log(medicart,"mearge");
-        })
-        console.log(spreding, "spreding");
-
-       
-
-//         let count = arr.map((v) => {
-//             let arrpid = spreding.some((a) => a.pid == v.pid)
-//             console.log(arrpid,"arrpid");
-//             if(arrpid){
-//                 let index = spreding.findIndex((a) => a.pid == v.pid )
-//                 arr[index].qyt++
-//                 console.log(index,"index");
-                
-//             }else{
-//                 arr.push(v)
-//             }
-
-//             return arr
-
-//         })
-// console.log(count,"count");
-
-        // if(arr){
-        //     let index = arr.findIndex((v) => v.pid  === id)
-        //     // console.log("index",index);
-        //     console.log( arr[index].qyt++ ,"index qyt");
-        //     arr[index].qyt++
-        // }else{
-        //     arr.push(id)
-        // }
-
-
-
-        // let cartcount1 = 0;
-        // if (arr) {
-        //     cartcount1 = arr.reduce((acc, v, i) => acc + v.qyt, 0)
-        // }
-        // console.log(cartcount1);
-
+                localStorage.setItem("cart", JSON.stringify(cartitems))
+            } else {
+                cartitems.push({
+                    pid: id,
+                    qyt: 1
+                })
+                localStorage.setItem("cart", JSON.stringify(cartitems))
+            }
+        }
     }
 
 
