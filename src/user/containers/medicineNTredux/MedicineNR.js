@@ -65,7 +65,8 @@ function MedicineNR({onupdatecount}) {
             }
         }
 
-        onupdatecount((prev) => prev + 1)
+     onupdatecount((prev) => prev + 1)
+       
     }
 
 
