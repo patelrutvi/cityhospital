@@ -29,22 +29,22 @@ function CartNR(props) {
     console.log(cartmediitem, "cartmediitem");
 
     const handleInc = (id) => {
-        let index = cartdata.findIndex((v) => v.pid === id)
-        cartdata[index].qyt++
-        // console.log(index);
-        localStorage.setItem("cart", JSON.stringify(cartdata))
-
+        let indexinc = cartmediitem.findIndex((v) => v.pid === id)
+        let qytinc = cartmediitem[indexinc].qyt++
+        localStorage.setItem("cart",JSON.stringify(cartmediitem))
+        setcartdata(cartmediitem)
     }
     const handleDnc = (id) => {
-        let index = cartdata.findIndex((v) => v.pid === id)
+        let index = cartmediitem.findIndex((v) => v.pid === id)
         
-        if (cartdata[index].qyt > 1) {
+        if (cartmediitem[index].qyt > 1) {
             console.log("hhjbv");
-            cartdata[index].qyt--
+            cartmediitem[index].qyt--
         }
        
         // console.log(index);
-        localStorage.setItem("cart", JSON.stringify(cartdata))
+        localStorage.setItem("cart", JSON.stringify(cartmediitem))
+        setcartdata(cartmediitem)
 
     }
 
