@@ -19,7 +19,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
-function Header(props) {
+function Header({count}) {
 
     const cartData = useSelector((state) => state.cart)
   
@@ -49,7 +49,7 @@ function Header(props) {
                         <div>
                             <Link to="/cartnr">
                                 <IconButton aria-label="cart" >
-                                    <StyledBadge badgeContent={0} color="secondary">
+                                    <StyledBadge badgeContent={count} color="secondary">
                                         <ShoppingCartIcon />
                                     </StyledBadge>
                                 </IconButton>

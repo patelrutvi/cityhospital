@@ -59,15 +59,12 @@ export const addtoCartreducer = (state = initState, action) => {
 
         case ActionType.CART_DELETE_DATA:
             console.log(action.payload);
-
             return{
                 items: state.items.filter((v) => v.pid !== action.payload),
                 loding: false,
                 error: null
             
             }
-
-
             return {
                 items: state.items,
                 loding: false,

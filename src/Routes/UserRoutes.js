@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from '../user/components/Header'
 import Footer from '../user/components/Footer'
@@ -23,10 +23,11 @@ import CartNR from '../user/containers/cartNR/CartNR';
 
 
 function UserRoutes(props) {
+    const [cartcount , setcartcount] = useState(0)
     return (
         <>
 
-            <Header />
+            <Header  count={cartcount}/>
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/department' element={<Department />} />
@@ -45,7 +46,7 @@ function UserRoutes(props) {
 
                 <Route path='*' element={<NotFound />} />
                 <Route path='/auth' element={<Auth />} />
-                <Route path='/medicinenr' element={<MedicineNR/>} />
+                <Route path='/medicinenr' element={<MedicineNR onupdatecount={setcartcount}/>} />
 
                 <Route element={<Protected />}>
                     <Route path='/medicines' element={<Usermedicine />} />

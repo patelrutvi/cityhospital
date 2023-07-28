@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MedisineListNR from './MedisineListNR';
 import Header from '../../components/Header';
 
-function MedicineNR(props) {
+function MedicineNR({onupdatecount}) {
 
     const [medidata, setmedidata] = useState([])
     const [filterdata, setfilterdata] = useState([])
@@ -64,6 +64,8 @@ function MedicineNR(props) {
                 localStorage.setItem("cart", JSON.stringify(cartitems))
             }
         }
+
+        onupdatecount((prev) => prev + 1)
     }
 
 
