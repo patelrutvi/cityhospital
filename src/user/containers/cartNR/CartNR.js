@@ -37,7 +37,12 @@ function CartNR(props) {
     }
     const handleDnc = (id) => {
         let index = cartdata.findIndex((v) => v.pid === id)
-        cartdata[index].qyt--
+        
+        if (cartdata[index].qyt > 1) {
+            console.log("hhjbv");
+            cartdata[index].qyt--
+        }
+       
         // console.log(index);
         localStorage.setItem("cart", JSON.stringify(cartdata))
 
