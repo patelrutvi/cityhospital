@@ -6,6 +6,8 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -19,11 +21,20 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
-function Header({count}) {
+// const shapeStyles = { bgcolor: 'primary.main', width: 20, height: 20 };
+// const shapeCircleStyles = { borderRadius: '50%' };
+// const rectangle = <Box component="span" sx={shapeStyles} />;
+// const circle = (
+//     <Box component="span" sx={{ ...shapeStyles, ...shapeCircleStyles }} />
+// );
+
+function Header({ count }) {
 
     const cartData = useSelector((state) => state.cart)
-  
-    console.log(cartData,"crd");
+    const favData = useSelector((state) => state.fav)
+    console.log(favData,"favData");
+
+    console.log(cartData, "crd");
 
     let cartcount = 0;
 
@@ -35,6 +46,13 @@ function Header({count}) {
     const handleLogout = () => {
         localStorage.removeItem("login")
     }
+
+
+    let favcount = 0;
+    if (favData.myfav) {
+        favcount = favData.myfav.reduce((acc, v, i) => acc + v.qyt, 0)
+    }
+
     return (
 
         <div className="main-header">
@@ -46,6 +64,13 @@ function Header({count}) {
                     </div>
 
                     <div className="d-none d-lg-flex social-links align-items-center">
+                        <div>
+                            <Link to={"myfav"}>
+                                <Badge color="secondary" badgeContent={favcount} >
+                                    <FavoriteIcon />
+                                </Badge>
+                            </Link>
+                        </div>
                         <div>
                             <Link to="/cartnr">
                                 <IconButton aria-label="cart" >

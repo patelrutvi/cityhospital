@@ -1,4 +1,6 @@
+import { Style } from '@mui/icons-material';
 import * as ActionType from '../ActionType'
+import { colors } from '@mui/material';
 
 const initState = {
     mediData: [],
@@ -18,24 +20,27 @@ export const medicineReducer = (state = initState, action) => {
         case ActionType.ADD_MEDICINEDATA:
             return {
                 ...state,
-                mediData:state.mediData.concat(action.payload)
+                mediData: state.mediData.concat(action.payload)
             }
-        case ActionType.DELETE_MEDICINEDATA : 
-        return {
-            ...state,
-            mediData:state.mediData.filter((v) => v.id != action.payload)
-        }
-        case ActionType.UPDATE_MEDICINEDATA :
+        case ActionType.DELETE_MEDICINEDATA:
             return {
-                ...state ,
-                mediData : state.mediData.map((v) => {
-                    if(v.id === action.payload.id){
+                ...state,
+                mediData: state.mediData.filter((v) => v.id != action.payload)
+            }
+        case ActionType.UPDATE_MEDICINEDATA:
+            return {
+                ...state,
+                mediData: state.mediData.map((v) => {
+                    if (v.id === action.payload.id) {
                         return action.payload
-                    }else{
+                    } else {
                         return v
                     }
                 })
             }
+        // case ActionType.CART_ICON_FAV:
+        //     console.log(action, "cart icon");
+        //     Style={color}
         default:
             return state
     }

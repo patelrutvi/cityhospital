@@ -5,7 +5,10 @@ import { Row } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addtoCart } from '../../../redux/action/addtocart.action';
-import { getmedicinedata } from '../../../redux/action/medicine.action';
+import {   getmedicinedata } from '../../../redux/action/medicine.action';
+import { addFavIcon } from '../../../redux/action/myfav.action';
+import styled from '@emotion/styled';
+import { colors } from '@mui/material';
 
 
 function Usermedicine(props) {
@@ -15,10 +18,12 @@ function Usermedicine(props) {
     const dispatch = useDispatch()
     const usermedival = useSelector(state => state.medicine)
     console.log("user medicine js", usermedival);
+    const mayfavdata= useSelector((state) => state.fav)
 
     useEffect(() => {
 
         dispatch(getmedicinedata(data))
+
 
     }, [])
 
@@ -43,6 +48,12 @@ function Usermedicine(props) {
     const handleCart = (id) => {
         dispatch(addtoCart(id))
         console.log("handleCart",id);
+    }
+    const handleicon = (id) => {
+        console.log("icon",id);
+        dispatch(addFavIcon(id))
+        
+
     }
 
     return (
@@ -77,7 +88,7 @@ function Usermedicine(props) {
                     <MedicineList 
                      mdata={filterdata.length > 0 ? filterdata :usermedival.mediData}
                      handleCart1={handleCart}
-                     
+                     handleIcon1={handleicon}
                      />
                 </div>
 

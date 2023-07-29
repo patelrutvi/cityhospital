@@ -56,3 +56,8 @@ export const upadeMedicine = (data) => (dispatch) => {
         console.log(error);
     }
 }
+
+
+// export const addFavIcon = (id) => (dispatch) => {
+//     dispatch({type:ActionType.CART_ICON_FAV , payload: id})
+// }

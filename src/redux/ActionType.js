@@ -27,3 +27,7 @@ export const DEC_QTY = "DEC_QTY"
 
 export const CART_DELETE_DATA = "CART_DELETE_DATA"
 // ............................................................
+
+
+// ........................Icon fav.............
+export const CART_ICON_FAV = "CART_ICON_FAV"

@@ -1,7 +1,10 @@
 import React from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useDispatch } from 'react-redux';
 
-function CustomCard({ values, btnval, onclick1 }) {
+function CustomCard({ values, btnval, onclick1,onclick2 }) {
+
     return (
 
         <div>
@@ -20,8 +23,9 @@ function CustomCard({ values, btnval, onclick1 }) {
                         src="https://picsum.photos/300/200"
                     /> : null
                 }
-
+                <FavoriteBorderIcon style={{width:'400px'}} onClick={() => onclick2(values.id)}  />
                 <CardBody>
+
                     <CardTitle tag="h5">
                         <p>Medicine Name: <b>{values.name}</b> </p>
                     </CardTitle>
