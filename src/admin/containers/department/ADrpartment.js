@@ -33,7 +33,7 @@ export default function ADrpartment() {
                 <DialogTitle>Department</DialogTitle>
                 <DialogContent>
                     <TextField
-                        autoFocus
+                        
                         margin="dense"
                         id="dname"
                         label="Department Name"
@@ -44,10 +44,10 @@ export default function ADrpartment() {
                     />
 
                     <TextField
-                        autoFocus
+                        
                         margin="dense"
                         id="faci"
-                        label="Facilities "
+                        label="Discription "
                         type="text"
                         fullWidth
                         variant="standard"
