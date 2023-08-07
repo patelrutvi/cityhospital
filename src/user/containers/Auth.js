@@ -7,8 +7,10 @@ import Button from '../components/UI/Button/Button';
 import Input from '../components/UI/Input/Input';
 import { Spantag } from '../components/UI/Input/input.style';
 import Span from '../components/UI/span/Span';
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword } from '@firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification} from '@firebase/auth';
 import { auth } from '../../firebase';
+import {  sendPasswordResetEmail } from "firebase/auth";
+import {  signInWithEmailAndPassword } from "firebase/auth";
 
 
 
@@ -23,13 +25,13 @@ function Auth(props) {
         localStorage.setItem("login", "true")
         navigate("/")
 
-        signInWithEmailAndPassword(auth,values.email, values.pass)
+        signInWithEmailAndPassword(auth, values.email, values.pass)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                if(user.emailVerified){
+                if (user.emailVerified) {
                     console.log("Email verified");
-                }else{
+                } else {
                     console.log("check email");
                 }
                 // ...
@@ -79,6 +81,20 @@ function Auth(props) {
             });
     }
 
+    const handleforgot = (values) => {
+        sendPasswordResetEmail(auth,values.email)
+            .then(() => {
+                // Password reset email sent!
+                // ..
+                console.log("Password reset email sent!");
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+            });
+    }
+
     let authobj = {}, intivalue = {}
     if (authdata === 'login') {
         authobj = {
@@ -123,16 +139,18 @@ function Auth(props) {
         validationSchema: authSchema,
         enableReinitialize: true,
         onSubmit: (values, action) => {
-            action.resetForm()
-            console.log(values);
+           
             if (authdata === 'login') {
                 handleLogin(values)
             } else if (authdata === 'sign up') {
                 handleregister(values)
             }
-            // else if(authdata === 'forgot'){
-            //     handleforgot()
-            // }
+            else if (authdata === 'forgot') {
+                handleforgot(values)
+            }
+
+            action.resetForm()
+            console.log(values);
 
         }
     })

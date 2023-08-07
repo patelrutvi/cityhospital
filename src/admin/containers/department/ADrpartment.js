@@ -87,24 +87,24 @@ function ADrpartment(props) {
     return (
         <>
             <>
-                <DepartmentForm onhandleSubmit={handleSubmit} onUpdate={update} />
-                <div style={{ height: 400, width: '100%' }}>
-                    <DataGrid
-                        rows={departD.depart}
-                        columns={columns}
-                        initialState={{
-                            pagination: {
-                                paginationModel: { page: 0, pageSize: 5 },
-                            },
-                        }}
-                        pageSizeOptions={[5, 10]}
-                        checkboxSelection
-                    />
-                </div>
+                {/* <DepartmentForm onhandleSubmit={handleSubmit} onUpdate={update} />
+      <div style={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={departD.depart}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 },
+            },
+          }}
+          pageSizeOptions={[5, 10]}
+          checkboxSelection
+        />
+      </div> */}
 
             </>
 
-            {/* {
+            {
                 departD.isloading ? <Box sx={{ display: 'flex', width: '200px ' }}>
                     <CircularProgress />
                 </Box>
@@ -127,7 +127,7 @@ function ADrpartment(props) {
                             </div>
 
                         </>
-            } */}
+            }
 
 
         </>
