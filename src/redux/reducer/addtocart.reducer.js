@@ -8,7 +8,7 @@ const initState = {
 }
 
 export const addtoCartreducer = (state = initState, action) => {
-    console.log(action);
+    // console.log(action);
 
     switch (action.type) {
         case ActionType.ADD_TO_CART:
@@ -16,11 +16,11 @@ export const addtoCartreducer = (state = initState, action) => {
             if (item) {
                 let index = state.items.findIndex((v) => v.pid === action.payload.pid)
                 state.items[index].qyt++
-                console.log(index);
+                // console.log(index);
             } else {
                 state.items.push(action.payload)
             }
-            console.log(state);
+            // console.log(state);
 
 
             return {
@@ -31,7 +31,7 @@ export const addtoCartreducer = (state = initState, action) => {
         case ActionType.INC_QTY:
             // console.log(state.items, action.payload);
             let indexinc = state.items.findIndex((v) => v.pid === action.payload)
-            console.log(indexinc);
+            // console.log(indexinc);
             state.items[indexinc].qyt++
 
             return {
@@ -40,13 +40,13 @@ export const addtoCartreducer = (state = initState, action) => {
                 error: null
             }
         case ActionType.DEC_QTY:
-            console.log(state.items, action.payload)
+            // console.log(state.items, action.payload)
             // console.log(state.items.qyt,"hfbdhf");
             let indexdec = state.items.findIndex((v) => v.pid === action.payload)
             console.log(indexdec);
 
             if (state.items[indexdec].qyt > 1) {
-                console.log("hhjbv");
+                // console.log("hhjbv");
                 state.items[indexdec].qyt--
             }
 
@@ -58,18 +58,18 @@ export const addtoCartreducer = (state = initState, action) => {
             }
 
         case ActionType.CART_DELETE_DATA:
-            console.log(action.payload);
+            // console.log(action.payload);
             return{
                 items: state.items.filter((v) => v.pid !== action.payload),
                 loding: false,
                 error: null
             
             }
-            return {
-                items: state.items,
-                loding: false,
-                error: null
-            }
+            // return {
+            //     items: state.items,
+            //     loding: false,
+            //     error: null
+            // }
 
 
         default:

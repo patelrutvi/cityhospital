@@ -10,7 +10,7 @@ const initalState = {
 };
 
 export const doctordataReduce = (state = initalState, action) => {
-    console.log(action, "njkh");
+    // console.log(action, "njkh");
 
     switch (action.type) {
         case ActionType.LODING_DATA :

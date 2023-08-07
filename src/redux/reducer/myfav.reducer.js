@@ -7,7 +7,7 @@ const initState = {
 
 }
 export const myfavreducer = (state = initState,action) => {
-    console.log(action,"action");
+    // console.log(action,"action");
     switch(action.type){
         case ActionType.CART_ICON_FAV : 
         let item = state.myfav.some((v) => v.pid === action.payload.pid)

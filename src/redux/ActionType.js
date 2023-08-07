@@ -29,5 +29,12 @@ export const CART_DELETE_DATA = "CART_DELETE_DATA"
 // ............................................................
 
 
-// ........................Icon fav.............
+// ........................Icon fav heart.............
 export const CART_ICON_FAV = "CART_ICON_FAV"
+
+
+// '''''''''''''''Department data admin side........................
+export const GET_DEPARTMENTDATA = "GET_DEPARTMENTDATA"
+export const ADD_DEPARTMENT = "ADD_DEPARTMENT"
+export const DELETE_DEPARTMENT = "DELETE_DEPARTMENT"
+export const UPDATE_DEPARTMENT = "UPDATE_DEPARTMENT"
