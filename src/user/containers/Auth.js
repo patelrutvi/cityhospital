@@ -7,6 +7,8 @@ import Button from '../components/UI/Button/Button';
 import Input from '../components/UI/Input/Input';
 import { Spantag } from '../components/UI/Input/input.style';
 import Span from '../components/UI/span/Span';
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword } from '@firebase/auth';
+import { auth } from '../../firebase';
 
 
 
@@ -16,10 +18,65 @@ function Auth(props) {
     const [authdata, setauth] = useState('login')
     const navigate = useNavigate();
 
-    const handleLogin = () => {
+    const handleLogin = (values) => {
         console.log("loginnn");
         localStorage.setItem("login", "true")
         navigate("/")
+
+        signInWithEmailAndPassword(auth,values.email, values.pass)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                if(user.emailVerified){
+                    console.log("Email verified");
+                }else{
+                    console.log("check email");
+                }
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
+    }
+    const handleregister = (values) => {
+        createUserWithEmailAndPassword(auth, values.email, values.pass)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user);
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        // User is signed in, see docs for a list of available properties
+                        // https://firebase.google.com/docs/reference/js/auth.user
+                        const uid = user.uid;
+                        sendEmailVerification(auth.currentUser)
+                            .then(() => {
+                                // Email verification sent!
+                                // ...
+                                console.log("Email verification sent!");
+                            })
+                            .catch((error) => {
+                                const errorCode = error.code;
+                                const errorMessage = error.message;
+                                console.log(errorCode, errorMessage);
+                                // ..
+                            });
+                        // ...
+                    } else {
+                        // User is signed out
+                        // ...
+                    }
+                });
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+                // ..
+            });
     }
 
     let authobj = {}, intivalue = {}
@@ -69,8 +126,13 @@ function Auth(props) {
             action.resetForm()
             console.log(values);
             if (authdata === 'login') {
-                handleLogin()
+                handleLogin(values)
+            } else if (authdata === 'sign up') {
+                handleregister(values)
             }
+            // else if(authdata === 'forgot'){
+            //     handleforgot()
+            // }
 
         }
     })
@@ -204,7 +266,7 @@ function Auth(props) {
                                     :
                                     (authdata === 'sign up'
                                         ?
-                                        <div className="text-center"><Button type="secondary" btnDisable={true}>Sign Up</Button></div>
+                                        <div className="text-center"><Button type="secondary">Sign Up</Button></div>
                                         : <div className="text-center"><Button type="outlined">submit</Button></div>
                                     )
 
