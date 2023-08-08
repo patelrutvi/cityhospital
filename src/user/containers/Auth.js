@@ -7,7 +7,7 @@ import Button from '../components/UI/Button/Button';
 import Input from '../components/UI/Input/Input';
 import { Spantag } from '../components/UI/Input/input.style';
 import Span from '../components/UI/span/Span';
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from '@firebase/auth';
+
 import { auth } from '../../firebase';
 import { sendPasswordResetEmail } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -25,7 +25,8 @@ function Auth(props) {
 
     const handleLogin = (values) => {
         console.log("loginnn");
-
+        localStorage.setItem("login", "true")
+        navigate("/")
 
         signInWithEmailAndPassword(auth, values.email, values.pass)
             .then((userCredential) => {
@@ -33,8 +34,7 @@ function Auth(props) {
                 const user = userCredential.user;
                 if (user.emailVerified) {
                     console.log("Email verified");
-                    localStorage.setItem("login", "true")
-                    navigate("/")
+                    
                 } else {
                     console.log("check email");
                 }
@@ -47,6 +47,7 @@ function Auth(props) {
             });
     }
     const handleregister = (values) => {
+        console.log(values);
         dispatch(signupRequest(values))
 
     }

@@ -11,15 +11,15 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik';
 
 
-function DepartmentForm({onhandleSubmit , onUpdate}) {
+function DepartmentForm({onsubmitdata,onupdate}) {
     const [open, setOpen] = React.useState(false);
 
     React.useEffect(() => {
-        if (onUpdate) {
-          formik.setValues(onUpdate)
+        if (onupdate) {
+          formik.setValues(onupdate)
           handleClickOpen();
         }
-      }, [onUpdate])
+      }, [onupdate])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -45,7 +45,7 @@ function DepartmentForm({onhandleSubmit , onUpdate}) {
             action.resetForm();
             console.log(value);
             handleClose()
-            onhandleSubmit(value)
+            onsubmitdata(value)
         }
     })
 

@@ -1,11 +1,14 @@
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from '@firebase/auth';
+import { auth } from '../../firebase';
+
 export const signupApi = (values) => {
-    console.log(values);
+    console.log(values)
     try {
         createUserWithEmailAndPassword(auth, values.email, values.pass)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                console.log(user);
+               
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         // User is signed in, see docs for a list of available properties

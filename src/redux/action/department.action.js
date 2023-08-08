@@ -1,45 +1,43 @@
-import { addDepartmentData, deleteDepartmentData, getDepartmentdata, updateDepartmentData } from '../../common/apis/department.api';
+import { addDepartmentdata, deleteDepartmentdata, getDepartmentdata, updateDepartmentdata } from '../../common/apis/department.api';
 import * as ActionType from '../ActionType'
 
-export const getdepartment = () => (dispatch) => {
-    try{
+export const getDepartmentdataa = () => (dispatch) => {
+    try {
         getDepartmentdata()
-        .then((response) => dispatch({ type: ActionType.GET_DEPARTMENTDATA, paylord: response.data }))
-        // .catch((error) => dispatch(errorHandle(error)))
+            .then((response) => dispatch({ type: ActionType.GET_DEPARTMENTDATA, payload: response.data }))
+            .catch((error) => console.log(error))
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+export const addDepartdata = (data) => (dispatch) => {
+    try {
+        addDepartmentdata(data)
+        .then((response) => dispatch({type:ActionType.ADD_DEPARTMENT , payload : response.data}))
+        .catch((error) => console.log(error))
+    } catch (error) {
+        console.log(error);
+    }
+}
+export const deleteDepartdata = (id) => (dispatch) => {
+    try{
+        deleteDepartmentdata(id)
+        .then(dispatch({type:ActionType.DELETE_DEPARTMENT , payload : id}))
+        .catch((error) => console.log(error))
     }catch (error) {
         console.log(error);
     }
 }
 
-export const addData = (data) => (dispatch) => {
+export const updatedepartdata = (data) => (dispatch) => {
     try{
-        addDepartmentData(data)
-        .then((response) => dispatch({type : ActionType.ADD_DEPARTMENT , payload : response.data}))
+        updateDepartmentdata(data)
+        .then(dispatch({type:ActionType.UPDATE_DEPARTMENT , payload : data}))
         .catch((error) => console.log(error))
-
-    } catch (error){
+    }catch (error) {
         console.log(error);
     }
 }
 
-export const deleteData = (id) => (dispatch) => {
-    try{
-        deleteDepartmentData(id)
-        .then(dispatch({type : ActionType.DELETE_DEPARTMENT , payload : id}))
-        .catch((error) => console.log(error))
-
-    } catch (error){
-        console.log(error);
-    }
-}
-
-export const updateData = (data) => (dispatch) => {
-    try{
-        updateDepartmentData(data)
-        .then(dispatch({type : ActionType.UPDATE_DEPARTMENT , payload : data}))
-        .catch((error) => console.log(error))
-
-    } catch (error){
-        console.log(error);
-    }
-}
