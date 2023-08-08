@@ -38,3 +38,7 @@ export const GET_DEPARTMENTDATA = "GET_DEPARTMENTDATA"
 export const ADD_DEPARTMENT = "ADD_DEPARTMENT"
 export const DELETE_DEPARTMENT = "DELETE_DEPARTMENT"
 export const UPDATE_DEPARTMENT = "UPDATE_DEPARTMENT"
+
+
+// '''''''''''''''Auth ........
+export const SIGN_UPREQUEST = "SIGN_UPREQUEST"

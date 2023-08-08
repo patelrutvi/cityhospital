@@ -7,10 +7,12 @@ import Button from '../components/UI/Button/Button';
 import Input from '../components/UI/Input/Input';
 import { Spantag } from '../components/UI/Input/input.style';
 import Span from '../components/UI/span/Span';
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification} from '@firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from '@firebase/auth';
 import { auth } from '../../firebase';
-import {  sendPasswordResetEmail } from "firebase/auth";
-import {  signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from 'react-redux';
+import { signupRequest } from '../../redux/action/auth.action';
 
 
 
@@ -19,11 +21,11 @@ function Auth(props) {
 
     const [authdata, setauth] = useState('login')
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const handleLogin = (values) => {
         console.log("loginnn");
-        localStorage.setItem("login", "true")
-        navigate("/")
+
 
         signInWithEmailAndPassword(auth, values.email, values.pass)
             .then((userCredential) => {
@@ -31,6 +33,8 @@ function Auth(props) {
                 const user = userCredential.user;
                 if (user.emailVerified) {
                     console.log("Email verified");
+                    localStorage.setItem("login", "true")
+                    navigate("/")
                 } else {
                     console.log("check email");
                 }
@@ -43,46 +47,12 @@ function Auth(props) {
             });
     }
     const handleregister = (values) => {
-        createUserWithEmailAndPassword(auth, values.email, values.pass)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log(user);
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        // User is signed in, see docs for a list of available properties
-                        // https://firebase.google.com/docs/reference/js/auth.user
-                        const uid = user.uid;
-                        sendEmailVerification(auth.currentUser)
-                            .then(() => {
-                                // Email verification sent!
-                                // ...
-                                console.log("Email verification sent!");
-                            })
-                            .catch((error) => {
-                                const errorCode = error.code;
-                                const errorMessage = error.message;
-                                console.log(errorCode, errorMessage);
-                                // ..
-                            });
-                        // ...
-                    } else {
-                        // User is signed out
-                        // ...
-                    }
-                });
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                // ..
-            });
+        dispatch(signupRequest(values))
+
     }
 
     const handleforgot = (values) => {
-        sendPasswordResetEmail(auth,values.email)
+        sendPasswordResetEmail(auth, values.email)
             .then(() => {
                 // Password reset email sent!
                 // ..
@@ -139,7 +109,7 @@ function Auth(props) {
         validationSchema: authSchema,
         enableReinitialize: true,
         onSubmit: (values, action) => {
-           
+
             if (authdata === 'login') {
                 handleLogin(values)
             } else if (authdata === 'sign up') {

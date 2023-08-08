@@ -5,11 +5,12 @@ import UserRoutes from './Routes/UserRoutes';
 import AdminRoutes from './Routes/AdminRoutes'
 import Protected from './Routes/Protected';
 import { Provider } from 'react-redux';
-import { configureStore } from './redux/store';
+
 import { PersistGate } from 'redux-persist/integration/react'
+import { persistor, store } from './redux/store';
 
 function App() {
-  const {store,persistor} = configureStore()
+
   return (
     <>
       <Provider store={store}>

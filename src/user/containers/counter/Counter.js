@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from '../../components/UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrement, increment } from '../../../slice/counterslice';
+import { decrement, increment } from '../../../redux/slice/counterslice';
+
 // import { decrement, increment } from '../../../redux/action/counter.action';
 
 function Counter(props) {
@@ -11,6 +12,7 @@ function Counter(props) {
     console.log(counterval);
     const handleinc = () => {
         dispatch(increment())
+        
     }
     const handledec = () => {
         dispatch(decrement())
