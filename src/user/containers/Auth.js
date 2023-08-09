@@ -13,9 +13,7 @@ import { auth } from '../../firebase';
 
 import { useDispatch } from 'react-redux';
 import { forgotRequest, loginRequest, signupRequest } from '../../redux/action/auth.action';
-
-
-
+import { SnackbarProvider, enqueueSnackbar, useSnackbar } from 'notistack';
 
 function Auth(props) {
 
@@ -24,8 +22,8 @@ function Auth(props) {
     const dispatch = useDispatch()
 
     const handleLogin = (values) => {
-        localStorage.setItem("login", "true")
-        navigate("/")
+        // localStorage.setItem("login", "true")
+        // navigate("/")
         console.log("loginnn");
         dispatch(loginRequest(values))
 
@@ -107,13 +105,19 @@ function Auth(props) {
 
             <>
 
+
                 <section id="appointment" className="appointment">
+                    <div>
+                        <SnackbarProvider />
+                        <button onClick={() => enqueueSnackbar('That was easy!')}>Show snackbarAPP</button>
+                    </div>
                     <div className="container">
                         <div className="section-title">
                             {/* .........Heading......... */}
                             {
                                 authdata === 'login'
                                     ? <h2>Login</h2>
+
                                     :
                                     (authdata === 'sign up'
                                         ? <h2>Sign Up</h2>

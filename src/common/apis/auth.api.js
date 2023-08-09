@@ -44,7 +44,7 @@ export const signupApi = (values) => {
                     if (errorCode.localeCompare("auth/network-request-failed") === 0) {
                         reject({Massage:"please check internet"});
                     } else if (errorCode.localeCompare("auth/email-already-in-use") === 0) {
-                        reject({Message:"email is already register"});
+                        reject("email is already register");
                     }
 
                 });

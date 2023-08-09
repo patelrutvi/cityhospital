@@ -1,17 +1,19 @@
 import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import * as ActionType from '../ActionType'
 import { forgotApi, loginApi, signupApi } from '../../common/apis/auth.api'
+import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* signupUser(action) {
     console.log(action);
     try {
         const user = yield call(signupApi, action.payload)
-        console.log(user);
+        enqueueSnackbar(user);
+    
         // yield put({ type: 'USER_FETCH_SUCCEEDED', user: user })
     } catch (e) {
 
-        console.log(e);
+        enqueueSnackbar(e);
         // yield put({ type: 'USER_FETCH_FAILED', message: e.message })
     }
 }
@@ -20,10 +22,10 @@ function* loginUser(action) {
     console.log(action);
     try {
         const user = yield call(loginApi, action.payload)
-        console.log(user);
+        enqueueSnackbar(user);
         // yield put({ type: 'USER_FETCH_SUCCEEDED', user: user })
     } catch (e) {
-        console.log(e);
+        enqueueSnackbar(e);
         // yield put({ type: 'USER_FETCH_FAILED', message: e.message })
     }
 }
@@ -33,9 +35,10 @@ function* forgotUser(action) {
     try {
         const user = yield call(forgotApi, action.payload)
         console.log(user);
+        enqueueSnackbar(user)
         // yield put({ type: 'USER_FETCH_SUCCEEDED', user: user })
     } catch (e) {
-        console.log(e);
+        enqueueSnackbar(e);
         // yield put({ type: 'USER_FETCH_FAILED', message: e.message })
     }
 }
