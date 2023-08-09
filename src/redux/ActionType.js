@@ -40,5 +40,8 @@ export const DELETE_DEPARTMENT = "DELETE_DEPARTMENT"
 export const UPDATE_DEPARTMENT = "UPDATE_DEPARTMENT"
 
 
-// '''''''''''''''Auth ........
+// '''''''''''''''Auth  firebase, saga........
+
 export const SIGN_UPREQUEST = "SIGN_UPREQUEST"
+export const LOGIN_REQUEST = "LOGIN_REQUEST"
+export const FORGOT_REQUEST = "FORGOT_REQUEST"

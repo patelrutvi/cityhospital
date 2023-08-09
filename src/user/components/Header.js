@@ -48,10 +48,10 @@ function Header({ count }) {
     }
 
 
-    let favcount = 0;
-    if (favData.myfav) {
-        favcount = favData.myfav.reduce((acc, v, i) => acc + v.qyt, 0)
-    }
+    // let favcount = 0;
+    // if (favData.myfav) {
+    //     favcount = favData.myfav.reduce((acc, v, i) => acc + v.qyt, 0)
+    // }
 
     return (
 
@@ -64,22 +64,23 @@ function Header({ count }) {
                     </div>
 
                     <div className="d-none d-lg-flex social-links align-items-center">
-                        <div>
+                        {/* <div>
                             <Link to={"myfav"}>
                                 <Badge color="secondary" badgeContent={favcount} >
                                     <FavoriteIcon />
                                 </Badge>
                             </Link>
-                        </div>
+                        </div> */}
                         <div>
-                            <Link to="/cartnr">
+                            {/* <Link to="/cartnr">
                                 <IconButton aria-label="cart" >
                                     <StyledBadge badgeContent={count} color="secondary">
                                         <ShoppingCartIcon />
                                     </StyledBadge>
                                 </IconButton>
-                            </Link>
+                            </Link> */}
                         </div>
+                        
 
                         <div>
                             <Link to="/cart">

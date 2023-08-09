@@ -9,10 +9,10 @@ import { Spantag } from '../components/UI/Input/input.style';
 import Span from '../components/UI/span/Span';
 
 import { auth } from '../../firebase';
-import { sendPasswordResetEmail } from "firebase/auth";
-import { signInWithEmailAndPassword } from "firebase/auth";
+
+
 import { useDispatch } from 'react-redux';
-import { signupRequest } from '../../redux/action/auth.action';
+import { forgotRequest, loginRequest, signupRequest } from '../../redux/action/auth.action';
 
 
 
@@ -24,27 +24,11 @@ function Auth(props) {
     const dispatch = useDispatch()
 
     const handleLogin = (values) => {
-        console.log("loginnn");
         localStorage.setItem("login", "true")
         navigate("/")
+        console.log("loginnn");
+        dispatch(loginRequest(values))
 
-        signInWithEmailAndPassword(auth, values.email, values.pass)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                if (user.emailVerified) {
-                    console.log("Email verified");
-                    
-                } else {
-                    console.log("check email");
-                }
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
     }
     const handleregister = (values) => {
         console.log(values);
@@ -53,17 +37,7 @@ function Auth(props) {
     }
 
     const handleforgot = (values) => {
-        sendPasswordResetEmail(auth, values.email)
-            .then(() => {
-                // Password reset email sent!
-                // ..
-                console.log("Password reset email sent!");
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-            });
+        dispatch(forgotRequest(values))
     }
 
     let authobj = {}, intivalue = {}
