@@ -1,6 +1,7 @@
 
 import { addDoctordata, deleteDoctordata, getDoctordata, updateDoctordata } from '../../common/apis/doctor.api';
 import * as ActionType from '../ActionType'
+import { setAlert } from '../slice/alertslice';
 
 export const getdoctordata = () => (dispatch) => {
 
@@ -10,7 +11,7 @@ export const getdoctordata = () => (dispatch) => {
             getDoctordata()
                 .then((response) => dispatch({ type: ActionType.GET_DOCTORDATA, paylord: response.data }))
                 .catch((error) => dispatch(errorHandle(error)))
-            // fetch("http://localhost:3004/doctor")
+            // fetch("http://localhost:3004/doctors")
             //     .then((response) => {
             //         if (response.ok) {
             //             return response.json()
@@ -31,7 +32,11 @@ export const addDoctor = (data) => (dispatch) => {
     console.log(data);
     try {
         addDoctordata(data)
-            .then((response) => dispatch({ type: ActionType.ADD_DOCTORDATA, paylord: response.data }))
+            .then((response) => {
+                dispatch(setAlert({ text: 'Add Data', color: 'success' }))
+                dispatch({ type: ActionType.ADD_DOCTORDATA, paylord: response.data }
+                )
+            })
             .catch((error) => console.log(error))
         // fetch("http://localhost:3004/doctors", {
         //     method: "POST",
@@ -53,7 +58,10 @@ export const deleteDoctor = (id) => (dispatch) => {
     console.log(id);
     try {
         deleteDoctordata(id)
-            .then(dispatch({ type: ActionType.DELETE_DOCTORDATA, paylord: id }))
+            .then(
+                dispatch(setAlert({ text: 'Delete Data', color: 'success' })),
+                dispatch({ type: ActionType.DELETE_DOCTORDATA, paylord: id })
+                )
             .catch((error) => console.log(error))
         // fetch("http://localhost:3004/doctors/" + id, {
         //     method: "DELETE",
@@ -70,8 +78,11 @@ export const updateDoctor = (data) => (dispatch) => {
     console.log(data);
     try {
         updateDoctordata(data)
-        .then(dispatch({ type: ActionType.EDIT_DOCTORDATA, paylord: data }))
-        .catch((error) => console.log(error))
+            .then(
+                dispatch(setAlert({ text: 'Upadate Data', color: 'success' })),
+                dispatch({ type: ActionType.EDIT_DOCTORDATA, paylord: data })
+                )
+            .catch((error) => console.log(error))
         // fetch("http://localhost:3004/doctors" + data.id, {
         //     method: "PUT",
         //     headers: {

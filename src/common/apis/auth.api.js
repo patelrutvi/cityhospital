@@ -20,14 +20,14 @@ export const signupApi = (values) => {
                             const uid = user.uid;
                             sendEmailVerification(auth.currentUser)
                                 .then(() => {
-                                    resolve({ Message: "Email verification sent!", user: user });
+                                    resolve({ message: "Email verification sent!", user: user });
                                 })
                                 .catch((error) => {
                                     const errorCode = error.code;
                                     if (errorCode.localeCompare("auth/network-request-failed") === 0) {
-                                        reject({Massage:"please check internet"});
+                                        reject({ message: "please check internet" });
                                     } else if (errorCode.localeCompare("auth/email-already-in-use") === 0) {
-                                        reject({Message:"email is already register"});
+                                        reject({ message: "email is already register" });
                                     }
                                     // ..
                                 });
@@ -42,9 +42,9 @@ export const signupApi = (values) => {
                 .catch((error) => {
                     const errorCode = error.code;
                     if (errorCode.localeCompare("auth/network-request-failed") === 0) {
-                        reject({Massage:"please check internet"});
+                        reject({ message: "please check internet" });
                     } else if (errorCode.localeCompare("auth/email-already-in-use") === 0) {
-                        reject("email is already register");
+                        reject({message:"email is already register"});
                     }
 
                 });
@@ -63,11 +63,11 @@ export const loginApi = (values) => {
                 // Signed in 
                 const user = userCredential.user;
                 if (user.emailVerified) {
-                    resolve({message:"Email verified",user:user});
+                    resolve({ message: "Email verified", user: user });
                     // localStorage.setItem("login", "true")
                     // navigate("/")
                 } else {
-                    reject("check email");
+                    reject({ message: "check email" });
                 }
                 // ...
             })
@@ -76,9 +76,9 @@ export const loginApi = (values) => {
                 console.log(errorCode);
                 // const errorMessage = error.message;
                 if (errorCode.localeCompare('auth/wrong-password') === 0) {
-                    reject({message:"please enter correct  password"})
+                    reject({ message: "please enter correct  password" })
                 } else if (errorCode.localeCompare("auth/user-not-found") === 0) {
-                    reject({message:"please signup "})
+                    reject({ message: "please signup " })
                 }
 
             });
@@ -98,8 +98,8 @@ export const forgotApi = (values) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode);
-                if(errorCode.localeCompare("auth/user-not-found") === 0){
-                    reject({message:"please signup "})
+                if (errorCode.localeCompare("auth/user-not-found") === 0) {
+                    reject({ message: "please signup " })
                 }
                 // ..
             });

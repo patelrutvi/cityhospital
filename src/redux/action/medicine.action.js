@@ -1,4 +1,5 @@
 import * as ActionType from '../ActionType'
+import { setAlert } from '../slice/alertslice';
 
 export const getmedicinedata = () => (dispatch) => {
     try {
@@ -13,15 +14,19 @@ export const getmedicinedata = () => (dispatch) => {
 
 export const addmedicineData = (data) => (dispatch) => {
     try {
-        fetch("http://localhost:3004/medicines",{
+        fetch("http://localhost:3004/medicines", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-              },
-              body: JSON.stringify(data),
+            },
+            body: JSON.stringify(data),
         })
             .then((response) => response.json())
-            .then((data) => dispatch({ type: ActionType.ADD_MEDICINEDATA, payload: data }))
+            .then((data) => {
+                dispatch(setAlert({ text: 'Add Data', color: 'success' }))
+                dispatch({ type: ActionType.ADD_MEDICINEDATA, payload: data })
+
+            })
             .catch((error) => console.log(error))
     } catch (error) {
         console.log(error);
@@ -30,29 +35,35 @@ export const addmedicineData = (data) => (dispatch) => {
 }
 
 export const deleteMedicinedta = (id) => (dispatch) => {
-    try{
-        fetch("http://localhost:3004/medicines/" + id , {
+    try {
+        fetch("http://localhost:3004/medicines/" + id, {
             method: "DELETE",
         })
-        .then(dispatch({type:ActionType.DELETE_MEDICINEDATA , payload:id}))
-        .catch((error) => console.log(error))
+            .then(
+                dispatch(setAlert({ text: 'Delete data', color: 'success' })),
+                dispatch({ type: ActionType.DELETE_MEDICINEDATA, payload: id })
+            )
+            .catch((error) => console.log(error))
     } catch (error) {
         console.log(error);
     }
 }
 
 export const upadeMedicine = (data) => (dispatch) => {
-    try{
-        fetch("http://localhost:3004/medicines/" + data.id , {
+    try {
+        fetch("http://localhost:3004/medicines/" + data.id, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-              },
-              body: JSON.stringify(data),
+            },
+            body: JSON.stringify(data),
         })
-        .then(dispatch({type:ActionType.UPDATE_MEDICINEDATA , payload : data}))
-        .catch((error) => console.log(error))
-    }catch (error) {
+            .then(
+                dispatch(setAlert({ text: 'Update data', color: 'success' })),
+                dispatch({ type: ActionType.UPDATE_MEDICINEDATA, payload: data })
+            )
+            .catch((error) => console.log(error))
+    } catch (error) {
         console.log(error);
     }
 }

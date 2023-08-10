@@ -9,28 +9,31 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './redux/store';
 import { SnackbarProvider } from 'notistack';
+import Alert from './user/components/Alert/Alert';
 
 function App() {
 
   return (
     <>
-   
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          {/* <Test2 /> */}
-          {/* <MuiDrower /> */}
-          {/* <Panel /> */}
-          {/* <ADoctor />
+      <SnackbarProvider maxSnack={3}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Alert />
+            {/* <Test2 /> */}
+            {/* <MuiDrower /> */}
+            {/* <Panel /> */}
+            {/* <ADoctor />
       <ADrpartment /> */}
 
-          <Routes >
-            <Route path='/*' element={<UserRoutes />} />
-            <Route element={<Protected />}>
-              <Route path='/admin/*' element={<AdminRoutes />} />
-            </Route>
-          </Routes>
-        </PersistGate>
-      </Provider>
+            <Routes >
+              <Route path='/*' element={<UserRoutes />} />
+              <Route>
+                <Route path='/admin/*' element={<AdminRoutes />} />
+              </Route>
+            </Routes>
+          </PersistGate>
+        </Provider>
+      </SnackbarProvider>
     </>
 
   );

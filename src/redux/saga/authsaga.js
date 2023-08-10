@@ -2,19 +2,18 @@ import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import * as ActionType from '../ActionType'
 import { forgotApi, loginApi, signupApi } from '../../common/apis/auth.api'
 import { SnackbarProvider, enqueueSnackbar } from 'notistack';
+import { setAlert } from '../slice/alertslice';
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* signupUser(action) {
     console.log(action);
     try {
         const user = yield call(signupApi, action.payload)
-        enqueueSnackbar(user);
-    
-        // yield put({ type: 'USER_FETCH_SUCCEEDED', user: user })
+        console.log(user);
+        yield put(setAlert({ text: user.message, color: 'success' }))
     } catch (e) {
-
-        enqueueSnackbar(e);
-        // yield put({ type: 'USER_FETCH_FAILED', message: e.message })
+        console.log(e);
+        yield put(setAlert({ text: e.message, color: 'error' }))
     }
 }
 
@@ -22,11 +21,13 @@ function* loginUser(action) {
     console.log(action);
     try {
         const user = yield call(loginApi, action.payload)
-        enqueueSnackbar(user);
-        // yield put({ type: 'USER_FETCH_SUCCEEDED', user: user })
+        console.log(user);
+        yield put(setAlert({ text: user.message, color: 'success' }))
+     
     } catch (e) {
-        enqueueSnackbar(e);
-        // yield put({ type: 'USER_FETCH_FAILED', message: e.message })
+        console.log(e);
+        yield put(setAlert({ text: e.message, color: 'error' }))
+      
     }
 }
 
@@ -35,11 +36,12 @@ function* forgotUser(action) {
     try {
         const user = yield call(forgotApi, action.payload)
         console.log(user);
-        enqueueSnackbar(user)
-        // yield put({ type: 'USER_FETCH_SUCCEEDED', user: user })
+        yield put(setAlert({ text: user.message, color: 'success' }))
+      
     } catch (e) {
-        enqueueSnackbar(e);
-        // yield put({ type: 'USER_FETCH_FAILED', message: e.message })
+        console.log(e);
+        yield put(setAlert({ text: e.message, color: 'error' }))
+       
     }
 }
 

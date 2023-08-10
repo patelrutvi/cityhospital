@@ -107,10 +107,6 @@ function Auth(props) {
 
 
                 <section id="appointment" className="appointment">
-                    <div>
-                        <SnackbarProvider />
-                        <button onClick={() => enqueueSnackbar('That was easy!')}>Show snackbarAPP</button>
-                    </div>
                     <div className="container">
                         <div className="section-title">
                             {/* .........Heading......... */}
