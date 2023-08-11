@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerificati
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { sendPasswordResetEmail } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 export const signupApi = (values) => {
     console.log(values)
@@ -44,7 +45,7 @@ export const signupApi = (values) => {
                     if (errorCode.localeCompare("auth/network-request-failed") === 0) {
                         reject({ message: "please check internet" });
                     } else if (errorCode.localeCompare("auth/email-already-in-use") === 0) {
-                        reject({message:"email is already register"});
+                        reject({ message: "email is already register" });
                     }
 
                 });
@@ -63,7 +64,7 @@ export const loginApi = (values) => {
                 // Signed in 
                 const user = userCredential.user;
                 if (user.emailVerified) {
-                    resolve({ message: "Email verified", user: user });
+                    resolve({ message2: "Email verified", user: user });
                     // localStorage.setItem("login", "true")
                     // navigate("/")
                 } else {
@@ -92,7 +93,7 @@ export const forgotApi = (values) => {
             .then(() => {
                 // Password reset email sent!
                 // ..
-                resolve("Password reset email sent!");
+                resolve({message:"Password reset email sent!"});
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -104,4 +105,18 @@ export const forgotApi = (values) => {
                 // ..
             });
     })
+}
+
+export const logoutApi = () => {
+    return new Promise((resolve, reject) => {
+        signOut(auth).then(() => {
+            // 
+            resolve({message:"Sign-out successful."})
+            console.log();
+        }).catch((error) => {
+            // An error happened.
+            reject({message:"An error happened."})
+        });
+    })
+
 }

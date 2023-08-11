@@ -43,5 +43,12 @@ export const UPDATE_DEPARTMENT = "UPDATE_DEPARTMENT"
 // '''''''''''''''Auth  firebase, saga........
 
 export const SIGN_UPREQUEST = "SIGN_UPREQUEST"
+export const EMAIL_VALIFICATION =" EMAIL_VALIFICATION"
+
 export const LOGIN_REQUEST = "LOGIN_REQUEST"
+export const LOGGED_IN = " LOGGED_IN"
+
 export const FORGOT_REQUEST = "FORGOT_REQUEST"
+export const AUTH_ERROR ="AUTH_ERROR"
+
+export const LOG_OUT = "LOG_OUT"

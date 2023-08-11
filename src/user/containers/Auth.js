@@ -11,15 +11,18 @@ import Span from '../components/UI/span/Span';
 import { auth } from '../../firebase';
 
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { forgotRequest, loginRequest, signupRequest } from '../../redux/action/auth.action';
 import { SnackbarProvider, enqueueSnackbar, useSnackbar } from 'notistack';
+import { CircularProgress } from '@mui/material';
 
 function Auth(props) {
 
     const [authdata, setauth] = useState('login')
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const auth = useSelector(state => state.auth)
+    console.log(auth, "authh");
 
     const handleLogin = (values) => {
         // localStorage.setItem("login", "true")
@@ -125,82 +128,69 @@ function Auth(props) {
                                 blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
                                 Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                         </div>
-                        <form className="php-email-form" onSubmit={handleSubmit}>
-                            <div className="row" style={{ justifyContent: 'center' }}>
-                                {/* ........name....... */}
-                                {
-                                    authdata === 'login'
-                                        ?
-                                        null
-                                        :
-                                        (authdata === 'sign up'
+
+                        {
+                            auth.isloading ? <CircularProgress  />
+                                : null
+                        }
+                        <>
+
+                            <form className="php-email-form" onSubmit={handleSubmit}>
+                                <div className="row" style={{ justifyContent: 'center' }}>
+                                    {/* ........name....... */}
+                                    {
+                                        authdata === 'login'
                                             ?
-                                            <div className="col-md-7 form-group">
-                                                <Input type="text"
-                                                    name="name"
-                                                    className="form-control"
-                                                    id="name"
-                                                    placeholder="Your Name"
-                                                    data-rule="minlen:4"
-                                                    data-msg="Please enter at least 4 chars"
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    value={values.name}
-                                                    errorText={errors.name && touched.name ? errors.name : ''}
-                                                />
-                                                <div className="validate" />
-                                                <Span className='error'>{errors.name && touched.name ? errors.name : ''}</Span>
-                                            </div>
-                                            :
                                             null
-                                        )
+                                            :
+                                            (authdata === 'sign up'
+                                                ?
+                                                <div className="col-md-7 form-group">
+                                                    <Input type="text"
+                                                        name="name"
+                                                        className="form-control"
+                                                        id="name"
+                                                        placeholder="Your Name"
+                                                        data-rule="minlen:4"
+                                                        data-msg="Please enter at least 4 chars"
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        value={values.name}
+                                                        errorText={errors.name && touched.name ? errors.name : ''}
+                                                    />
+                                                    <div className="validate" />
+                                                    <Span className='error'>{errors.name && touched.name ? errors.name : ''}</Span>
+                                                </div>
+                                                :
+                                                null
+                                            )
 
-                                }
-                                {/* ..........email.......... */}
-                                <div className="col-md-7 form-group mt-3 mt-md-0">
-                                    <Input
-                                        className="form-control"
-                                        type="text"
-                                        name="email"
-                                        id="email"
-                                        placeholder="email"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.email}
-                                        errorText={errors.email && touched.email ? errors.email : ''}
-                                    />
-                                    <div className="validate" />
-                                    <Span className='error'>{errors.email && touched.email ? errors.email : ''}</Span>
-                                </div>
+                                    }
+                                    {/* ..........email.......... */}
+                                    <div className="col-md-7 form-group mt-3 mt-md-0">
+                                        <Input
+                                            className="form-control"
+                                            type="text"
+                                            name="email"
+                                            id="email"
+                                            placeholder="email"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.email}
+                                            errorText={errors.email && touched.email ? errors.email : ''}
+                                        />
+                                        <div className="validate" />
+                                        <Span className='error'>{errors.email && touched.email ? errors.email : ''}</Span>
+                                    </div>
 
-                                {/* ...........password......... */}
-                                {
-                                    authdata === 'login'
-                                        ?
-                                        <div className="col-md-7 form-group mt-3 mt-md-0">
-                                            <Input type="password"
-                                                className="form-control"
-                                                name="pass" id="pass"
-                                                placeholder="Your Password"
-                                                data-rule="minlen:4"
-                                                data-msg="Please enter at least 2 chars"
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                value={values.pass}
-                                                errorText={errors.pass && touched.pass ? errors.pass : ''}
-
-                                            />
-                                            <div className="validate" />
-                                            <Span className='error'>{errors.pass && touched.pass ? errors.pass : ''}</Span>
-                                        </div>
-                                        :
-                                        (authdata === 'sign up'
+                                    {/* ...........password......... */}
+                                    {
+                                        authdata === 'login'
                                             ?
                                             <div className="col-md-7 form-group mt-3 mt-md-0">
                                                 <Input type="password"
                                                     className="form-control"
-                                                    name="pass"
-                                                    id="pass"
+                                                    name="pass" id="pass"
                                                     placeholder="Your Password"
                                                     data-rule="minlen:4"
                                                     data-msg="Please enter at least 2 chars"
@@ -214,43 +204,64 @@ function Auth(props) {
                                                 <Span className='error'>{errors.pass && touched.pass ? errors.pass : ''}</Span>
                                             </div>
                                             :
-                                            null
-                                        )
-                                }
+                                            (authdata === 'sign up'
+                                                ?
+                                                <div className="col-md-7 form-group mt-3 mt-md-0">
+                                                    <Input type="password"
+                                                        className="form-control"
+                                                        name="pass"
+                                                        id="pass"
+                                                        placeholder="Your Password"
+                                                        data-rule="minlen:4"
+                                                        data-msg="Please enter at least 2 chars"
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        value={values.pass}
+                                                        errorText={errors.pass && touched.pass ? errors.pass : ''}
 
-                            </div>
-                            {/* ......buttonnnn...... */}
-                            {
-                                authdata === 'login'
-                                    ?
-                                    <div className="text-center"> <Button type="primary" >Login</Button></div>
+                                                    />
+                                                    <div className="validate" />
+                                                    <Span className='error'>{errors.pass && touched.pass ? errors.pass : ''}</Span>
+                                                </div>
+                                                :
+                                                null
+                                            )
+                                    }
 
-
-                                    :
-                                    (authdata === 'sign up'
-                                        ?
-                                        <div className="text-center"><Button type="secondary">Sign Up</Button></div>
-                                        : <div className="text-center"><Button type="outlined">submit</Button></div>
-                                    )
-
-                            }
-                            {/* ......link...sign up ////....login... */}
-                            {
-                                authdata === 'login'
-                                    ?
-                                    <div>Create a new account<a href='#' onClick={() => setauth('sign up')}> Sign Up</a></div>
-                                    :
-                                    <div>Already have an account <a href='#' onClick={() => setauth('login')}> log In</a></div>
-                            }
-                            {/* ........link.......forgot password.... */}
-                            <div>
+                                </div>
+                                {/* ......buttonnnn...... */}
                                 {
-                                    authdata === 'login' ?
-                                        <a href='#' onClick={() => setauth('forgot')} >Forgot Password?</a>
-                                        : (authdata === 'sign up' ? null : null)
+                                    authdata === 'login'
+                                        ?
+                                        <div className="text-center"> <Button type="primary" >Login</Button></div>
+
+
+                                        :
+                                        (authdata === 'sign up'
+                                            ?
+                                            <div className="text-center"><Button type="secondary">Sign Up</Button></div>
+                                            : <div className="text-center"><Button type="outlined">submit</Button></div>
+                                        )
+
                                 }
-                            </div>
-                        </form>
+                                {/* ......link...sign up ////....login... */}
+                                {
+                                    authdata === 'login'
+                                        ?
+                                        <div>Create a new account<a href='#' onClick={() => setauth('sign up')}> Sign Up</a></div>
+                                        :
+                                        <div>Already have an account <a href='#' onClick={() => setauth('login')}> log In</a></div>
+                                }
+                                {/* ........link.......forgot password.... */}
+                                <div>
+                                    {
+                                        authdata === 'login' ?
+                                            <a href='#' onClick={() => setauth('forgot')} >Forgot Password?</a>
+                                            : (authdata === 'sign up' ? null : null)
+                                    }
+                                </div>
+                            </form>
+                        </>
                     </div >
 
                 </section>

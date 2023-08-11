@@ -7,6 +7,7 @@ import { myfavreducer } from "./myfav.reducer"
 // import counterReduce from "../../slice/counterslice"
 import { departmentReducer } from "./department.reducer"
 import alertReducer from "../slice/alertslice"
+import { authReducer } from "./auth.reducer"
 
 
 export const rootReducer = combineReducers({
@@ -17,8 +18,10 @@ export const rootReducer = combineReducers({
     cart: addtoCartreducer,
     fav: myfavreducer,
     department:departmentReducer,
-    alert:alertReducer
+    alert:alertReducer,
+    auth:authReducer
 
+    
 })
 
 
