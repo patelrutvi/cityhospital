@@ -8,6 +8,7 @@ import { myfavreducer } from "./myfav.reducer"
 import { departmentReducer } from "./department.reducer"
 import alertReducer from "../slice/alertslice"
 import { authReducer } from "./auth.reducer"
+import appoimentReducer from "../slice/appoimentslice"
 
 
 export const rootReducer = combineReducers({
@@ -19,7 +20,8 @@ export const rootReducer = combineReducers({
     fav: myfavreducer,
     department:departmentReducer,
     alert:alertReducer,
-    auth:authReducer
+    auth:authReducer,
+    appoiment:appoimentReducer
 
     
 })

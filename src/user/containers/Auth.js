@@ -103,10 +103,7 @@ function Auth(props) {
 
     return (
         <div className='auth'>
-
             <>
-
-
                 <section id="appointment" className="appointment">
                     <div className="container">
                         <div className="section-title">
