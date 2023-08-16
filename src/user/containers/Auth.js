@@ -9,8 +9,6 @@ import { Spantag } from '../components/UI/Input/input.style';
 import Span from '../components/UI/span/Span';
 
 import { auth } from '../../firebase';
-
-
 import { useDispatch, useSelector } from 'react-redux';
 import { forgotRequest, loginRequest, signupRequest } from '../../redux/action/auth.action';
 import { SnackbarProvider, enqueueSnackbar, useSnackbar } from 'notistack';

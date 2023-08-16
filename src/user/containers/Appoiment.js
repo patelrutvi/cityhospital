@@ -1,28 +1,63 @@
 import React from 'react';
-import { styled } from 'styled-components';
+import Button from '../components/UI/Button/Button';
+import { useFormik } from 'formik';
+import * as Yup from 'yup'
+
 
 function Appoiment(props) {
-    const Button = styled.button`
-    color: #BF4F74;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid #BF4F74;
-  border-radius: 3px;
 
-  &:hover{
-    background-color: #105b72c2;
-  }
-  `;
+    let appoimentSchema = Yup.object({
+        name: Yup.string().required('Please enter name').matches(/^[a-z]+$/, 'Please enter valid name'),
+        email: Yup.string().email('please enter valid email').required('Please enter email'),
+        phone: Yup.string()
+            .required('please enter phone number')
+            .matches(
+                /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, 'please enter 10 digit phone number'
+            ),
+        date: Yup.date()
+            .required("please enter appoiment date")
+            .min(new Date(), 'Must be in present and future'),
+        department: Yup.string()
+            .required("plase select department")
+            .test('department', 'please select department', function (val) {
+                if (val === 0) {
+                    return false
+                } else {
 
-    // A new component based on Button, but with some override styles
-    const TomatoButton = styled(Button)`
-    background-color: tomato;
-    color:white;
-    border-radius: 40px;
-    padding: 9px 36px;
-  `;
-  
+                    return true
+                }
+            }),
+        message: Yup.string().required('Please enter message')
+            .test('message', 'Maximum 5 word allow',
+                function (val) {
+                    let arr = val.split(" ")
+                    if (arr.length > 5) {
+                        return false;
+                    } else {
+                        return true
+                    }
+                }
+            ),
+
+    })
+
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            phone: '',
+            date: '',
+            department: '',
+            message: ''
+        },
+        validationSchema: appoimentSchema,
+        onSubmit: values => {
+            console.log(values);
+        },
+    })
+
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik
+
     return (
         <div>
             <section id="appointment" className="appointment">
@@ -33,38 +68,106 @@ function Appoiment(props) {
                             blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
                             Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                     </div>
-                    <form action method="post" role="form" className="php-email-form">
+                    <form action method="post" role="form" className="php-email-form" onSubmit={handleSubmit} >
                         <div className="row">
                             <div className="col-md-4 form-group">
-                                <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <input type="text"
+                                    name="name"
+                                    className="form-control"
+                                    id="name"
+                                    placeholder="Your Name"
+                                    data-rule="minlen:4"
+                                    data-msg="Please enter at least 4 chars"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.name}
+
+                                />
+                                <span style={{ color: 'red' }} className='error'>{errors.name && touched.name ? errors.name : null}</span>
                                 <div className="validate" />
                             </div>
                             <div className="col-md-4 form-group mt-3 mt-md-0">
-                                <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                <input type="email"
+                                    className="form-control"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Your Email"
+                                    data-rule="email"
+                                    data-msg="Please enter a valid email"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email}
+
+                                />
+                                <span style={{ color: 'red' }} className='error'>{errors.email && touched.email ? errors.email : null}</span>
                                 <div className="validate" />
                             </div>
                             <div className="col-md-4 form-group mt-3 mt-md-0">
-                                <input type="tel" className="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <input type="tel"
+                                    className="form-control"
+                                    name="phone"
+                                    id="phone"
+                                    placeholder="Your Phone"
+                                    data-rule="minlen:4"
+                                    data-msg="Please enter at least 4 chars"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.phone}
+
+                                />
+                                <span style={{ color: 'red' }} className='error'>{errors.phone && touched.phone ? errors.phone : null}</span>
                                 <div className="validate" />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-4 form-group mt-3">
-                                <input type="datetime" name="date" className="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <input type="date"
+                                    name="date"
+                                    className="form-control datepicker"
+                                    id="date"
+                                    placeholder="Appointment Date"
+                                    data-rule="minlen:4"
+                                    data-msg="Please enter at least 4 chars"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.date}
+                                />
+                                <span style={{ color: 'red' }} className='error'>{errors.date && touched.date ? errors.date : null}</span>
                                 <div className="validate" />
                             </div>
                             <div className="col-md-4 form-group mt-3">
-                                <select name="department" id="department" className="form-select">
+                                <select
+                                    name="department"
+                                    id="department"
+                                    className="form-select"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.department}
+                                >
+
                                     <option value>Select Department</option>
                                     <option value="Department 1">Department 1</option>
                                     <option value="Department 2">Department 2</option>
                                     <option value="Department 3">Department 3</option>
                                 </select>
+                                <span style={{ color: 'red' }} className='error'>{errors.department && touched.department ? errors.department : null}</span>
                                 <div className="validate" />
+
                             </div>
                         </div>
                         <div className="form-group mt-3">
-                            <textarea className="form-control" name="message" rows={5} placeholder="Message (Optional)" defaultValue={""} />
+                            <textarea
+                                className="form-control"
+                                name="message"
+                                rows={5}
+                                placeholder="Message (Optional)"
+                                defaultValue={""}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.message}
+
+                            />
+                            <span style={{ color: 'red' }} className='error'>{errors.message && touched.message ? errors.message : null}</span>
                             <div className="validate" />
                         </div>
                         <div className="mb-3">
@@ -72,7 +175,7 @@ function Appoiment(props) {
                             <div className="error-message" />
                             <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                         </div>
-                        <div className="text-center"><TomatoButton >Make an Appointment</TomatoButton></div>
+                        <div className="text-center"> <Button type="submit">Make anAppointment</Button></div>
                     </form>
                 </div>
             </section>
