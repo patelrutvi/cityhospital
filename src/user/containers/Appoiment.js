@@ -21,6 +21,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 
 function Appoiment(props) {
+    const [filterdata, setfilterdata] = useState([])
     const [value, setValue] = React.useState(0);
     const [update, setupdate] = useState(false)
     const appoimentval = useSelector(state => state.appoiment)
@@ -38,6 +39,23 @@ function Appoiment(props) {
     const handledelete = (id) => {
         console.log(id);
         dispatch(deleteappoinment(id))
+    }
+
+    const handlechange = (val) => {
+        console.log(val, "val");
+        // let medicine = JSON.parse(localStorage.getItem('medicine'));
+        let fdata = appoimentval.apt.filter((v) =>
+            v.name.toLowerCase().includes(val.toLowerCase())
+            || v.email.toString().includes(val)
+            || v.phone.toString().includes(val)
+            || v.date.toString().includes(val)
+            || v.department.toLowerCase().includes(val.toLowerCase())
+            || v.message.toLowerCase().includes(val.toLowerCase())
+        )
+
+        console.log(fdata);
+        setfilterdata(fdata)
+
     }
 
 
@@ -107,7 +125,7 @@ function Appoiment(props) {
         setupdate(true)
         setValue(0)
         setValues(values)
-        
+
     }
 
     const columns = [
@@ -288,19 +306,36 @@ function Appoiment(props) {
 
                         value === 1 &&
 
-                        <div style={{ height: 300, width: '100%' }}>
-                            <DataGrid
-                                rows={appoimentval.apt}
-                                columns={columns}
-                                initialState={{
-                                    pagination: {
-                                        paginationModel: { page: 0, pageSize: 5 },
-                                    },
-                                }}
-                                pageSizeOptions={[5, 10]}
-                                checkboxSelection
-                            />
-                        </div>
+                        
+                        <>
+                            <div class="input-group" style={{ marginLeft: '20px' }}>
+                                <div class="form-outline" style={{ width: '90%', margin: '30px', marginRight: '0px' }}>
+                                    <input id="search-input"
+                                        type="search"
+                                        class="form-control"
+                                        onChange={(e) => handlechange(e.target.value)} />
+
+                                </div>
+                                <button id="search-button" type="button" class="btn btn-primary" style={{ margin: '30px 0px' }}>
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+{}
+                          
+                            <div style={{ height: 300, width: '100%' }}>
+                                <DataGrid
+                                    rows={appoimentval.apt}
+                                    columns={columns}
+                                    initialState={{
+                                        pagination: {
+                                            paginationModel: { page: 0, pageSize: 5 },
+                                        },
+                                    }}
+                                    pageSizeOptions={[5, 10]}
+                                    checkboxSelection
+                                />
+                            </div>
+                        </>
                     }
 
                 </div>
