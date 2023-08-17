@@ -22,7 +22,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 function Appoiment(props) {
     const [value, setValue] = React.useState(0);
-    const [update,setupdate] = useState(false)
+    const [update, setupdate] = useState(false)
     const appoimentval = useSelector(state => state.appoiment)
     console.log(appoimentval, "appoimentval");
 
@@ -39,12 +39,7 @@ function Appoiment(props) {
         console.log(id);
         dispatch(deleteappoinment(id))
     }
-    const handleEdit = (values) => {
-        console.log(values);
-        setValue(0)
-        setvalues(values)
-        dispatch(updateappoinment(values))
-    }
+
 
     let appoimentSchema = Yup.object({
         name: Yup.string().required('Please enter name').matches(/^[a-z]+$/, 'Please enter valid name'),
@@ -91,16 +86,29 @@ function Appoiment(props) {
             message: ''
         },
         validationSchema: appoimentSchema,
-        onSubmit: (values,action) => {
+        onSubmit: (values, action) => {
             console.log(values);
-            dispatch(addappoinment(values))
+            if (update) {
+                dispatch(updateappoinment(values))
+            } else {
+                dispatch(addappoinment(values))
+            }
+
+            setupdate(false)
             action.resetForm()
             setValue(1)
 
         },
     })
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit,setvalues } = formik
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit, setValues } = formik
+    const handleEdit = (values) => {
+        console.log(values);
+        setupdate(true)
+        setValue(0)
+        setValues(values)
+        
+    }
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
@@ -153,7 +161,7 @@ function Appoiment(props) {
                             blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
                             Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                     </div>
-                    <div style={{marginLeft:'37%',marginBottom:'20px'}}>
+                    <div style={{ marginLeft: '37%', marginBottom: '20px' }}>
                         <Tabs value={value} onChange={handleChangeTab} aria-label="icon tabs example">
                             {/* <Tab icon={<PhoneIcon />} aria-label="phone" /> */}
                             <Tab icon={<AppRegistrationIcon />} label="BOOK APPOINMENT" />
