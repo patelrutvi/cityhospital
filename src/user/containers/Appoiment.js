@@ -130,34 +130,34 @@ function Appoiment(props) {
 
     }
 
-    const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'name', headerName: 'Name', width: 130 },
-        { field: 'email', headerName: 'email', width: 130 },
-        { field: 'phone', headerName: 'phone', width: 130 },
-        { field: 'date', headerName: 'date', width: 130 },
-        { field: 'department', headerName: 'department', width: 130 },
-        { field: 'message', headerName: 'message', width: 130 },
-        {
-            field: 'action',
-            headerName: 'Action',
-            width: 130,
+    // const columns = [
+    //     { field: 'id', headerName: 'ID', width: 70 },
+    //     { field: 'name', headerName: 'Name', width: 130 },
+    //     { field: 'email', headerName: 'email', width: 130 },
+    //     { field: 'phone', headerName: 'phone', width: 130 },
+    //     { field: 'date', headerName: 'date', width: 130 },
+    //     { field: 'department', headerName: 'department', width: 130 },
+    //     { field: 'message', headerName: 'message', width: 130 },
+    //     {
+    //         field: 'action',
+    //         headerName: 'Action',
+    //         width: 130,
 
-            renderCell: (params) => (
-                <>
-                    <DeleteIcon onClick={() => handledelete(params.row.id)}>
+    //         renderCell: (params) => (
+    //             <>
+    //                 <DeleteIcon onClick={() => handledelete(params.row.id)}>
 
-                    </DeleteIcon>
-                    <EditIcon onClick={() => handleEdit(params.row)}>
+    //                 </DeleteIcon>
+    //                 <EditIcon onClick={() => handleEdit(params.row)}>
 
-                    </EditIcon>
-                </>
+    //                 </EditIcon>
+    //             </>
 
-            ),
+    //         ),
 
-        },
+    //     },
 
-    ];
+    // ];
 
 
     return (
@@ -295,7 +295,7 @@ function Appoiment(props) {
                                 <span style={{ color: 'red' }} className='error'>{errors.message && touched.message ? errors.message : null}</span>
                                 <div className="validate" />
                             </div>
-                          
+
 
                             <div className="mb-3">
                                 <div className="loading">Loading</div>
@@ -325,6 +325,7 @@ function Appoiment(props) {
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
+                         
                             { }
 
                             {/* <div style={{ height: 300, width: '100%' }}>
@@ -341,7 +342,71 @@ function Appoiment(props) {
                                 />
                             </div> */}
 
-                            
+
+                            {
+                                appoimentval.apt.map((c, i) => {
+                                    return (
+                                        <>
+                                            <div className="card mb-3">
+                                                <div className="card-body">
+                                                    <div className="d-flex justify-content-between">
+                                                        <div className="d-flex flex-row align-items-center">
+
+                                                          <img src={c.pres} style={{width:"100px",height:"100px"}}/>
+
+                                                        </div>
+                                                        <div className="d-flex flex-row align-items-center">
+
+                                                            <div className="ms-3">
+                                                                <h5>{c.name}</h5>
+                                                                <p className="small mb-0">{c.email}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div className="d-flex flex-row align-items-center">
+                                                            <div className="ms-3">
+
+                                                                <h5 className="fw-normal mb-0">{c.phone}</h5>
+
+                                                            </div>
+                                                            <div style={{ width: 130 }}>
+
+                                                                <h5 className="ms-3">{c.date}</h5>
+
+                                                            </div>
+                                                            <div style={{ width: 130 }}>
+
+                                                                <h5 className="ms-3">{c.description}</h5>
+                                                            </div>
+                                                            <div style={{ width: 180 }}>
+
+                                                                <h5 className="ms-3">{c.message}</h5>
+                                                            </div>
+
+                                                            <div style={{ width: 130 }}>
+
+                                                                <button type="button" class="btn btn-primary btn-lg" onClick={() => handledelete(c.id)}>Delete</button>
+
+                                                            </div>
+
+
+                                                            <button type="button" class="btn btn-primary btn-lg" onClick={() => handleEdit(c)}>Edit</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </>
+
+                                    )
+                                })
+
+                            }
+
+
                         </>
                     }
 

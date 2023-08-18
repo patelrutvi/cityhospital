@@ -35,21 +35,26 @@ export const addappoinment = createAsyncThunk(
     'appointment/add',
     async (data) => {
         console.log(data, "appoiment slice");
+
         try {
             const storageRef = ref(storage, 'prescription/' + data.pres.name);
-            uploadBytes(storageRef, data.pres).then((snapshot) => {
+            let idata = { ...data }
+            await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
                 console.log('Uploaded a blob or file!');
-                getDownloadURL(snapshot.ref)
+                await getDownloadURL(snapshot.ref)
                     .then(async (url) => {
                         console.log(url);
-                        const docRef = await addDoc(collection(db, "appoinment"), { ...data, pres: url });
-                        return {
+                        idata = { ...data, pres: url }
+                        const docRef = await addDoc(collection(db, "appoinment"), idata);
+                        idata = {
                             id: docRef.id,
                             ...data,
                             pres: url
                         }
                     });
             });
+            return idata
+            // console.log(idata);
 
             // const docRef = await addDoc(collection(db, "appoinment"), data);
             // console.log("Document written with ID: ", docRef.id);
