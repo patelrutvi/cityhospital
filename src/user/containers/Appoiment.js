@@ -91,6 +91,7 @@ function Appoiment(props) {
                     }
                 }
             ),
+        pres: Yup.mixed().required()
 
     })
 
@@ -101,7 +102,8 @@ function Appoiment(props) {
             phone: '',
             date: '',
             department: '',
-            message: ''
+            message: '',
+            pres: ''
         },
         validationSchema: appoimentSchema,
         onSubmit: (values, action) => {
@@ -119,7 +121,7 @@ function Appoiment(props) {
         },
     })
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit, setValues } = formik
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit, setValues, setFieldValue } = formik
     const handleEdit = (values) => {
         console.log(values);
         setupdate(true)
@@ -157,17 +159,6 @@ function Appoiment(props) {
 
     ];
 
-    const rows = [
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-        { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-        { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-        { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-        { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-        { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-        { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-        { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    ];
 
     return (
         <div>
@@ -277,6 +268,18 @@ function Appoiment(props) {
 
                                 </div>
                             </div>
+
+                            <div className="col-md-4 form-group mt-3">
+                                <input type="file"
+                                    name="pres"
+                                    className="form-control datepicker"
+                                    onChange={(event) => setFieldValue("pres", event.target.files[0])}
+
+                                />
+                                <span style={{ color: 'red' }} className='error'>{errors.pres && touched.pres ? errors.pres : null}</span>
+                                <div className="validate" />
+                            </div>
+
                             <div className="form-group mt-3">
                                 <textarea
                                     className="form-control"
@@ -292,6 +295,8 @@ function Appoiment(props) {
                                 <span style={{ color: 'red' }} className='error'>{errors.message && touched.message ? errors.message : null}</span>
                                 <div className="validate" />
                             </div>
+                          
+
                             <div className="mb-3">
                                 <div className="loading">Loading</div>
                                 <div className="error-message" />
@@ -306,7 +311,7 @@ function Appoiment(props) {
 
                         value === 1 &&
 
-                        
+
                         <>
                             <div class="input-group" style={{ marginLeft: '20px' }}>
                                 <div class="form-outline" style={{ width: '90%', margin: '30px', marginRight: '0px' }}>
@@ -320,9 +325,9 @@ function Appoiment(props) {
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
-{}
-                          
-                            <div style={{ height: 300, width: '100%' }}>
+                            { }
+
+                            {/* <div style={{ height: 300, width: '100%' }}>
                                 <DataGrid
                                     rows={appoimentval.apt}
                                     columns={columns}
@@ -334,7 +339,9 @@ function Appoiment(props) {
                                     pageSizeOptions={[5, 10]}
                                     checkboxSelection
                                 />
-                            </div>
+                            </div> */}
+
+                            
                         </>
                     }
 
