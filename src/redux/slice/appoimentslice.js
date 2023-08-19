@@ -37,19 +37,21 @@ export const addappoinment = createAsyncThunk(
         console.log(data, "appoiment slice");
 
         try {
-            const storageRef = ref(storage, 'prescription/' + data.pres.name[0]);
+            const rNo = Math.floor(Math.random() * 100000)
+            const storageRef = ref(storage, 'prescription/' + rNo + "_" + data.pres.name);
             let idata = { ...data }
             await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
                 console.log('Uploaded a blob or file!');
                 await getDownloadURL(snapshot.ref)
                     .then(async (url) => {
                         console.log(url);
-                        idata = { ...data, pres: url }
+                        idata = { ...data, pres: url, "pres_name": rNo + "_" + data.pres.name }
                         const docRef = await addDoc(collection(db, "appoinment"), idata);
                         idata = {
                             id: docRef.id,
                             ...data,
-                            pres: url
+                            pres: url,
+                            "pres_name": rNo + "_" + data.pres.name
                         }
                     });
             });
@@ -70,17 +72,17 @@ export const addappoinment = createAsyncThunk(
 
 export const deleteappoinment = createAsyncThunk(
     'appointment/delete',
-    async (id, data) => {
+    async (data) => {
 
-        console.log(id, 'prescription/' + data.pres.name[0], "appoiment slice id");
+        console.log(data.id, "appoiment slice id");
         try {
-            const desertRef = ref(storage, 'prescription/' + data.pres.name[0]);
-            deleteObject(desertRef).then(async() => {
+            const desertRef = ref(storage, 'prescription/' + data.pres_name);
+            deleteObject(desertRef).then(async () => {
                 // File deleted successfully
-                await deleteDoc(doc(db, "appoinment", id));
+                await deleteDoc(doc(db, "appoinment", data.id));
             })
-            
-            return id
+
+            return data.id
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -90,14 +92,54 @@ export const updateappoinment = createAsyncThunk(
     'appointment/update',
     async (data) => {
         console.log(data, "appoiment slice up-data");
+        let idata = { ...data }
         try {
-            const aptRef = doc(db, "appoinment", data.id);
+            if (typeof data.pres === "string") {
+                console.log("image no change");
+                const aptRef = doc(db, "appoinment", data.id);
 
-            await updateDoc(aptRef, data);
-            return data
+                await updateDoc(aptRef, data);
+                return data
+            } else {
+                console.log("image  change");
+
+                // ..............
+                const desertRef = ref(storage, 'prescription/' + data.pres_name);
+                console.log("delete  old img");
+                await deleteObject(desertRef).then(async () => {
+                    // File deleted successfully
+                    await deleteDoc(doc(db, "appoinment",data.id));
+                })
+                // .....................
+                console.log("update img");
+                const rNo = Math.floor(Math.random() * 100000)
+                const storageRef = ref(storage, 'prescription/' + rNo + "_" + data.pres.name);
+
+                await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
+                    console.log('Uploaded new img a blob or file!');
+                    await getDownloadURL(snapshot.ref)
+                        .then(async (url) => {
+                            console.log(url);
+                            idata = { ...data, pres: url, "pres_name": rNo + "_" + data.pres.name }
+                            const aptRef = doc(db, "appoinment", data.id);
+                            let docRef = await updateDoc(aptRef, data);
+                            idata = {
+                                id: docRef.id,
+                                ...data,
+                                pres: url,
+                                "pres_name": rNo + "_" + data.pres.name
+                            }
+                        });
+                });
+
+            }
+
+
+
         } catch (e) {
             console.error("Error adding document: ", e);
         }
+        return idata
     }
 )
 

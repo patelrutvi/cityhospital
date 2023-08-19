@@ -10,14 +10,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import ListIcon from '@mui/icons-material/List';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-import PhoneIcon from '@mui/icons-material/Phone';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import PersonPinIcon from '@mui/icons-material/PersonPin';
-
-// ....grid table....
-import { DataGrid } from '@mui/x-data-grid';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 
 
 function Appoiment(props) {
@@ -36,9 +28,9 @@ function Appoiment(props) {
     useEffect(() => {
         dispatch(getappoinment())
     }, [])
-    const handledelete = (id) => {
-        console.log(id);
-        dispatch(deleteappoinment(id))
+    const handledelete = (data) => {
+        // console.log(id);
+        dispatch(deleteappoinment(data))
     }
 
     const handlechange = (val) => {
@@ -129,36 +121,6 @@ function Appoiment(props) {
         setValues(values)
 
     }
-
-    // const columns = [
-    //     { field: 'id', headerName: 'ID', width: 70 },
-    //     { field: 'name', headerName: 'Name', width: 130 },
-    //     { field: 'email', headerName: 'email', width: 130 },
-    //     { field: 'phone', headerName: 'phone', width: 130 },
-    //     { field: 'date', headerName: 'date', width: 130 },
-    //     { field: 'department', headerName: 'department', width: 130 },
-    //     { field: 'message', headerName: 'message', width: 130 },
-    //     {
-    //         field: 'action',
-    //         headerName: 'Action',
-    //         width: 130,
-
-    //         renderCell: (params) => (
-    //             <>
-    //                 <DeleteIcon onClick={() => handledelete(params.row.id)}>
-
-    //                 </DeleteIcon>
-    //                 <EditIcon onClick={() => handleEdit(params.row)}>
-
-    //                 </EditIcon>
-    //             </>
-
-    //         ),
-
-    //     },
-
-    // ];
-
 
     return (
         <div>
@@ -267,15 +229,20 @@ function Appoiment(props) {
                                     <div className="validate" />
 
                                 </div>
+                                
                             </div>
 
-                            <div className="col-md-4 form-group mt-3">
+                            <div className="col-md-4 form-group mt-3" style={{ display: 'flex' }}>
                                 <input type="file"
                                     name="pres"
-                                    className="form-control datepicker"
+                                    className="form-control"
                                     onChange={(event) => setFieldValue("pres", event.target.files[0])}
 
                                 />
+                                {
+                                    values.pres === '' ? '' : <img src={typeof values.pres === 'string' ? values.pres : URL.createObjectURL(values.pres)} style={{ width: '40px', height: '40px', marginLeft: '10px' }} />
+                                }
+
                                 <span style={{ color: 'red' }} className='error'>{errors.pres && touched.pres ? errors.pres : null}</span>
                                 <div className="validate" />
                             </div>
@@ -325,22 +292,6 @@ function Appoiment(props) {
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
-                         
-                            { }
-
-                            {/* <div style={{ height: 300, width: '100%' }}>
-                                <DataGrid
-                                    rows={appoimentval.apt}
-                                    columns={columns}
-                                    initialState={{
-                                        pagination: {
-                                            paginationModel: { page: 0, pageSize: 5 },
-                                        },
-                                    }}
-                                    pageSizeOptions={[5, 10]}
-                                    checkboxSelection
-                                />
-                            </div> */}
 
 
                             {
@@ -352,7 +303,7 @@ function Appoiment(props) {
                                                     <div className="d-flex justify-content-between">
                                                         <div className="d-flex flex-row align-items-center">
 
-                                                          <img src={c.pres} style={{width:"100px",height:"100px"}}/>
+                                                            <img src={c.pres} style={{ width: "100px", height: "100px" }} />
 
                                                         </div>
                                                         <div className="d-flex flex-row align-items-center">
@@ -385,7 +336,7 @@ function Appoiment(props) {
 
                                                             <div style={{ width: 130 }}>
 
-                                                                <button type="button" class="btn btn-primary btn-lg" onClick={() => handledelete(c.id)}>Delete</button>
+                                                                <button type="button" class="btn btn-primary btn-lg" onClick={() => handledelete(c)}>Delete</button>
 
                                                             </div>
 
