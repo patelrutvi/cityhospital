@@ -6,6 +6,8 @@ import { addDepartdata, deleteDepartdata, getDepartmentdataa, updatedepartdata }
 import { IconButton } from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditNoteIcon from "@mui/icons-material/EditNote";
+import { addDepartments, deleteDepartments, fetchDepartments, updatedepartments } from '../../../redux/slice/departmentslice';
+// import { fetchDepartments } from '../../../redux/slice/departmentslice';
 
 function ADrpartment(props) {
     const [Update, setUpdate] = React.useState(null);
@@ -13,25 +15,30 @@ function ADrpartment(props) {
 
     const depaValue = useSelector(state => state.department)
     console.log(depaValue, "depaValue");
-    let dData = depaValue.depData
+    let dData = depaValue.depart
 
     useEffect(() => {
-        dispatch(getDepartmentdataa())
+        // dispatch(getDepartmentdataa())
+        dispatch(fetchDepartments())
     }, [])
 
     const handleSubmitdata = (data) => {
 
         console.log("data");
         if(Update){
-            dispatch(updatedepartdata(data))
+            // dispatch(updatedepartdata(data))
+            dispatch(updatedepartments(data))
         }else{
-            dispatch(addDepartdata(data))
+            // dispatch(addDepartdata(data))
+            dispatch(addDepartments(data))
+
         }
         setUpdate(null)
     }
 
     const handleDelete = (id) => {
-        dispatch(deleteDepartdata(id))
+        // dispatch(deleteDepartdata(id))
+        dispatch(deleteDepartments(id))
     }
 
     const handleUpdate = (data) => {

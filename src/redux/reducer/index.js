@@ -5,11 +5,12 @@ import { medicineReducer } from "./medicine.reducer"
 import { addtoCartreducer } from "./addtocart.reducer"
 import { myfavreducer } from "./myfav.reducer"
 // import counterReduce from "../../slice/counterslice"
-import { departmentReducer } from "./department.reducer"
+
 import alertReducer from "../slice/alertslice"
 import { authReducer } from "./auth.reducer"
 import appoimentReducer from "../slice/appoimentslice"
 import counterfacReducer from "../slice/counterfacslice"
+import departmentReducer from "../slice/departmentslice"
 
 
 export const rootReducer = combineReducers({
