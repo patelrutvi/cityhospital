@@ -82,10 +82,11 @@ export const deleteappoinment = createAsyncThunk(
                 await deleteDoc(doc(db, "appoinment", data.id));
             })
 
-            return data.id
+
         } catch (e) {
             console.error("Error adding document: ", e);
         }
+        return data.id
     }
 )
 export const updateappoinment = createAsyncThunk(
@@ -101,40 +102,36 @@ export const updateappoinment = createAsyncThunk(
                 return data
             } else {
                 console.log("image  change");
+                const desertRef = ref(storage, 'prescription/' + data.pres_name);
+                console.log("delete  old img");
+                await deleteObject(desertRef).then(async () => {
+                    // File deleted successfully
+                    await deleteDoc(doc(db, "appoinment", data.id));
+                })
 
-                // // ..............
-                // const desertRef = ref(storage, 'prescription/' + data.pres_name);
-                // console.log("delete  old img");
-                // await deleteObject(desertRef).then(async () => {
-                //     // File deleted successfully
-                //     await deleteDoc(doc(db, "appoinment",data.id));
-                // })
-                // // .....................
-                // console.log("update img");
-                // const rNo = Math.floor(Math.random() * 100000)
-                // const storageRef = ref(storage, 'prescription/' + rNo + "_" + data.pres.name);
+                // .....................
+                console.log("update img");
+                const rNo = Math.floor(Math.random() * 100000)
+                const storageRef = ref(storage, 'prescription/' + rNo + "_" + data.pres.name);
 
-                // await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
-                //     console.log('Uploaded new img a blob or file!');
-                //     await getDownloadURL(snapshot.ref)
-                //         .then(async (url) => {
-                //             console.log(url);
-                //             idata = { ...data, pres: url, "pres_name": rNo + "_" + data.pres.name }
-                //             const aptRef = doc(db, "appoinment", data.id);
-                //             let docRef = await updateDoc(aptRef, data);
-                //             idata = {
-                //                 id: docRef.id,
-                //                 ...data,
-                //                 pres: url,
-                //                 "pres_name": rNo + "_" + data.pres.name
-                //             }
-                //         });
-                // });
+                await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
+                    console.log('Uploaded new img a blob or file!');
+                    await getDownloadURL(snapshot.ref)
+                        .then(async (url) => {
+                            console.log(url);
+                            idata = { ...data, pres: url, "pres_name": rNo + "_" + data.pres.name }
+                            const aptRef = doc(db, "appoinment", data.id);
+                            let docRef = await updateDoc(aptRef, data);
+                            idata = {
+                                id: docRef.id,
+                                ...data,
+                                pres: url,
+                                "pres_name": rNo + "_" + data.pres.name
+                            }
+                        });
+                });
 
             }
-
-
-
         } catch (e) {
             console.error("Error adding document: ", e);
         }

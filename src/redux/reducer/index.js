@@ -9,6 +9,7 @@ import { departmentReducer } from "./department.reducer"
 import alertReducer from "../slice/alertslice"
 import { authReducer } from "./auth.reducer"
 import appoimentReducer from "../slice/appoimentslice"
+import counterfacReducer from "../slice/counterfacslice"
 
 
 export const rootReducer = combineReducers({
@@ -21,7 +22,8 @@ export const rootReducer = combineReducers({
     department:departmentReducer,
     alert:alertReducer,
     auth:authReducer,
-    appoiment:appoimentReducer
+    appoiment:appoimentReducer,
+    counterfact:counterfacReducer
 
     
 })
