@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from './UI/Button/Button';
 import Badge from '@mui/material/Badge';
@@ -8,6 +8,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { ThemeContext } from '../../Context/ThameContext';
+
 
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -29,10 +31,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 // );
 
 function Header({ count }) {
+    const theme = useContext(ThemeContext)
 
     const cartData = useSelector((state) => state.cart)
     const favData = useSelector((state) => state.fav)
-    console.log(favData,"favData");
+    console.log(favData, "favData");
 
     console.log(cartData, "crd");
 
@@ -56,7 +59,8 @@ function Header({ count }) {
     return (
 
         <div className="main-header">
-            <div id="topbar" className="d-flex align-items-center fixed-top">
+            <div id="topbar" className={`d-flex align-items-center fixed-top ${theme.theme}`}>
+
                 <div className="container d-flex justify-content-between">
                     <div className="contact-info d-flex align-items-center">
                         <i className="bi bi-envelope" /> <a href="mailto:contact@example.com">cityhospital@example.com</a>
@@ -80,7 +84,7 @@ function Header({ count }) {
                                 </IconButton>
                             </Link> */}
                         </div>
-                        
+
 
                         <div>
                             <Link to="/cart">
@@ -96,10 +100,19 @@ function Header({ count }) {
                         <a href="#" className="facebook"><i className="bi bi-facebook" /></a>
                         <a href="#" className="instagram"><i className="bi bi-instagram" /></a>
                         <a href="#" className="linkedin"><i className="bi bi-linkedin" /></a>
+                        {
+                            theme.theme === 'light' ?
+                                <button className="darkbtn" onClick={() => theme.toogletheme(theme.theme)} >
+                                    Dark Mode
+                                </button> :
+                                <button className="darkbtn" onClick={() => theme.toogletheme(theme.theme)} >
+                                    Light Mode
+                                </button>
+                        }
                     </div>
                 </div>
             </div>
-            <header id="header" className="fixed-top">
+            <header id="header" className={`fixed-top ${theme.theme}`}>
                 <div className="container d-flex align-items-center">
                     <div className="logo">
                         <Link to={'/'}>

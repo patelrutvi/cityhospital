@@ -1,0 +1,2 @@
+
+export const TOGGELE_THEME = 'TOGGELE_THEME'
