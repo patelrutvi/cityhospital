@@ -30,8 +30,9 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 //     <Box component="span" sx={{ ...shapeStyles, ...shapeCircleStyles }} />
 // );
 
-function Header({ count }) {
-    const theme = useContext(ThemeContext)
+function Header(props ) {
+    console.log(theme,"themeee");
+    // const theme = useContext(ThemeContext)
 
     const cartData = useSelector((state) => state.cart)
     const favData = useSelector((state) => state.fav)

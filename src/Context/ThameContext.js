@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
 import { TOGGELE_THEME } from "./ActionType";
-import {  themeReducer } from "./reducer/theme.reducer";
+import {  ThemeReducer } from "./reducer/theme.reducer";
 
 
 export const ThemeContext = createContext()
@@ -10,7 +10,7 @@ const initialState = {
 }
 
 export const ThemeProvider = ({ children }) => {
-    const [state,dispatch] = useReducer(themeReducer,initialState)
+    const [state,dispatch] = useReducer(ThemeReducer,initialState)
     const toogletheme = (theme) => {
         console.log(theme);
         const newTheme = theme === 'light' ? 'dark' : 'light'

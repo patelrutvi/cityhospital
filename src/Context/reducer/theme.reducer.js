@@ -1,7 +1,7 @@
 import { TOGGELE_THEME } from "../ActionType";
 
-export const themeReducer = (state , action) => {
-  console.log(state , action);
+export const ThemeReducer = (state , action) => {
+  console.log(state , action,"ThemeReducer");
     switch (action.type){
         case TOGGELE_THEME :
          return {
