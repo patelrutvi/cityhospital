@@ -117,6 +117,7 @@ function Header({ count }) {
                             <li><Link className="nav-link scrollto " to={'/about'}>About</Link></li>
                             <li><Link className="nav-link scrollto" to={'/contact'}>Contact</Link></li>
                             <li><Link className="nav-link scrollto" to={'/counterfac'}>counterfac</Link></li>
+                            <li><Link className="nav-link scrollto" to={'/usecallback'}>CallBack</Link></li>
                             {/* <li><Link className="nav-link scrollto" to={'/counter'}>Counter</Link></li> */}
 
                         </ul>

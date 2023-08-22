@@ -20,6 +20,7 @@ import MedicineNR from '../user/containers/medicineNTredux/MedicineNR';
 import CartNR from '../user/containers/cartNR/CartNR';
 import Myfav from '../user/containers/myfav/Myfav';
 import CounterFac from '../user/containers/counter/CounterFac';
+import Usecallbackex from '../user/containers/counter/Usecallbackex';
 
 
 
@@ -38,10 +39,15 @@ function UserRoutes(props) {
                 <Route path='/contact' element={<Contact />} />
                 <Route path='/appiment' element={<Appoiment />} />
                 <Route path='/counter' element={<Counter/>} />
-                <Route path='/counterfac' element={<CounterFac/>} />
+              {/* usememo   and usecallback */}
+              <Route path='/counterfac' element={<CounterFac/>} />
+                <Route path='/usecallback' element={<Usecallbackex/>} />
+
+              {/* ................... */}
                 <Route path='/cart' element={<Cart/>} />
                 <Route path='/cartnr' element={<CartNR/>} />
                 <Route path='/myfav' element={<Myfav/>} />
+             
                 {/* neseted routs */}
                 <Route path='/doctor'>
                     <Route path=':id' element={<Doctor />} />
