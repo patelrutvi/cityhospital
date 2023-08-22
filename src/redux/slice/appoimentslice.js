@@ -37,7 +37,7 @@ export const addappoinment = createAsyncThunk(
         console.log(data, "appoiment slice");
 
         try {
-            const rNo = Math.floor(Math.random() * 100000)
+            let rNo = Math.floor(Math.random() * 100000)
             const storageRef = ref(storage, 'prescription/' + rNo + "_" + data.pres.name);
             let idata = { ...data }
             await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
@@ -73,16 +73,13 @@ export const addappoinment = createAsyncThunk(
 export const deleteappoinment = createAsyncThunk(
     'appointment/delete',
     async (data) => {
-
         console.log(data.id, "appoiment slice id");
         try {
-            const desertRef = ref(storage, 'prescription/' + data.pres_name);
-            deleteObject(desertRef).then(async () => {
+            const aptRef = ref(storage, 'prescription/' + data.pres_name);
+            deleteObject(aptRef).then(async () => {
                 // File deleted successfully
                 await deleteDoc(doc(db, "appoinment", data.id));
             })
-
-
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -93,49 +90,47 @@ export const updateappoinment = createAsyncThunk(
     'appointment/update',
     async (data) => {
         console.log(data, "appoiment slice up-data");
-        let idata = { ...data }
         try {
             if (typeof data.pres === "string") {
                 console.log("image no change");
-                const aptRef = doc(db, "appoinment", data);
+                const aptRef = doc(db, "appoinment", data.id);
                 await updateDoc(aptRef, data);
                 return data
             } else {
+                let idata = { ...data }
                 console.log("image  change");
-                const desertRef = ref(storage, 'prescription/' + data.pres_name);
-                console.log("delete  old img");
-                await deleteObject(desertRef).then(async () => {
-                    // File deleted successfully
-                    await deleteDoc(doc(db, "appoinment", data.id));
+                const aptRef = ref(storage, 'prescription/' + data.pres_name);
+                await deleteObject(aptRef).then(async () => {
+                    // File deleted successfull
+                    console.log("update img");
+                    let rNo = Math.floor(Math.random() * 100000)
+                    const storageRef = ref(storage, 'prescription/' + rNo + "_" + data.pres.name);
+
+                    await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
+                        console.log('Uploaded new img a blob or file!');
+                        await getDownloadURL(snapshot.ref)
+                            .then(async (url) => {
+                                console.log(url);
+                                idata = { ...data, pres: url, "pres_name": rNo + "_" + data.pres.name }
+                                const aptRef = doc(db, "appoinment", data.id);
+                                await updateDoc(aptRef, idata);
+                                idata = {
+                                    ...data,
+                                    pres: url,
+                                    "pres_name": rNo + "_" + data.pres.name
+                                }
+                            });
+                    });
                 })
-
+                return idata
                 // .....................
-                console.log("update img");
-                const rNo = Math.floor(Math.random() * 100000)
-                const storageRef = ref(storage, 'prescription/' + rNo + "_" + data.pres.name);
 
-                await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
-                    console.log('Uploaded new img a blob or file!');
-                    await getDownloadURL(snapshot.ref)
-                        .then(async (url) => {
-                            console.log(url);
-                            idata = { ...data, pres: url, "pres_name": rNo + "_" + data.pres.name }
-                            const aptRef = doc(db, "appoinment", data.id);
-                            let docRef = await updateDoc(aptRef, data);
-                            idata = {
-                                id: docRef.id,
-                                ...data,
-                                pres: url,
-                                "pres_name": rNo + "_" + data.pres.name
-                            }
-                        });
-                });
 
             }
         } catch (e) {
             console.error("Error adding document: ", e);
         }
-        return idata
+
 
     }
 )
