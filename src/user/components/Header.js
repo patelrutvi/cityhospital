@@ -31,8 +31,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 // );
 
 function Header(props ) {
-    console.log(theme,"themeee");
-    // const theme = useContext(ThemeContext)
+    // console.log(theme,"themeee");
+    const theme = useContext(ThemeContext)
 
     const cartData = useSelector((state) => state.cart)
     const favData = useSelector((state) => state.fav)
