@@ -21,6 +21,7 @@ import CartNR from '../user/containers/cartNR/CartNR';
 import Myfav from '../user/containers/myfav/Myfav';
 import CounterFac from '../user/containers/counter/CounterFac';
 import UseCallback from '../user/containers/counter/UseCallback';
+import Medicinedata from '../user/containers/medicines/Medicinedata';
 
 
 
@@ -59,6 +60,8 @@ function UserRoutes(props) {
                 <Route element={<Protected />}>
                     <Route path='/medicines' element={<Usermedicine />} />
                 </Route>
+
+                <Route path='/medicinedata' element={<Medicinedata />} />
 
                 {/* <Route path='/medicines' element={<Protected Component={Usermedicine} />} /> */}
 

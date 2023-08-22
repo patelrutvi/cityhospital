@@ -1,29 +1,30 @@
 import React from 'react';
-import { Basebutton, outlinedButton, primaryButton, secondaryButton } from './Button.style';
+import {LinearButton, OutlinedButton, PrimaryButton, SecendoryButton, StyledButton} from './Button.style';
 
-function Button({ children, type ,btnDisable=false}) {
-    console.log(type);
-    const coustumButton = () => {
-        switch (type) {
-            case 'primary':
-                return primaryButton;
-            case 'secondary':
-                return secondaryButton;
-            case 'outlined' :
-                return outlinedButton;
+function Button({children , type , btnDisabled=false}) {
+ 
+  const customButtontype = () => {
+      switch(type){
+          case 'primary' :
+            return PrimaryButton ;
+          case 'secendory':
+            return SecendoryButton ;
+          case 'outlined':
+            return OutlinedButton ; 
+          case 'linear':
+            return LinearButton ;
             default :
-            return primaryButton;
-            
-        }
-    }
+            return PrimaryButton;
+      }
+  }
 
-    const CostomButtoncall = coustumButton()
+  const CustomButton = customButtontype()
+  return (
+        <CustomButton disabled={btnDisabled}>
+          {children}
+        </CustomButton>
 
-    return (
-        <CostomButtoncall disabled={btnDisable} >
-            {children}
-        </CostomButtoncall>
-    );
+  );
 }
 
 export default Button;

@@ -9,10 +9,11 @@ import {   getmedicinedata } from '../../../redux/action/medicine.action';
 import { addFavIcon } from '../../../redux/action/myfav.action';
 import styled from '@emotion/styled';
 import { colors } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 
 function Usermedicine(props) {
-
+    const navigate = useNavigate();
     const [data, setdata] = useState([])
     const [filterdata, setfilterdata] = useState([])
     const dispatch = useDispatch()
@@ -48,6 +49,8 @@ function Usermedicine(props) {
     const handleCart = (id) => {
         dispatch(addtoCart(id))
         console.log("handleCart",id);
+        navigate("/medicinedata" )
+
     }
     const handleicon = (id) => {
         console.log("icon",id);
