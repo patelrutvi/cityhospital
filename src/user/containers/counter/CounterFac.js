@@ -40,14 +40,15 @@ function CounterFac(props) {
     return (
         <>
             {/* ........one page manege counter state */}
-            <div style={{ marginLeft: '40%' }}>
+            <h3 style={{ marginLeft: '40%',marginTop: '40px'}}>useMemo Example</h3>
+            <div style={{ marginLeft: '40%',marginTop: '20px'  }}>
                 <button onClick={() => { setcount(count + 1) }}  >+</button>
                 <span>{count}</span>
                 <button onClick={() => { setcount(count - 1) }} >-</button>
 
             </div>
             {/* ..............using slice mange counter */}
-            <div style={{ marginLeft: '40%' }}>
+            <div style={{ marginLeft: '40%',marginTop: '20px'  }}>
                 <button onClick={() => handleinc()}  >+</button>
                 <span>{counterval.count}</span>
                 <button onClick={() => handledec()} >-</button>

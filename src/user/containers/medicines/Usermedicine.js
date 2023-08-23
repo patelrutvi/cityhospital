@@ -49,7 +49,10 @@ function Usermedicine(props) {
     const handleCart = (id) => {
         dispatch(addtoCart(id))
         console.log("handleCart",id);
-        navigate("/medicinedata" )
+
+
+        
+        navigate("/medicinedata" + id)
 
     }
     const handleicon = (id) => {

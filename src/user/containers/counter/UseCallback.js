@@ -17,7 +17,7 @@ function UseCallback(props) {
     return (
 
         <div style={themestyle}>
-            <div >
+            <div style={{margin:'50px'}} >
                 <h3>Usecallback Example</h3>
                 <button onClick={() => settheme(!theme)}>Theme</button>
                 <input type='text' onChange={(event) => setnumber(parseInt(event.target.value))} />

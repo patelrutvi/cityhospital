@@ -22,16 +22,17 @@ import Myfav from '../user/containers/myfav/Myfav';
 import CounterFac from '../user/containers/counter/CounterFac';
 import UseCallback from '../user/containers/counter/UseCallback';
 import Medicinedata from '../user/containers/medicines/Medicinedata';
+import UseRefExample from '../user/containers/counter/UseRefExample';
 
 
 
 
 function UserRoutes(props) {
-    const [cartcount , setcartcount] = useState(0)
+    const [cartcount, setcartcount] = useState(0)
     return (
         <>
 
-            <Header  count={cartcount}/>
+            <Header count={cartcount} />
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/department' element={<Department />} />
@@ -39,14 +40,15 @@ function UserRoutes(props) {
                 <Route path='/about' element={<About />} />
                 <Route path='/contact' element={<Contact />} />
                 <Route path='/appiment' element={<Appoiment />} />
-                <Route path='/counter' element={<Counter/>} />
-             {/* .....usememo and usecallback */}
-             <Route path='/counterfac' element={<CounterFac/>} />
-                <Route path='/usecallback' element={<UseCallback/>} />
-             {/* ....................... */}
-                <Route path='/cart' element={<Cart/>} />
-                <Route path='/cartnr' element={<CartNR/>} />
-                <Route path='/myfav' element={<Myfav/>} />
+                <Route path='/counter' element={<Counter />} />
+                {/* .....usememo and usecallback */}
+                <Route path='/counterfac' element={<CounterFac />} />
+                <Route path='/usecallback' element={<UseCallback />} />
+                <Route path='/useref' element={<UseRefExample />} />
+                {/* ....................... */}
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/cartnr' element={<CartNR />} />
+                <Route path='/myfav' element={<Myfav />} />
                 {/* neseted routs */}
                 <Route path='/doctor'>
                     <Route path=':id' element={<Doctor />} />
@@ -55,7 +57,7 @@ function UserRoutes(props) {
 
                 <Route path='*' element={<NotFound />} />
                 <Route path='/auth' element={<Auth />} />
-                <Route path='/medicinenr' element={<MedicineNR onupdatecount={setcartcount}/>} />
+                <Route path='/medicinenr' element={<MedicineNR onupdatecount={setcartcount} />} />
 
                 <Route element={<Protected />}>
                     <Route path='/medicines' element={<Usermedicine />} />
