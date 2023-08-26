@@ -1,9 +1,13 @@
 import { Button } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrQty, deleteCArtdata, incQty } from '../../../redux/action/addtocart.action';
+import { ThemeContext } from '../../../Context/ThameContext';
 
 function Cart(props) {
+
+    const theme = useContext(ThemeContext)
+
     const medicinedata = useSelector((state) => state.medicine)
     const cartdata = useSelector((state) => state.cart)
     const dispatch = useDispatch()
@@ -33,7 +37,7 @@ function Cart(props) {
 
     return (
 
-        <section id="cart" >
+        <section id="cart" className={`cart ${theme.theme}`}>
             <div className='container'>
                 <div className="section-title">
                     <h2>Cart</h2>
@@ -46,7 +50,7 @@ function Cart(props) {
 
                             return (
                                 <>
-                                    <div className="card mb-3">
+                                    <div  className={`card mb-3 ${theme.theme}`}>
                                         <div className="card-body">
                                             <div className="d-flex justify-content-between">
                                                 <div className="d-flex flex-row align-items-center">
@@ -87,7 +91,7 @@ function Cart(props) {
 
                     }
 
-                    <div className="card mb-3">
+                    <div className={`card mb-3 ${theme.theme}`}>
                         <div className="card-body">
                             <div className="d-flex justify-content-between">
                                 <div className="d-flex flex-row align-items-center">

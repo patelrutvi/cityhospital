@@ -31,6 +31,7 @@ export const CART_DELETE_DATA = "CART_DELETE_DATA"
 
 // ........................Icon fav heart.............
 export const CART_ICON_FAV = "CART_ICON_FAV"
+export const DELETE_ICON_FAV_DATA = "DELETE_ICON_FAV_DATA "
 
 
 // '''''''''''''''Department data admin side........................

@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useDispatch } from 'react-redux';
+import Medicinedata from '../../containers/medicines/Medicinedata';
+import { Link } from 'react-router-dom';
+import { ThemeContext } from '../../../Context/ThameContext';
 
-function CustomCard({ values, btnval, onclick1,onclick2 }) {
+function CustomCard({ values, btnval, onclick1, onclick2 }) {
+    const theme = useContext(ThemeContext)
+
 
     return (
 
-        <div>
-            <Card body outline color="success"
+        <div  >
+            <Card className={`icon ${theme.theme}`} body outline color="success"
                 style={{
 
                     // backgroundColor: '#333',
@@ -23,26 +28,29 @@ function CustomCard({ values, btnval, onclick1,onclick2 }) {
                         src="https://picsum.photos/300/200"
                     /> : null
                 }
-                <FavoriteBorderIcon style={{width:'400px'}} onClick={() => onclick2(values.id)}  />
-                <CardBody>
+                <FavoriteBorderIcon style={{ width: '400px' }} onClick={() => onclick2(values.id)} />
+                <CardBody className={`themecustom ${theme.theme}`}>
+                  
+                        <Link to={'/medicinedata/' + values.id }style={{ color: 'gray' }}>
 
-                    <CardTitle tag="h5">
-                        <p>Medicine Name: <b>{values.name}</b> </p>
-                    </CardTitle>
-                    <CardSubtitle
-                        className="mb-2 text-muted"
-                        tag="h6"
-                    >
-                        <p>price: <b>{values.price}</b> </p>
+                        <CardTitle tag="h5">
+                            <p>Medicine Name: <b>{values.name}</b> </p>
+                        </CardTitle>
+                        <CardSubtitle
+                            className="mb-2 text-muted"
+                            tag="h6"
+                        >
+                            <p>price: <b>{values.price}</b> </p>
 
-                    </CardSubtitle>
-                    <CardText>
-                        <p>Expiry: <b>{values.expiry}</b> </p>
+                        </CardSubtitle>
+                        <CardText>
+                            <p>Expiry: <b>{values.expiry}</b> </p>
 
-                    </CardText>
-                    <CardText style={{ height: '60px', overflow: 'auto' }}>
-                        {values.desc}
-                    </CardText>
+                        </CardText>
+                        <CardText style={{ height: '60px', overflow: 'auto' }}>
+                            {values.desc}
+                        </CardText>
+                    </Link>
                     {
                         btnval ? <Button
                             style={{ backgroundColor: 'green' }}

@@ -49,7 +49,7 @@ function UserRoutes(props) {
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/cartnr' element={<CartNR />} />
                 <Route path='/myfav' element={<Myfav />} />
-                {/* neseted routs */}
+                {/* neseted routes */}
                 <Route path='/doctor'>
                     <Route path=':id' element={<Doctor />} />
                     <Route path='visiting_doctors' element={<Visitingdoctors />} />
@@ -61,9 +61,8 @@ function UserRoutes(props) {
 
                 <Route element={<Protected />}>
                     <Route path='/medicines' element={<Usermedicine />} />
+                    <Route path='/medicinedata/:id' element={<Medicinedata />} />
                 </Route>
-
-                <Route path='/medicinedata' element={<Medicinedata />} />
 
                 {/* <Route path='/medicines' element={<Protected Component={Usermedicine} />} /> */}
 

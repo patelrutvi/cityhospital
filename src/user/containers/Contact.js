@@ -1,11 +1,14 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import * as Yup from 'yup'
 import Button from '../components/UI/Button/Button';
+import { ThemeContext } from '../../Context/ThameContext';
 
 
 
 function Contect1(props) {
+    const theme = useContext(ThemeContext)
+
     let contact1Schema = Yup.object({
         name: Yup.string().required('Please enter name').matches(/^[a-z]+$/, 'Please enter valid name'),
         email: Yup.string().email('please enter valid email').required('Please enter email'),
@@ -41,7 +44,7 @@ function Contect1(props) {
     return (
         <div>
             <main>
-                <section id="contact" className="contact">
+                <section id="contact" className={`contact ${theme.theme}`}>
                     <div className="container">
                         <div className="section-title">
                             <h2>Contact</h2>
@@ -57,7 +60,7 @@ function Contect1(props) {
                     <div className="container">
                         <div className="row mt-5">
                             <div className="col-lg-4">
-                                <div className="info">
+                                <div className={`info ${theme.theme}`} style={{padding:'20px'}}>
                                     <div className="address">
                                         <i className="bi bi-geo-alt" />
                                         <h4>Location:</h4>
@@ -75,20 +78,22 @@ function Contect1(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-8 mt-5 mt-lg-0">
+                            <div    className={`col-lg-8 mt-5 mt-lg-0 ${theme.theme}`} >
                                 <form
                                     action
                                     method="post"
                                     role="form"
-                                    className="php-email-form"
+                                    className={`php-email-form ${theme.theme}`}
+                                    
                                     onSubmit={handleSubmit}
+                                    style={{padding:'20px'}}
                                 >
                                     <div className="row">
                                         <div className="col-md-6 form-group">
                                             <input
                                                 type="text"
                                                 name="name"
-                                                className="form-control"
+                                                className={`form-control ${theme.theme}`}
                                                 id="name"
                                                 placeholder="Your Name"
                                                 onChange={handleChange}
@@ -102,7 +107,7 @@ function Contect1(props) {
                                         <div className="col-md-6 form-group mt-3 mt-md-0">
                                             <input
                                                 type="email"
-                                                className="form-control"
+                                                className={`form-control ${theme.theme}`} 
                                                 name="email"
                                                 id="email"
                                                 placeholder="Your Email"
@@ -116,7 +121,7 @@ function Contect1(props) {
                                     <div className="form-group mt-3">
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className={`form-control ${theme.theme}`}
                                             name="subject"
                                             id="subject"
                                             placeholder="Subject"
@@ -129,7 +134,7 @@ function Contect1(props) {
                                     </div>
                                     <div className="form-group mt-3">
                                         <textarea
-                                            className="form-control"
+                                            className={`form-control ${theme.theme}`}
                                             name="message"
                                             rows={5}
                                             placeholder="Message"

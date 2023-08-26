@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ThemeContext } from '../../Context/ThameContext';
+import { Circle } from '@mui/icons-material';
 
 
 
@@ -18,17 +19,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
         top: 13,
         border: `2px solid ${theme.palette.background.paper}`,
         padding: '0 4px',
-        background: '#ff6337'
+        background: '#FF6337'
 
     },
 }));
 
-// const shapeStyles = { bgcolor: 'primary.main', width: 20, height: 20 };
-// const shapeCircleStyles = { borderRadius: '50%' };
-// const rectangle = <Box component="span" sx={shapeStyles} />;
-// const circle = (
-//     <Box component="span" sx={{ ...shapeStyles, ...shapeCircleStyles }} />
-// );
 
 function Header(props ) {
     // console.log(theme,"themeee");
@@ -52,10 +47,10 @@ function Header(props ) {
     }
 
 
-    // let favcount = 0;
-    // if (favData.myfav) {
-    //     favcount = favData.myfav.reduce((acc, v, i) => acc + v.qyt, 0)
-    // }
+    let favcount = 0;
+    if (favData.myfav) {
+        favcount = favData.myfav.reduce((acc, v, i) => acc + v.qyt, 0)
+    }
 
     return (
 
@@ -69,13 +64,19 @@ function Header(props ) {
                     </div>
 
                     <div className="d-none d-lg-flex social-links align-items-center">
-                        {/* <div>
+                        
+                        <div>
                             <Link to={"myfav"}>
                                 <Badge color="secondary" badgeContent={favcount} >
                                     <FavoriteIcon />
                                 </Badge>
+                               
                             </Link>
-                        </div> */}
+ 
+        
+    
+                         
+                        </div>
                         <div>
                             {/* <Link to="/cartnr">
                                 <IconButton aria-label="cart" >
@@ -127,6 +128,7 @@ function Header(props ) {
                             <li><Link className="nav-link scrollto" to={'/department'}>Departments</Link></li>
                             <li><Link className="nav-link scrollto" to={'/doctors'}>Doctors</Link></li>
                             <li><Link className="nav-link scrollto" to={'/medicines'}>Medicines</Link></li>
+                            {/* <li><Link className="nav-link scrollto" to={'/medicinedata'}>medicineData</Link></li> */}
                             {/* <li><Link className="nav-link scrollto" to={'/medicinenr'}>Medicines1</Link></li> */}
                             <li><Link className="nav-link scrollto " to={'/about'}>About</Link></li>
                             <li><Link className="nav-link scrollto" to={'/contact'}>Contact</Link></li>

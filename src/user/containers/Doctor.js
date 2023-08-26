@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { ThemeContext } from '../../Context/ThameContext';
 
 
 const doctordata = [
@@ -36,6 +37,7 @@ const doctordata = [
 
 function Doctor(props) {
     const { id } = useParams()
+    const theme = useContext(ThemeContext)
 
     // console.log("idd", id);
 
@@ -54,7 +56,7 @@ function Doctor(props) {
 
 
     return (
-        <div className='drpr-data '>
+        <div className={`drpr-data  ${theme.theme}`} style={{padding:'30px'}} >
             {
 
                 <>

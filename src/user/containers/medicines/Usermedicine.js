@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import MedicineList from './MedicineList';
 import { useState } from 'react';
 import { Row } from 'reactstrap';
@@ -10,6 +10,7 @@ import { addFavIcon } from '../../../redux/action/myfav.action';
 import styled from '@emotion/styled';
 import { colors } from '@mui/material';
 import { useNavigate } from 'react-router';
+import { ThemeContext } from '../../../Context/ThameContext';
 
 
 function Usermedicine(props) {
@@ -20,6 +21,8 @@ function Usermedicine(props) {
     const usermedival = useSelector(state => state.medicine)
     console.log("user medicine js", usermedival);
     const mayfavdata= useSelector((state) => state.fav)
+    
+    const theme = useContext(ThemeContext)
 
     useEffect(() => {
 
@@ -50,10 +53,6 @@ function Usermedicine(props) {
         dispatch(addtoCart(id))
         console.log("handleCart",id);
 
-
-        
-        navigate("/medicinedata" + id)
-
     }
     const handleicon = (id) => {
         console.log("icon",id);
@@ -65,6 +64,8 @@ function Usermedicine(props) {
     return (
 
         <>
+           <section id="contact" className={`contact ${theme.theme}`}>
+      <div className="container">
             <div className="section-title">
                 <h2>Medicine</h2>
                 <p>
@@ -75,12 +76,13 @@ function Usermedicine(props) {
                     sit amet massa sed orci vehicula facilisis.
                 </p>
             </div>
+            </div>
 
             <div class="input-group" style={{marginLeft:'90px'}}>
                 <div class="form-outline" style={{ width: '80%', margin: '30px', marginRight: '0px' }}>
                     <input id="search-input"
                         type="search"
-                        class="form-control"
+                        className={`form-control ${theme.theme}`}
                         onChange={(e) => handlechange(e.target.value)} />
 
                 </div>
@@ -99,6 +101,7 @@ function Usermedicine(props) {
                 </div>
 
             </div>
+            </section>
         </>
 
     );

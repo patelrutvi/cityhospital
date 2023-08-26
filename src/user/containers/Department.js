@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Link from '../components/UI/Link/Link';
 import { fetchDepartments } from '../../redux/slice/departmentslice';
 import { useDispatch, useSelector } from 'react-redux';
+import { ThemeContext } from '../../Context/ThameContext';
+import { styled } from 'styled-components';
 
 
 function Department(props) {
+    const theme = useContext(ThemeContext)
 
     const dispatch = useDispatch()
     const departData = useSelector(state => state.department)
@@ -18,7 +21,7 @@ function Department(props) {
     return (
         <div>
             <main>
-                <section id="departments" >
+                <section id="departments " className={`departments ${theme.theme}` }>
                     <div className="container">
                         <div className="section-title">
                             <h2>Departments</h2>
@@ -60,7 +63,7 @@ function Department(props) {
                                                 <div className={i === 0 ? 'tab-pane active show' : 'tab-pane'} id={`tab-${i + 1}`}>
                                                     <div className="row">
                                                         <div className="col-lg-8 details order-2 order-lg-1">
-                                                            <h3>{c.name}</h3>
+                                                            <h3 >{c.name}</h3>
                                                             <p className="fst-italic">
                                                                 {c.desc}
                                                             </p>

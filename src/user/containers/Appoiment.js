@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from '../components/UI/Button/Button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
@@ -10,9 +10,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import ListIcon from '@mui/icons-material/List';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import { ThemeContext } from '../../Context/ThameContext';
 
 
 function Appoiment(props) {
+    const theme = useContext(ThemeContext)
+
     const [filterdata, setfilterdata] = useState([])
     const [value, setValue] = React.useState(0);
     const [update, setupdate] = useState(false)
@@ -20,6 +23,7 @@ function Appoiment(props) {
     console.log(appoimentval, "appoimentval");
 
     const handleChangeTab = (event, newValue) => {
+
         console.log(newValue, "newValue");
         setValue(newValue);
     };
@@ -124,7 +128,7 @@ function Appoiment(props) {
 
     return (
         <div>
-            <section id="appointment" className="appointment">
+            <section id="appointment" className={`appointment ${theme.theme}`}>
                 <div className="container">
                     <div className="section-title">
                         <h2>Make an Appointment</h2>
@@ -143,12 +147,12 @@ function Appoiment(props) {
                         value === 0
                         &&
 
-                        <form action method="post" role="form" className="php-email-form" onSubmit={handleSubmit} >
+                        <form action method="post" role="form" className={`php-email-form ${theme.theme}`} onSubmit={handleSubmit} >
                             <div className="row">
                                 <div className="col-md-4 form-group">
                                     <input type="text"
                                         name="name"
-                                        className="form-control"
+                                        className={`form-control ${theme.theme}`}
                                         id="name"
                                         placeholder="Your Name"
                                         data-rule="minlen:4"
@@ -163,7 +167,7 @@ function Appoiment(props) {
                                 </div>
                                 <div className="col-md-4 form-group mt-3 mt-md-0">
                                     <input type="email"
-                                        className="form-control"
+                                        className={`form-control ${theme.theme}`}
                                         name="email"
                                         id="email"
                                         placeholder="Your Email"
@@ -179,7 +183,7 @@ function Appoiment(props) {
                                 </div>
                                 <div className="col-md-4 form-group mt-3 mt-md-0">
                                     <input type="tel"
-                                        className="form-control"
+                                        className={`form-control ${theme.theme}`}
                                         name="phone"
                                         id="phone"
                                         placeholder="Your Phone"
@@ -198,7 +202,7 @@ function Appoiment(props) {
                                 <div className="col-md-4 form-group mt-3">
                                     <input type="date"
                                         name="date"
-                                        className="form-control datepicker"
+                                        className={`form-control datepicker ${theme.theme}`}
                                         id="date"
                                         placeholder="Appointment Date"
                                         data-rule="minlen:4"
@@ -214,7 +218,8 @@ function Appoiment(props) {
                                     <select
                                         name="department"
                                         id="department"
-                                        className="form-select"
+
+                                        className={`form-select ${theme.theme}`}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.department}
@@ -229,13 +234,13 @@ function Appoiment(props) {
                                     <div className="validate" />
 
                                 </div>
-                                
+
                             </div>
 
-                            <div className="col-md-4 form-group mt-3" style={{ display: 'flex' }}>
+                            <div className='col-md-4 form-group mt-3' style={{ display: 'flex' }}>
                                 <input type="file"
                                     name="pres"
-                                    className="form-control"
+                                    className={`form-control ${theme.theme}`}
                                     onChange={(event) => setFieldValue("pres", event.target.files[0])}
 
                                 />
@@ -249,7 +254,8 @@ function Appoiment(props) {
 
                             <div className="form-group mt-3">
                                 <textarea
-                                    className="form-control"
+
+                                    className={`form-control ${theme.theme}`}
                                     name="message"
                                     rows={5}
                                     placeholder="Message (Optional)"
@@ -284,7 +290,7 @@ function Appoiment(props) {
                                 <div class="form-outline" style={{ width: '90%', margin: '30px', marginRight: '0px' }}>
                                     <input id="search-input"
                                         type="search"
-                                        class="form-control"
+                                        className={`form-control ${theme.theme}`}
                                         onChange={(e) => handlechange(e.target.value)} />
 
                                 </div>
@@ -298,7 +304,7 @@ function Appoiment(props) {
                                 appoimentval.apt.map((c, i) => {
                                     return (
                                         <>
-                                            <div className="card mb-3">
+                                            <div className={`card mb-3 ${theme.theme}`}>
                                                 <div className="card-body">
                                                     <div className="d-flex justify-content-between">
                                                         <div className="d-flex flex-row align-items-center">

@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as Yup from 'yup'
@@ -13,8 +13,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { forgotRequest, loginRequest, signupRequest } from '../../redux/action/auth.action';
 import { SnackbarProvider, enqueueSnackbar, useSnackbar } from 'notistack';
 import { CircularProgress } from '@mui/material';
+import { ThemeContext } from '../../Context/ThameContext';
+
 
 function Auth(props) {
+
+    const theme = useContext(ThemeContext)
 
     const [authdata, setauth] = useState('login')
     const navigate = useNavigate();
@@ -23,8 +27,8 @@ function Auth(props) {
     console.log(auth, "authh");
 
     const handleLogin = (values) => {
-        // localStorage.setItem("login", "true")
-        // navigate("/")
+        localStorage.setItem("login", "true")
+        navigate("/")
         console.log("loginnn");
         dispatch(loginRequest(values))
 
@@ -102,9 +106,9 @@ function Auth(props) {
     const { values, errors, touched, handleSubmit, handleChange, handleBlur } = formik
 
     return (
-        <div className='auth'>
+        <div>
             <>
-                <section id="appointment" className="appointment">
+                <section id="appointment" className={`appointment ${theme.theme}` } style={{padding:'30px'}} >
                     <div className="container">
                         <div className="section-title">
                             {/* .........Heading......... */}
@@ -125,7 +129,7 @@ function Auth(props) {
                         </div>
 
                         {
-                            auth.isloading ? <CircularProgress  />
+                            auth.isloading ? <CircularProgress />
                                 : null
                         }
                         <>
@@ -263,8 +267,8 @@ function Auth(props) {
 
 
 
-            </>
-        </div>
+        </>
+        </div >
     );
 }
 

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // import Link from '../components/UI/Link/Link';
 import { Link } from 'react-router-dom';
 import Span from '../components/UI/span/Span';
+import { ThemeContext } from '../../Context/ThameContext';
 
 
 const doctordata = [
@@ -37,12 +38,12 @@ const doctordata = [
 
 function Doctors(props) {
     const [fdoctordata, setfdoctordata] = useState(doctordata)
-
+    const theme = useContext(ThemeContext)
     localStorage.setItem("drdata", JSON.stringify(fdoctordata))
 
     return (
         <div>
-            <section id="doctors" className="doctors">
+            <section id="doctors" className={`doctors ${theme.theme}`}>
                 <div className="container">
                     <div className="section-title">
                         <h2>Doctors</h2>
