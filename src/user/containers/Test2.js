@@ -1,3 +1,4 @@
+
 import { useFormik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup'
@@ -7,12 +8,12 @@ function Test2(props) {
         name: Yup.string()
             .required('plase enter full name')
             .matches(
-                /^[a-zA-Z ]{2,30}$/, 'plase anter valid name'
-            ).test('name', 'maximum 3 word allowed',
+                /^[a-zA-Z ]{2,30}$/, 'plase anter valid name')
+            .test('name', 'maximum 3 word allowed',
                 function (val) {
                     let arr = val.split(" ")
                     //   console.log(arr);
-                  
+
                     if (arr.length === 3) {
                         return true
                     } else {
@@ -30,17 +31,17 @@ function Test2(props) {
             ),
         conpass: Yup.string()
             .required()
-            .test('conpass','please enter same password',
-            function(val){
-                // console.log(this.parent.pass);
-                if(this.parent.pass === val){
-                    return true
-                }else {
-                    return false
-                }
-            }),
+            .test('conpass', 'please enter same password',
+                function (val) {
+                    // console.log(this.parent.pass);
+                    if (this.parent.pass === val) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }),
 
-            // .oneOf([Yup.ref("pass"), ''], "Password Must Match"),
+        // .oneOf([Yup.ref("pass"), ''], "Password Must Match"),
 
         mobile: Yup.string()
             .required('please enter mobile number')
@@ -54,7 +55,7 @@ function Test2(props) {
             .required(),
         dob: Yup.date()
             .required("plase enter date of birth")
-            .max( new Date(),'Must be in present and past'),
+            .max(new Date(), 'Must be in present and past'),
         add: Yup.string()
             .required("plase enter Address")
             .test("add", "Maximum 5 word allow", function (val) {
@@ -77,10 +78,10 @@ function Test2(props) {
                 }
             }),
         gender: Yup.string().required(),
-          
-        hobbies: Yup.array().min(2,'please select 2 hobbies').required(),
 
-       
+        hobbies: Yup.array().min(2, 'please select 2 hobbies').required(),
+
+
         tc: Yup.boolean()
             .required("Must be selected.").oneOf([true], "You must accept the terms and conditions"),
     })

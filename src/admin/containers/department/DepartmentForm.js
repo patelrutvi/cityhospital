@@ -32,12 +32,14 @@ function DepartmentForm({onsubmitdata,onupdate}) {
     const departmentSchema = Yup.object({
         name: Yup.string().required("Please Enter Name"),
         desc: Yup.string().required("Please Enter Description"),
+        img : Yup.string().required()
     })
 
     const formik = useFormik({
         initialValues: {
             name: '',
-            desc: ''
+            desc: '',
+            img : ''
         },
         validationSchema: departmentSchema,
         enableReinitialize: true,
@@ -92,6 +94,10 @@ function DepartmentForm({onsubmitdata,onupdate}) {
                                 onChange={handleChange}
                             />
                             <span style={{color : 'red'}}>{errors.desc && touched.desc ? errors.desc : null}</span>
+
+                            <div>
+                                <input type='file' name='img'/>
+                            </div>
                             <DialogActions>
                                 <Button onClick={handleClose}>Cancel</Button>
                                 <Button type='submit'>Submit</Button>

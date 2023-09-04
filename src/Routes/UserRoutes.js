@@ -42,9 +42,9 @@ function UserRoutes(props) {
                 <Route path='/appiment' element={<Appoiment />} />
                 <Route path='/counter' element={<Counter />} />
                 {/* .....usememo and usecallback */}
-                <Route path='/counterfac' element={<CounterFac />} />
+                {/* <Route path='/counterfac' element={<CounterFac />} />
                 <Route path='/usecallback' element={<UseCallback />} />
-                <Route path='/useref' element={<UseRefExample />} />
+                <Route path='/useref' element={<UseRefExample />} /> */}
                 {/* ....................... */}
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/cartnr' element={<CartNR />} />

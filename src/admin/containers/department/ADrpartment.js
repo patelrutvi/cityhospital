@@ -7,6 +7,7 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { addDepartments, deleteDepartments, fetchDepartments, updatedepartments } from '../../../redux/slice/departmentslice';
+import { getdepartmentdataFire } from '../../../redux/slice/departmentFirebSlice';
 // import { fetchDepartments } from '../../../redux/slice/departmentslice';
 
 function ADrpartment(props) {
@@ -15,20 +16,21 @@ function ADrpartment(props) {
 
     const depaValue = useSelector(state => state.department)
     console.log(depaValue, "depaValue");
-    let dData = depaValue.depart
+    let dData = depaValue.depData
 
     useEffect(() => {
         // dispatch(getDepartmentdataa())
         dispatch(fetchDepartments())
+       
     }, [])
 
     const handleSubmitdata = (data) => {
 
         console.log("data");
-        if(Update){
+        if (Update) {
             // dispatch(updatedepartdata(data))
             dispatch(updatedepartments(data))
-        }else{
+        } else {
             // dispatch(addDepartdata(data))
             dispatch(addDepartments(data))
 
@@ -42,7 +44,7 @@ function ADrpartment(props) {
     }
 
     const handleUpdate = (data) => {
-       
+
         setUpdate(data)
     }
 
@@ -77,7 +79,7 @@ function ADrpartment(props) {
 
     return (
         <div>
-            <DepartmentForm onsubmitdata={handleSubmitdata}  onupdate={Update}/>
+            <DepartmentForm onsubmitdata={handleSubmitdata} onupdate={Update} />
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
                     rows={dData}
