@@ -11,15 +11,15 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik';
 
 
-function DepartmentForm({onsubmitdata,onupdate}) {
+function DepartmentForm({ onsubmitdata, onupdate }) {
     const [open, setOpen] = React.useState(false);
 
     React.useEffect(() => {
         if (onupdate) {
-          formik.setValues(onupdate)
-          handleClickOpen();
+            formik.setValues(onupdate)
+            handleClickOpen();
         }
-      }, [onupdate])
+    }, [onupdate])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -32,12 +32,14 @@ function DepartmentForm({onsubmitdata,onupdate}) {
     const departmentSchema = Yup.object({
         name: Yup.string().required("Please Enter Name"),
         desc: Yup.string().required("Please Enter Description"),
+        pres: Yup.mixed().required()
     })
 
     const formik = useFormik({
         initialValues: {
             name: '',
-            desc: ''
+            desc: '',
+            pres: ''
         },
         validationSchema: departmentSchema,
         enableReinitialize: true,
@@ -49,7 +51,7 @@ function DepartmentForm({onsubmitdata,onupdate}) {
         }
     })
 
-    const { errors, values, touched, handleBlur, handleChange, handleSubmit } = formik
+    const { errors, values, touched, handleBlur, handleChange, handleSubmit ,setFieldValue} = formik
     return (
         <>
             <div>
@@ -78,7 +80,7 @@ function DepartmentForm({onsubmitdata,onupdate}) {
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                             />
-                            <span style={{color : 'red'}}>{errors.name && touched.name ? errors.name : null}</span>
+                            <span style={{ color: 'red' }}>{errors.name && touched.name ? errors.name : null}</span>
                             <TextField
                                 margin="dense"
                                 id="desc"
@@ -91,7 +93,22 @@ function DepartmentForm({onsubmitdata,onupdate}) {
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                             />
-                            <span style={{color : 'red'}}>{errors.desc && touched.desc ? errors.desc : null}</span>
+                            <span style={{ color: 'red' }}>{errors.desc && touched.desc ? errors.desc : null}</span>
+                          
+                            <div className='col-md-4 form-group mt-3' style={{ display: 'flex' }}>
+                                <input type="file"
+                                    name="pres"
+                                    onChange={(event) => setFieldValue("pres", event.target.files[0])}
+
+                                />
+                                {
+                                    values.pres === '' ? '' : <img src={typeof values.pres === 'string' ? values.pres : URL.createObjectURL(values.pres)} style={{ width: '40px', height: '40px', marginLeft: '10px' }} />
+                                }
+
+                                <span style={{ color: 'red' }} className='error'>{errors.pres && touched.pres ? errors.pres : null}</span>
+                                <div className="validate" />
+                            </div>
+
                             <DialogActions>
                                 <Button onClick={handleClose}>Cancel</Button>
                                 <Button type='submit'>Submit</Button>

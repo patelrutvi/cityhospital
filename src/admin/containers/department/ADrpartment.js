@@ -7,19 +7,20 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { addDepartments, deleteDepartments, fetchDepartments, updatedepartments } from '../../../redux/slice/departmentslice';
+import { addDepartmentFire, deletedepartmentFire, getdepartmentFire, updatedepartmentFire } from '../../../redux/slice/departmentFireSlice';
 // import { fetchDepartments } from '../../../redux/slice/departmentslice';
 
 function ADrpartment(props) {
     const [Update, setUpdate] = React.useState(null);
     const dispatch = useDispatch()
-
-    const depaValue = useSelector(state => state.department)
+    const depaValue = useSelector(state => state.fdapart)
     console.log(depaValue, "depaValue");
-    let dData = depaValue.depart
+    let dData = depaValue.FdepartData
 
     useEffect(() => {
         // dispatch(getDepartmentdataa())
-        dispatch(fetchDepartments())
+        // dispatch(fetchDepartments())
+        dispatch(getdepartmentFire())
     }, [])
 
     const handleSubmitdata = (data) => {
@@ -27,18 +28,21 @@ function ADrpartment(props) {
         console.log("data");
         if(Update){
             // dispatch(updatedepartdata(data))
-            dispatch(updatedepartments(data))
+            // dispatch(updatedepartments(data))
+            dispatch(updatedepartmentFire(data))
         }else{
             // dispatch(addDepartdata(data))
-            dispatch(addDepartments(data))
+            // dispatch(addDepartments(data))
+            dispatch(addDepartmentFire(data))
 
         }
         setUpdate(null)
     }
 
-    const handleDelete = (id) => {
+    const handleDelete = (data) => {
         // dispatch(deleteDepartdata(id))
-        dispatch(deleteDepartments(id))
+        // dispatch(deleteDepartments(id))
+        dispatch(deletedepartmentFire(data))
     }
 
     const handleUpdate = (data) => {
@@ -49,6 +53,7 @@ function ADrpartment(props) {
     const columns = [
         { field: 'name', headerName: 'Name', width: 130 },
         { field: 'desc', headerName: 'Dscription', width: 130 },
+        { field: 'pres_name', headerName: 'Image', width: 130 },
         {
             field: 'action',
             headerName: 'Action',
@@ -58,7 +63,7 @@ function ADrpartment(props) {
                 <>
                     <IconButton
                         aria-label="delete"
-                        onClick={() => handleDelete(params.row.id)}
+                        onClick={() => handleDelete(params.row)}
                     >
                         <DeleteIcon />
                     </IconButton>

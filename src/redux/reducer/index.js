@@ -11,6 +11,8 @@ import { authReducer } from "./auth.reducer"
 import appoimentReducer from "../slice/appoimentslice"
 import counterfacReducer from "../slice/counterfacslice"
 import departmentReducer from "../slice/departmentslice"
+import fdepartmentReducer from '../slice/departmentFireSlice';
+
 
 
 export const rootReducer = combineReducers({
@@ -21,10 +23,12 @@ export const rootReducer = combineReducers({
     cart: addtoCartreducer,
     fav: myfavreducer,
     department:departmentReducer,
+    fdapart:fdepartmentReducer,
     alert:alertReducer,
     auth:authReducer,
     appoiment:appoimentReducer,
     counterfact:counterfacReducer
+   
 
     
 })
