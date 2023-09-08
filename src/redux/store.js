@@ -10,7 +10,7 @@ import { rootsaga } from "./saga/rootsaga"
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['medicine', 'cart','fdapart']
+    whitelist: ['medicine', 'cart','fdapart','fdoctor']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

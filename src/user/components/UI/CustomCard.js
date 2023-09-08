@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Medicinedata from '../../containers/medicines/Medicinedata';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../../Context/ThameContext';
 
 function CustomCard({ values, btnval, onclick1, onclick2 }) {
     const theme = useContext(ThemeContext)
+
+    const mayfavdata= useSelector((state) => state.fav)
+    console.log(mayfavdata,"custom cart fav");
 
 
     return (
@@ -28,6 +31,7 @@ function CustomCard({ values, btnval, onclick1, onclick2 }) {
                         src="https://picsum.photos/300/200"
                     /> : null
                 }
+                
                 <FavoriteBorderIcon style={{ width: '400px' }} onClick={() => onclick2(values.id)} />
                 <CardBody className={`themecustom ${theme.theme}`}>
                   

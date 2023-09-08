@@ -10,8 +10,9 @@ function Department(props) {
     const theme = useContext(ThemeContext)
 
     const dispatch = useDispatch()
-    const departData = useSelector(state => state.department)
-    console.log(departData, 'department user');
+    const departData = useSelector(state => state.fdapart)
+    console.log(departData.FdepartData , 'department user');
+       
 
 
     useEffect(() => {
@@ -30,7 +31,8 @@ function Department(props) {
                             <div className="col-lg-3">
                                 <ul className="nav nav-tabs flex-column">
                                     {
-                                        departData.depart.map((c, i) => {
+
+                                       departData.FdepartData.map((c, i) => {
                                             return (
                                                 <>
 
@@ -58,7 +60,7 @@ function Department(props) {
                             <div className="col-lg-9 mt-4 mt-lg-0">
                                 <div className="tab-content">
                                     {
-                                        departData.depart.map((c, i) => {
+                                         departData.FdepartData.map((c, i) => {
                                             return (
                                                 <div className={i === 0 ? 'tab-pane active show' : 'tab-pane'} id={`tab-${i + 1}`}>
                                                     <div className="row">

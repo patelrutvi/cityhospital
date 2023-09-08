@@ -12,7 +12,7 @@ import Button from '../../../user/components/UI/Button/Button';
 import { useState } from 'react';
 
 
-function DoctorsForm({ onhandlesubmit,onupdate }) {
+function DoctorsForm({ onhandlesubmit, onupdate }) {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
@@ -50,8 +50,8 @@ function DoctorsForm({ onhandlesubmit,onupdate }) {
                     return true;
                 }
             }),
-        // img: Yup.string()
-        //     .required('please add photo')
+        pres: Yup.string()
+            .required('please add photo')
     })
 
     const formik = useFormik({
@@ -59,7 +59,7 @@ function DoctorsForm({ onhandlesubmit,onupdate }) {
             name: '',
             Designation: '',
             Degree: '',
-            // img: ''
+            pres: ''
         },
         validationSchema: doctorSchema,
         enableReinitialize: true,
@@ -70,7 +70,7 @@ function DoctorsForm({ onhandlesubmit,onupdate }) {
         }
     })
 
-    const { values, errors, touched, handleSubmit, handleChange, handleBlur } = formik
+    const { values, errors, touched, handleSubmit, handleChange, handleBlur, setFieldValue } = formik
 
     return (
         <div>
@@ -128,20 +128,21 @@ function DoctorsForm({ onhandlesubmit,onupdate }) {
                             value={values.Degree}
                         />
                         <span style={{ color: "red" }} className='error'>{errors.Degree && touched.Degree ? errors.Degree : ''}</span>
-                        <div className="social">
-                            <input
-                                type='file'
-                                name="img"
-                                id="img"
-                                label="icon"
-                                sx={{ margin: '10px', padding: '25px 0 0 0' }}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.dis}
-                            >
 
-                            </input>
-                            <span style={{ color: "red" }} className='error'>{errors.img && touched.img ? errors.img : ''}</span>
+
+                        <div className='col-md-4 form-group mt-3' style={{ display: 'flex' }}>
+                            <input type="file"
+                                name="pres"
+
+                                onChange={(event) => setFieldValue("pres", event.target.files[0])}
+
+                            />
+                            {
+                                values.pres === '' ? '' : <img src={typeof values.pres === 'string' ? values.pres : URL.createObjectURL(values.pres)} style={{ width: '40px', height: '40px', marginLeft: '10px' }} />
+                            }
+
+                            <span style={{ color: 'red' }} className='error'>{errors.pres && touched.pres ? errors.pres : null}</span>
+                            <div className="validate" />
                         </div>
                         <DialogActions>
                             <button onClick={handleClose}>Cancel</button>

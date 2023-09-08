@@ -8,17 +8,19 @@ import DoctorsForm from './DoctorsForm';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CircularProgress from '@mui/material/CircularProgress';
+import { addDoctorFire, getDoctorFire } from '../../../redux/slice/doctorFireslice';
 
 
 export default function ADoctor() {
     const [updatedata, setupdatedata] = React.useState(null)
     const dispatch = useDispatch()
-    const drdataval = useSelector(state => state.doctor)
+    const drdataval = useSelector(state => state.fdoctor)
     console.log(drdataval, "drdataval");
 
     // ......redux.....
     useEffect(() => {
-        dispatch(getdoctordata())
+        // dispatch(getdoctordata())
+        dispatch(getDoctorFire())
     }, [])
     // ....................
 
@@ -28,7 +30,8 @@ export default function ADoctor() {
         if (updatedata) {
             dispatch(updateDoctor(data))
         } else {
-            dispatch(addDoctor(data))
+            // dispatch(addDoctor(data))...i think axios crude
+            dispatch(addDoctorFire(data))
         }
         setupdatedata(null)
     }
@@ -49,7 +52,7 @@ export default function ADoctor() {
         { field: 'name', headerName: 'Doctor Name', width: 150 },
         { field: 'Designation', headerName: 'Designation', width: 150 },
         { field: 'Degree', headerName: 'Degree', width: 150 },
-        { field: 'img', headerName: 'image', width: 150 },
+        { field: 'pres_name', headerName: 'image', width: 150 },
         {
             field: 'action',
             headerName: 'Action',
@@ -87,7 +90,7 @@ export default function ADoctor() {
 
                         <div style={{ height: 400, width: '100%' }}>
                             <DataGrid
-                                rows={drdataval.drData}
+                                rows={drdataval.drFire}
                                 columns={columns}
                                 initialState={{
                                     pagination: {
