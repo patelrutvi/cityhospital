@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const initstate = {
     drFire: [],
@@ -14,21 +14,22 @@ export const addDoctorFire = createAsyncThunk(
     async (data) => {
         console.log(data,"doctor fire add data");
         try {
+            const storage = getStorage();
             let rNo = Math.floor(Math.random() * 100000)
-            const storageRef = ref(storage, 'prescriptiondr/' + rNo + "_" + data.pres.name);
+            const storageRef = ref(storage, 'doctor-img/' + rNo + "_" + data.pres.name);
             let idata = { ...data }
             await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
                 console.log('Uploaded a blob or file!');
                 await getDownloadURL(snapshot.ref)
                     .then(async (url) => {
                         console.log(url);
-                        idata = { ...data, pres: url, "pres_name": rNo + "_" + data.pres.name }
+                        idata = { ...data, pres: url, "dr-img": rNo + "_" + data.pres.name }
                         const docRef = await addDoc(collection(db, "doctor"), idata);
                         idata = {
                             id: docRef.id,
                             ...data,
                             pres: url,
-                            "pres_name": rNo + "_" + data.pres.name
+                            "dr-img": rNo + "_" + data.pres.name
                         }
                     });
             });
@@ -67,6 +68,73 @@ export const getDoctorFire = createAsyncThunk (
 
     }
 )
+export const deleteDoctorFire = createAsyncThunk(
+    'doctors/delete',
+    async (data) => {
+        console.log(data.id, "doctor fire slice id");
+        try {
+            const aptRef = ref(storage,  'doctor-img/' + data.pres.name);
+            deleteObject(aptRef).then(async () => {
+                // File deleted successfully
+                await deleteDoc(doc(db, " 'doctor", data.id));
+            })
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+        return data.id
+    }
+)
+
+
+
+export const updateDoctorFire = createAsyncThunk(
+    'doctors/update',
+    async (data) => {
+        console.log(data, "doctor  slice up-data");
+        try {
+            if (typeof data.pres === "string") {
+                console.log("image no change");
+                const aptRef = doc(db, "doctor", data.id);
+                await updateDoc(aptRef, data);
+                return data
+            } else {
+                let idata = { ...data }
+                console.log("image  change");
+                const aptRef = ref(storage, 'doctor-img/' + data.presname);
+                await deleteObject(aptRef).then(async () => {
+                    // File deleted successfull
+                    console.log("update img");
+                    let rNo = Math.floor(Math.random() * 100000)
+                    const storageRef = ref(storage, 'doctor-img/' + rNo + "_" + data.pres.name);
+
+                    await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
+                        console.log('Uploaded new img a blob or file!');
+                        await getDownloadURL(snapshot.ref)
+                            .then(async (url) => {
+                                console.log(url);
+                                idata = { ...data, pres: url, "dr-img": rNo + "_" + data.pres.name }
+                                const aptRef = doc(db, "doctor", data.id);
+                                await updateDoc(aptRef, idata);
+                                idata = {
+                                    ...data,
+                                    pres: url,
+                                    "dr-img": rNo + "_" + data.pres.name
+                                }
+                            });
+                    });
+                })
+                return idata
+                
+
+
+            }
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+
+
+    }
+)
 
 const onRejected = (state, action) => {
     state.isloading = false;
@@ -77,7 +145,6 @@ const onLoading = (state, action) => {
     state.isloading = true;
     state.error = null;
 }
-
 export const doctorFireslice = createSlice({
     name: 'doctors',
     initialState: initstate,
@@ -101,6 +168,34 @@ export const doctorFireslice = createSlice({
                 state.isloading = false;
                 state.error = null;
 
+            })
+        
+
+            .addCase(deleteDoctorFire.rejected, onRejected)
+            .addCase(deleteDoctorFire.pending, onLoading)
+            .addCase(deleteDoctorFire.fulfilled, (state, action) => {
+                console.log(action.payload, "action delete fire delete");
+                state.drFire = state.drFire.filter((v) => v.id !== action.payload)
+                state.isloading = false;
+                state.error = null;
+            })
+
+
+            .addCase(updateDoctorFire.rejected, onRejected)
+            .addCase(updateDoctorFire.pending, onLoading)
+            .addCase(updateDoctorFire.fulfilled, (state, action) => {
+                console.log(action.payload.id, "action fire doctor update");
+                let udata = state.drFire.map((v) => {
+                    if (v.id === action.payload.id) {
+                        return action.payload
+                    } else {
+                        return v
+                    }
+                })
+    
+                state.drFire = udata
+                state.isloading = false;
+                state.error = null;
             })
     }
 })

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useDispatch, useSelector } from 'react-redux';
 import Medicinedata from '../../containers/medicines/Medicinedata';
@@ -31,8 +32,13 @@ function CustomCard({ values, btnval, onclick1, onclick2 }) {
                         src="https://picsum.photos/300/200"
                     /> : null
                 }
-                
-                <FavoriteBorderIcon style={{ width: '400px' }} onClick={() => onclick2(values.id)} />
+                {
+                    mayfavdata.myfav.some((v,i) => v.pid === values.id) ? 
+                     <FavoriteIcon style={{ width: '400px',color:'red' }} onClick={() => onclick2(values.id)} /> 
+                    :
+                    <FavoriteBorderIcon style={{ width: '400px' }} onClick={() => onclick2(values.id)} />
+                }
+               
                 <CardBody className={`themecustom ${theme.theme}`}>
                   
                         <Link to={'/medicinedata/' + values.id }style={{ color: 'gray' }}>

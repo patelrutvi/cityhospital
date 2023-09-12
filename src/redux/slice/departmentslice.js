@@ -96,7 +96,7 @@ export const departmentslice = createSlice({
                     } else {
                         return v
                     }
-                })
+                })                                                                                                                                      
                 state.depart = udata
                 state.isloading = false
                 state.error = null

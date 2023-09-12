@@ -4,6 +4,7 @@ import { fetchDepartments } from '../../redux/slice/departmentslice';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from '../../Context/ThameContext';
 import { styled } from 'styled-components';
+import { getdepartmentFire } from '../../redux/slice/departmentFireSlice';
 
 
 function Department(props) {
@@ -17,7 +18,8 @@ function Department(props) {
 
     useEffect(() => {
         // dispatch(getData());
-        dispatch(fetchDepartments())
+        // dispatch(fetchDepartments())
+        dispatch(getdepartmentFire())
     }, []);
     return (
         <div>

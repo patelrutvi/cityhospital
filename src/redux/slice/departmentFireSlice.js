@@ -1,23 +1,26 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { db, storage } from "../../firebase";
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
+import { db, storage } from "../../firebase";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+
 
 
 const initstate = {
     FdepartData: [],
     isloading: false,
     error: null
-}
+}                                                   
 
 export const addDepartmentFire = createAsyncThunk(
     'department/add' ,
     async (data) => {
         console.log(data, "department  fire add  slice");
+         let idata = { ...data }
         try {
+            const storage = getStorage();
             let rNo = Math.floor(Math.random() * 100000)
             const storageRef = ref(storage, 'prescriptiondepart/' + rNo + "_" + data.pres.name);
-            let idata = { ...data }
+           
             await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
                 console.log('Uploaded a blob or file!');
                 await getDownloadURL(snapshot.ref)

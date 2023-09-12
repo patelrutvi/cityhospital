@@ -8,7 +8,7 @@ import DoctorsForm from './DoctorsForm';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CircularProgress from '@mui/material/CircularProgress';
-import { addDoctorFire, getDoctorFire } from '../../../redux/slice/doctorFireslice';
+import { addDoctorFire, deleteDoctorFire, getDoctorFire, updateDoctorFire } from '../../../redux/slice/doctorFireslice';
 
 
 export default function ADoctor() {
@@ -28,7 +28,8 @@ export default function ADoctor() {
         console.log(data, "sjkdnsjk");
 
         if (updatedata) {
-            dispatch(updateDoctor(data))
+            // dispatch(updateDoctor(data))
+            dispatch(updateDoctorFire(data))
         } else {
             // dispatch(addDoctor(data))...i think axios crude
             dispatch(addDoctorFire(data))
@@ -36,9 +37,10 @@ export default function ADoctor() {
         setupdatedata(null)
     }
 
-    const handledelete = (id) => {
-        console.log(id);
-        dispatch(deleteDoctor(id))
+    const handledelete = (data) => {
+        // console.log(id);
+        // dispatch(deleteDoctor(id))
+        dispatch(deleteDoctorFire(data))
     }
 
     const handleEdit = (data) => {
@@ -52,7 +54,7 @@ export default function ADoctor() {
         { field: 'name', headerName: 'Doctor Name', width: 150 },
         { field: 'Designation', headerName: 'Designation', width: 150 },
         { field: 'Degree', headerName: 'Degree', width: 150 },
-        { field: 'pres_name', headerName: 'image', width: 150 },
+        { field: 'dr-img', headerName: 'image', width: 150 },
         {
             field: 'action',
             headerName: 'Action',
@@ -60,7 +62,7 @@ export default function ADoctor() {
 
             renderCell: (params) => (
                 <>
-                    <DeleteIcon onClick={() => handledelete(params.row.id)}>
+                    <DeleteIcon onClick={() => handledelete(params.row)}>
 
                     </DeleteIcon>
                     <EditIcon onClick={() => handleEdit(params.row)}>
