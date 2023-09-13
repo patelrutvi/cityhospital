@@ -70,7 +70,7 @@ export const getdepartmentFire = createAsyncThunk(
 export const deletedepartmentFire = createAsyncThunk(
     'department/delete',
     async (data) => {
-        console.log(data.id, "department fire slice id");
+        console.log(data.id, "department fire slice id",data.pres_name);
         try {
             const aptRef = ref(storage, 'prescriptiondepart/' + data.pres_name);
             deleteObject(aptRef).then(async () => {

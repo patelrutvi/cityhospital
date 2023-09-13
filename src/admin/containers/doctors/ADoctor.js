@@ -8,7 +8,7 @@ import DoctorsForm from './DoctorsForm';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CircularProgress from '@mui/material/CircularProgress';
-import { addDoctorFire, deleteDoctorFire, getDoctorFire, updateDoctorFire } from '../../../redux/slice/doctorFireslice';
+import { addDoctorFire, deleteDoctorsFire, getDoctorFire, updateDoctorFire } from '../../../redux/slice/doctorFireslice';
 
 
 export default function ADoctor() {
@@ -38,9 +38,9 @@ export default function ADoctor() {
     }
 
     const handledelete = (data) => {
-        // console.log(id);
+        console.log("delete data drrrrrr",data);
         // dispatch(deleteDoctor(id))
-        dispatch(deleteDoctorFire(data))
+        dispatch(deleteDoctorsFire(data))
     }
 
     const handleEdit = (data) => {
@@ -54,7 +54,7 @@ export default function ADoctor() {
         { field: 'name', headerName: 'Doctor Name', width: 150 },
         { field: 'Designation', headerName: 'Designation', width: 150 },
         { field: 'Degree', headerName: 'Degree', width: 150 },
-        { field: 'dr-img', headerName: 'image', width: 150 },
+        { field: 'pres_name', headerName: 'image', width: 150 },
         {
             field: 'action',
             headerName: 'Action',

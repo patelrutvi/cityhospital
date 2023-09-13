@@ -5,20 +5,16 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCK3kzs3ZaNeMIL90G92rK4BApSGrd8V-8",
-  authDomain: "cityhospital-d7a9b.firebaseapp.com",
-  projectId: "cityhospital-d7a9b",
-  storageBucket: "cityhospital-d7a9b.appspot.com",
-  messagingSenderId: "349054241161",
-  appId: "1:349054241161:web:dd61d0fcc7530834f3b958",
-  measurementId: "G-S3ZFBWC66R"
+  apiKey: "AIzaSyCSssvVlK5Lf9dP-iKpitJtzB6gBPe2egk",
+  authDomain: "cityhospital-9fdab.firebaseapp.com",
+  projectId: "cityhospital-9fdab",
+  storageBucket: "cityhospital-9fdab.appspot.com",
+  messagingSenderId: "736485007243",
+  appId: "1:736485007243:web:5e5b4abc7c85589d74198e",
+  measurementId: "G-J36G004K0Y"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

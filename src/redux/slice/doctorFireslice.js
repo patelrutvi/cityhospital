@@ -12,29 +12,30 @@ const initstate = {
 export const addDoctorFire = createAsyncThunk(
     'doctors/add',
     async (data) => {
-        console.log(data,"doctor fire add data");
+        console.log(data, "doctor fire add data");
         try {
             const storage = getStorage();
             let rNo = Math.floor(Math.random() * 100000)
-            const storageRef = ref(storage, 'doctor-img/' + rNo + "_" + data.pres.name);
+            const storageRef = ref(storage, 'drprescriptiondepart/' + rNo + "_" + data.pres.name);
             let idata = { ...data }
             await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
                 console.log('Uploaded a blob or file!');
                 await getDownloadURL(snapshot.ref)
                     .then(async (url) => {
                         console.log(url);
-                        idata = { ...data, pres: url, "dr-img": rNo + "_" + data.pres.name }
+                        idata = { ...data, pres: url, "pres_name": rNo + "_" + data.pres.name }
                         const docRef = await addDoc(collection(db, "doctor"), idata);
                         idata = {
                             id: docRef.id,
                             ...data,
                             pres: url,
-                            "dr-img": rNo + "_" + data.pres.name
+                            "pres_name": rNo + "_" + data.pres.name
                         }
+                        console.log(idata, "i datataaaaa");
                     });
             });
             return idata
-       
+
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -47,7 +48,7 @@ export const addDoctorFire = createAsyncThunk(
     }
 )
 
-export const getDoctorFire = createAsyncThunk (
+export const getDoctorFire = createAsyncThunk(
     'doctors/get',
     async () => {
         try {
@@ -58,7 +59,7 @@ export const getDoctorFire = createAsyncThunk (
                     id: doc.id,
                     ...doc.data()
                 })
-                console.log(data,"data");
+                console.log(data, "data");
 
             });
             return data
@@ -68,15 +69,16 @@ export const getDoctorFire = createAsyncThunk (
 
     }
 )
-export const deleteDoctorFire = createAsyncThunk(
+
+export const deleteDoctorsFire = createAsyncThunk(
     'doctors/delete',
     async (data) => {
-        console.log(data.id, "doctor fire slice id");
+      
         try {
-            const aptRef = ref(storage,  'doctor-img/' + data.pres.name);
+            const aptRef = ref(storage, 'drprescriptiondepart/' + data.pres_name);
             deleteObject(aptRef).then(async () => {
                 // File deleted successfully
-                await deleteDoc(doc(db, " 'doctor", data.id));
+                await deleteDoc(doc(db, "doctor", data.id));
             })
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -84,7 +86,6 @@ export const deleteDoctorFire = createAsyncThunk(
         return data.id
     }
 )
-
 
 
 export const updateDoctorFire = createAsyncThunk(
@@ -100,31 +101,31 @@ export const updateDoctorFire = createAsyncThunk(
             } else {
                 let idata = { ...data }
                 console.log("image  change");
-                const aptRef = ref(storage, 'doctor-img/' + data.presname);
+                const aptRef = ref(storage, 'drprescriptiondepart/' + data.pres_name);
                 await deleteObject(aptRef).then(async () => {
                     // File deleted successfull
                     console.log("update img");
                     let rNo = Math.floor(Math.random() * 100000)
-                    const storageRef = ref(storage, 'doctor-img/' + rNo + "_" + data.pres.name);
+                    const storageRef = ref(storage, 'drprescriptiondepart/' + rNo + "_" + data.pres.name);
 
                     await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
                         console.log('Uploaded new img a blob or file!');
                         await getDownloadURL(snapshot.ref)
                             .then(async (url) => {
                                 console.log(url);
-                                idata = { ...data, pres: url, "dr-img": rNo + "_" + data.pres.name }
+                                idata = { ...data, pres: url, "pres_name": rNo + "_" + data.pres.name }
                                 const aptRef = doc(db, "doctor", data.id);
                                 await updateDoc(aptRef, idata);
                                 idata = {
                                     ...data,
                                     pres: url,
-                                    "dr-img": rNo + "_" + data.pres.name
+                                    "pres_name": rNo + "_" + data.pres.name
                                 }
                             });
                     });
                 })
                 return idata
-                
+
 
 
             }
@@ -151,10 +152,10 @@ export const doctorFireslice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(addDoctorFire.rejected,onRejected)
-            .addCase(addDoctorFire.pending ,onLoading )
+            .addCase(addDoctorFire.rejected, onRejected)
+            .addCase(addDoctorFire.pending, onLoading)
             .addCase(addDoctorFire.fulfilled, (state, action) => {
-                console.log(action.payload,"doctor fire action");
+                console.log(action.payload, "doctor fire action");
                 state.drFire = state.drFire.concat(action.payload)
                 state.isloading = false;
                 state.error = null;
@@ -169,16 +170,17 @@ export const doctorFireslice = createSlice({
                 state.error = null;
 
             })
-        
 
-            .addCase(deleteDoctorFire.rejected, onRejected)
-            .addCase(deleteDoctorFire.pending, onLoading)
-            .addCase(deleteDoctorFire.fulfilled, (state, action) => {
-                console.log(action.payload, "action delete fire delete");
+
+            .addCase(deleteDoctorsFire.rejected, onRejected)
+            .addCase(deleteDoctorsFire.pending, onLoading)
+            .addCase(deleteDoctorsFire.fulfilled, (state, action) => {
+                console.log(action.payload, "action delete");
                 state.drFire = state.drFire.filter((v) => v.id !== action.payload)
                 state.isloading = false;
                 state.error = null;
             })
+
 
 
             .addCase(updateDoctorFire.rejected, onRejected)
@@ -192,7 +194,7 @@ export const doctorFireslice = createSlice({
                         return v
                     }
                 })
-    
+
                 state.drFire = udata
                 state.isloading = false;
                 state.error = null;
