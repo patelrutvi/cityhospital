@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
-import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const initState = {
     isloading: false,
@@ -35,11 +35,12 @@ export const addappoinment = createAsyncThunk(
     'appointment/add',
     async (data) => {
         console.log(data, "appoiment slice");
-
+        let idata = { ...data }
         try {
+            const storage = getStorage()
             let rNo = Math.floor(Math.random() * 100000)
             const storageRef = ref(storage, 'prescription/' + rNo + "_" + data.pres.name);
-            let idata = { ...data }
+           
             await uploadBytes(storageRef, data.pres).then(async (snapshot) => {
                 console.log('Uploaded a blob or file!');
                 await getDownloadURL(snapshot.ref)
@@ -91,7 +92,7 @@ export const updateappoinment = createAsyncThunk(
     async (data) => {
         console.log(data, "appoiment slice up-data");
         try {
-            if (typeof data.pres === "string") {
+            if (typeof data.pres === 'string') {
                 console.log("image no change");
                 const aptRef = doc(db, "appoinment", data.id);
                 await updateDoc(aptRef, data);
