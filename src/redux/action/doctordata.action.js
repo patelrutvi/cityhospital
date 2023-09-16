@@ -8,6 +8,7 @@ export const getdoctordata = () => (dispatch) => {
     try {
         dispatch(lodingData(true));
         setTimeout(() => {
+            //axious
             getDoctordata()
                 .then((response) => dispatch({ type: ActionType.GET_DOCTORDATA, paylord: response.data }))
                 .catch((error) => dispatch(errorHandle(error)))
