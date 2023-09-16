@@ -51,6 +51,8 @@ function Medicineform({ onhandlesubmit, onupdate }) {
                     return true;
                 }
             }),
+            presM : Yup.string()
+            .required()
     })
 
     const formik = useFormik({
@@ -59,6 +61,7 @@ function Medicineform({ onhandlesubmit, onupdate }) {
             price: '',
             expiry: '',
             desc: '',
+            presM:''
 
         },
         validationSchema: medicineSchema,
@@ -73,7 +76,7 @@ function Medicineform({ onhandlesubmit, onupdate }) {
         }
     })
 
-    const { values, errors, touched, handleSubmit, handleChange, handleBlur } = formik
+    const { values, errors, touched, handleSubmit, handleChange, handleBlur , setFieldValue } = formik
     return (
 
         <>
@@ -146,6 +149,23 @@ function Medicineform({ onhandlesubmit, onupdate }) {
                             value={values.desc}
                         />
                         <span style={{ color: "red" }} className='error'>{errors.desc && touched.disc ? errors.desc : ''}</span>
+
+
+
+                        <div className='col-md-4 form-group mt-3' style={{ display: 'flex' }}>
+                            <input type="file"
+                                name="presM"
+
+                                onChange={(event) => setFieldValue("presM", event.target.files[0])}
+
+                            />
+                            {
+                                values.presM === '' ? '' : <img src={typeof values.presM === 'string' ? values.presM : URL.createObjectURL(values.presM)} style={{ width: '40px', height: '40px', marginLeft: '10px' }} />
+                            }
+
+                            <span style={{ color: 'red' }} className='error'>{errors.presM && touched.presM ? errors.pres : null}</span>
+                            <div className="validate" />
+                        </div>
                         <DialogActions>
                             <Button onClick={handleClose}>Cancel</Button>
                             <Button type="submit">Submit</Button>

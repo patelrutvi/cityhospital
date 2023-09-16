@@ -8,17 +8,17 @@ function Cart(props) {
 
     const theme = useContext(ThemeContext)
 
-    const medicinedata = useSelector((state) => state.medicine)
+    const medicinedata = useSelector((state) => state.fmedicine)
     const cartdata = useSelector((state) => state.cart)
     const dispatch = useDispatch()
 
     let cartmediitem = cartdata.items.map((v) => {
-        let medidataf = medicinedata.mediData.find((m) => m.id === v.pid)
+        let medidataf = medicinedata.fMdata.find((m) => m.id === v.pid)
         let mdatacart = { ...medidataf, ...v }
         return mdatacart;
 
     })
-    console.log(cartmediitem);
+    console.log(cartmediitem,"cartttt");
 
     console.log(medicinedata, cartdata);
 

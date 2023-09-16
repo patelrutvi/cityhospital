@@ -12,13 +12,13 @@ import { colors } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { ThemeContext } from '../../../Context/ThameContext';
 
-
+// fMdata
 function Usermedicine(props) {
     const navigate = useNavigate();
     const [data, setdata] = useState([])
     const [filterdata, setfilterdata] = useState([])
     const dispatch = useDispatch()
-    const usermedival = useSelector(state => state.medicine)
+    const usermedival = useSelector(state => state.fmedicine)
     console.log("user medicine js", usermedival);
     const mayfavdata= useSelector((state) => state.fav)
     
@@ -37,7 +37,7 @@ function Usermedicine(props) {
 
         // let medicine = JSON.parse(localStorage.getItem('medicine'));
 
-        let fdata = usermedival.mediData.filter((v) =>
+        let fdata = usermedival.fMdata.filter((v) =>
             v. name.toLowerCase().includes(val.toLowerCase())
             || v. price.toString().includes(val)
             || v.expiry.toString().includes(val)
@@ -94,7 +94,7 @@ function Usermedicine(props) {
             <div className='container'>
                 <div className='row gap-3' >
                     <MedicineList 
-                     mdata={filterdata.length > 0 ? filterdata :usermedival.mediData}
+                     mdata={filterdata.length > 0 ? filterdata :usermedival.fMdata}
                      handleCart1={handleCart}
                      handleIcon1={handleicon}
                      />

@@ -64,6 +64,7 @@ function DoctorsForm({ onhandlesubmit, onupdate }) {
         validationSchema: doctorSchema,
         enableReinitialize: true,
         onSubmit: (values, action) => {
+            action.resetForm()
             console.log(values);
             handleClose()
             onhandlesubmit(values)

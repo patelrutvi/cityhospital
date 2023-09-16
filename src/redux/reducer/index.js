@@ -10,6 +10,7 @@ import appoimentReducer from "../slice/appoimentslice"
 import departmentReducer from "../slice/departmentslice"
 import fdepartmentReducer from '../slice/departmentFireSlice';
 import doctorFireReducer from "../slice/doctorFireslice"
+import medicineFireReducer from "../slice/medicineFireslice"
 
 
 
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
     doctor: doctordataReduce,
     fdoctor:doctorFireReducer,
     medicine: medicineReducer,
+    fmedicine:medicineFireReducer,
     cart: addtoCartreducer,
     fav: myfavreducer,
     department:departmentReducer,

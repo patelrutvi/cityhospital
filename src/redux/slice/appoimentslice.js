@@ -135,7 +135,6 @@ export const updateappoinment = createAsyncThunk(
     }
 )
 
-
 const onRejected = (state, action) => {
     state.isloading = false;
     state.error = action.error.message

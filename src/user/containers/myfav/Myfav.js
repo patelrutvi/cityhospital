@@ -7,13 +7,13 @@ import { ThemeContext } from '../../../Context/ThameContext';
 function Myfav(props) {
     const theme = useContext(ThemeContext)
 
-    const medicinedata = useSelector((state) => state.medicine)
+    const medicinedata = useSelector((state) => state.fmedicine)
     const favdata = useSelector((state) => state.fav)
     console.log(medicinedata, favdata);
     const dispatch = useDispatch()
 
     let favmedi = favdata.myfav.map((v) => {
-        let medidataf = medicinedata.mediData.find((m) => m.id === v.pid)
+        let medidataf = medicinedata.fMdata.find((m) => m.id === v.pid)
         let mdatacart = { ...medidataf, ...v }
         return mdatacart;
 
@@ -31,7 +31,7 @@ function Myfav(props) {
         <section id="cart" className={`cart ${theme.theme}`} >
             <div className='container'>
                 <div className="section-title">
-                    <h2>Cart</h2>
+                    <h2>Bookmark</h2>
                     {
                         favmedi.map((f) => {
                             return (
@@ -47,7 +47,7 @@ function Myfav(props) {
                                                     </div>
                                                     <div className="ms-5">
 
-                                                        <p className="small mb-0">{f.desc.substring(0, 30)}</p>
+                                                        <p className="small mb-0">{f.desc.substring(0, 40)}</p>
                                                     </div>
                                                 </div>
                                                 <div className="d-flex flex-row align-items-center">

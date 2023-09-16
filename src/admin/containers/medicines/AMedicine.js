@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import Medicineform from './Medicineform';
 import { useDispatch, useSelector } from 'react-redux';
 import { addmedicineData, deleteMedicinedta, getmedicinedata, upadeMedicine } from '../../../redux/action/medicine.action';
+import { addmedicinefire, deletemedicineFire, getmedicineFire, updatemedicineFire } from '../../../redux/slice/medicineFireslice';
 
 
 
@@ -24,25 +25,30 @@ export default function AMedicine() {
     const [updatedata, setupdatedata] = useState(null)
 
     const dispatch = useDispatch()
-    const medidataval = useSelector(state => state.medicine)
+    const medidataval = useSelector(state => state.fmedicine)
     console.log(medidataval);
 
     useEffect(() => {
-        dispatch(getmedicinedata())
+        // dispatch(getmedicinedata())
+        dispatch(getmedicineFire())
     }, []);
 
 
     const handleSubmitdata = (data) => {
         if(updatedata){
-            dispatch(upadeMedicine(data))
+            // dispatch(upadeMedicine(data))
+            dispatch(updatemedicineFire(data))
         }else{
-            dispatch(addmedicineData(data))
+            // dispatch(addmedicineData(data))
+            dispatch(addmedicinefire(data))
+
         }
         setupdatedata(null)
     }
-    const handledelete = (id) => {
+    const handledelete = (data) => {
         console.log("delete");
-        dispatch(deleteMedicinedta(id))
+        // dispatch(deleteMedicinedta(id))
+        dispatch(deletemedicineFire(data))
 
     }
 
@@ -54,7 +60,7 @@ export default function AMedicine() {
 
     // ....Grid table..../
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
+        
         { field: 'name', headerName: 'Medicine Name', width: 130 },
         { field: 'price', headerName: 'Price', width: 130 },
         { field: 'expiry', headerName: 'Exp Date', width: 130 },
@@ -66,7 +72,7 @@ export default function AMedicine() {
 
             renderCell: (params) => (
                 <>
-                    <DeleteIcon onClick={() => handledelete(params.row.id)}>
+                    <DeleteIcon onClick={() => handledelete(params.row)}>
 
                     </DeleteIcon>
                     <EditIcon onClick={() => handleEdit(params.row)}>
@@ -89,7 +95,7 @@ export default function AMedicine() {
 
             <div style={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={medidataval.mediData}
+                    rows={medidataval.fMdata}
                     columns={columns}
                     initialState={{
                         pagination: {

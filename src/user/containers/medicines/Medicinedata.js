@@ -6,13 +6,12 @@ import { ThemeContext } from '../../../Context/ThameContext';
 
 function Medicinedata() {
     const theme = useContext(ThemeContext)
-
     const dispatch = useDispatch()
     const { id } = useParams()
-    const MedData = useSelector(state => state.medicine)
-    // console.log(MedData);
-    let mdata = MedData.mediData.filter((v) => v.id === parseInt(id))
-    console.log(mdata, 'mmm');
+    const MedData = useSelector(state => state.fmedicine)
+    console.log(MedData.fMdata,"mmmmmmmdattatatat");
+    let mdata = MedData.fMdata.filter((v) => v.id === id)
+    console.log(mdata, id,'mmm');
 
     const handleCart = (id) => {
         dispatch(addtoCart(id))
