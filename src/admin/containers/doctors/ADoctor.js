@@ -19,7 +19,7 @@ export default function ADoctor() {
 
     // ......redux.....
     useEffect(() => {
-        // dispatch(getdoctordata())
+        // dispatch(getdoctordata())....axoius(fethch api pan chhe comment ma)
         dispatch(getDoctorFire())
     }, [])
     // ....................
@@ -28,10 +28,10 @@ export default function ADoctor() {
         console.log(data, "sjkdnsjk");
 
         if (updatedata) {
-            // dispatch(updateDoctor(data))
+            // dispatch(updateDoctor(data))....axoius(fethch api pan chhe comment ma)
             dispatch(updateDoctorFire(data))
         } else {
-            // dispatch(addDoctor(data))...i think axios crude
+            // dispatch(addDoctor(data))...(i think axios crude)....axoius(fethch api pan chhe comment ma)
             dispatch(addDoctorFire(data))
         }
         setupdatedata(null)
@@ -39,7 +39,7 @@ export default function ADoctor() {
 
     const handledelete = (data) => {
         console.log("delete data drrrrrr",data);
-        // dispatch(deleteDoctor(id))
+        // dispatch(deleteDoctor(id))....axoius(fethch api pan chhe comment ma)
         dispatch(deleteDoctorsFire(data))
     }
 

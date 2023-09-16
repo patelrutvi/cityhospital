@@ -18,8 +18,8 @@ function ADrpartment(props) {
     let dData = depaValue.FdepartData
 
     useEffect(() => {
-        // dispatch(getDepartmentdataa())
-        // dispatch(fetchDepartments())
+        // dispatch(getDepartmentdataa())...axious
+        // dispatch(fetchDepartments())....toolkit slice
         dispatch(getdepartmentFire())
     }, [])
 
@@ -27,12 +27,12 @@ function ADrpartment(props) {
 
         console.log("data");
         if(Update){
-            // dispatch(updatedepartdata(data))
-            // dispatch(updatedepartments(data))
+            // dispatch(updatedepartdata(data))...axious
+            // dispatch(updatedepartments(data))....toolkit slice
             dispatch(updatedepartmentFire(data))
         }else{
-            // dispatch(addDepartdata(data))
-            // dispatch(addDepartments(data))
+            // dispatch(addDepartdata(data))...axious
+            // dispatch(addDepartments(data))....toolkit slice
             dispatch(addDepartmentFire(data))
 
         }
@@ -40,8 +40,8 @@ function ADrpartment(props) {
     }
 
     const handleDelete = (data) => {
-        // dispatch(deleteDepartdata(id))
-        // dispatch(deleteDepartments(id))
+        // dispatch(deleteDepartdata(id))...axious
+        // dispatch(deleteDepartments(id))....toolkit slice
         dispatch(deletedepartmentFire(data))
     }
 

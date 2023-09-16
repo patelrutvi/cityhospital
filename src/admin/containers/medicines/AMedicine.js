@@ -1,8 +1,6 @@
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { useState } from 'react';
-
 
 // .....table...
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
@@ -29,17 +27,17 @@ export default function AMedicine() {
     console.log(medidataval);
 
     useEffect(() => {
-        // dispatch(getmedicinedata())
+        // dispatch(getmedicinedata())....fetch api  
         dispatch(getmedicineFire())
     }, []);
 
 
     const handleSubmitdata = (data) => {
         if(updatedata){
-            // dispatch(upadeMedicine(data))
+            // dispatch(upadeMedicine(data))....fetch api  
             dispatch(updatemedicineFire(data))
         }else{
-            // dispatch(addmedicineData(data))
+            // dispatch(addmedicineData(data))....fetch api  
             dispatch(addmedicinefire(data))
 
         }
@@ -47,14 +45,13 @@ export default function AMedicine() {
     }
     const handledelete = (data) => {
         console.log("delete");
-        // dispatch(deleteMedicinedta(id))
+        // dispatch(deleteMedicinedta(id))....fetch api  
         dispatch(deletemedicineFire(data))
 
     }
 
     const handleEdit = (data) => {
         //    console.log(evalue);
-      
         setupdatedata(data)
     }
 
@@ -121,7 +118,7 @@ export default function AMedicine() {
 
 
 
-
+// ................local storage......crud......
 // import * as React from 'react';
 // import Box from '@mui/material/Box';
 // import { useState } from 'react';
